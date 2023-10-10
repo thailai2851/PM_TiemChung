@@ -1,0 +1,29 @@
+﻿@model DmTinhCuTru
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-4 col-md-4 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaTinh" class="col-form-label required">Mã tỉnh/TP</label>
+                <input required type="text" asp-for="@Model.MaTinh" id="txtMaTinh" class="form-control" placeholder="Nhập mã tỉnh/TP">
+                <div class="invalid-feedback">
+                    Nhập mã tỉnh/TP
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-8 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenTinh" class="col-form-label required">Tên tỉnh/TP</label>
+                <input required type="text" asp-for="@Model.TenTinh" id="txtTenTinh" class="form-control" placeholder="Nhập tên tỉnh/TP">
+                <div class="invalid-feedback">
+                    Nhập tên tỉnh/TP
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

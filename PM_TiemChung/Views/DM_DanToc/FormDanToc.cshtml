@@ -1,0 +1,41 @@
+﻿@model DmDanToc
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaDanToc" class="col-form-label required">Mã dân tộc</label>
+                <input required type="text" asp-for="@Model.MaDanToc" id="txtMaDanToc" class="form-control" placeholder="Nhập mã dân tộc">
+                <div class="invalid-feedback">
+                    Nhập mã dân tộc
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenDanToc" class="col-form-label required">Tên dân tộc</label>
+                <input required type="text" asp-for="@Model.TenDanToc" id="txtTenDanToc" class="form-control" placeholder="Nhập tên dân tộc">
+                <div class="invalid-feedback">
+                    Nhập tên dân tộc
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenGoiKhac">Tên gọi khác</label>
+                <input type="text" asp-for="@Model.TenGoiKhac" id="txtTenGoiKhac" class="form-control" placeholder="Nhập tên gọi khác">
+            </div>
+        </div><div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtDiaBanCuTru">Địa bàn cư trú</label>
+                <input type="text" asp-for="@Model.DiaBanCuTru" id="txtDiaBanCuTru" class="form-control" placeholder="Nhập địa bàn cư trú">
+            </div>
+        </div>
+
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

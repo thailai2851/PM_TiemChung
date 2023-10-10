@@ -1,0 +1,81 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PM_TiemChung
+build_property.RootNamespace = PM_TiemChung
+build_property.ProjectDir = D:\Project\PM_TiemChung\PM_TiemChung\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Project\PM_TiemChung\PM_TiemChung
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_DanToc/DanToc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fRGFuVG9jXERhblRvYy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_DanToc/FormDanToc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fRGFuVG9jXEZvcm1EYW5Ub2MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_GioiTinh/FormGioiTinh.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fR2lvaVRpbmhcRm9ybUdpb2lUaW5oLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_GioiTinh/GioiTinh.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fR2lvaVRpbmhcR2lvaVRpbmguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_HuyenCuTru/HuyenCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fSHV5ZW5DdVRydVxIdXllbkN1VHJ1LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_ThoiGian/FormThoiGian.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVGhvaUdpYW5cRm9ybVRob2lHaWFuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_ThoiGian/ThoiGian.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVGhvaUdpYW5cVGhvaUdpYW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_TinhCuTru/FormTinhCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVGluaEN1VHJ1XEZvcm1UaW5oQ3VUcnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_TinhCuTru/TinhCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVGluaEN1VHJ1XFRpbmhDdVRydS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-lhxff9qhuc

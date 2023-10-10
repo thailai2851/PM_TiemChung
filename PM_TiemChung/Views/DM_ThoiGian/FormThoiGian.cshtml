@@ -1,0 +1,29 @@
+﻿@model DmThoiGian
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-4 col-md-4 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenTG" class="col-form-label required">Tên thời gian</label>
+                <input required type="text" asp-for="@Model.TenTg" id="txtMaTinh" class="form-control" placeholder="Nhập tên thời gian">
+                <div class="invalid-feedback">
+                    Nhập tên thời gian
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col-md-8 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtSoNgay" class="col-form-label required">Số ngày</label>
+                <input required type="text" asp-for="@Model.SoNgay" id="txtSoNgay" class="form-control" placeholder="Nhập số ngày">
+                <div class="invalid-feedback">
+                    Nhập số ngày
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>
