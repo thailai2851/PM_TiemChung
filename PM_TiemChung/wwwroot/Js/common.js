@@ -1,4 +1,4 @@
-function showProgress() {
+﻿function showProgress() {
     $('#progress').show();
 }
 function hideProgress() {
@@ -40,4 +40,57 @@ if (modalDanger) {
     modalDanger.addEventListener('hidden.bs.modal', function (event) {
         $('#btnDanger').off('click');
     });
+}
+
+function formatDay(inputString) {
+    if (inputString) {
+        var inputDate = new Date(inputString);
+        var day = inputDate.getDate();
+        if (day < 10) {
+            day = '0' + day;
+        }
+        var month = inputDate.getMonth() + 1;
+        if (month < 10) {
+            month = '0' + month;
+        }
+        var year = inputDate.getFullYear();
+        return day + '-' + month + '-' + year;
+    } else {
+        return ""
+    }
+}
+function configCbDataBase(datas) {
+    
+    datas.forEach(data => {
+        $.ajax({
+            method: "post",
+            url: data.action,
+        }).done(function (response) {
+            var mySelect = new TomSelect($(data.className), {
+                selectOnTab: true,
+                loadingClass: "Đang tìm kiếm...",
+                maxOptions: 50,
+                valueField: 'id',
+                labelField: 'ten',
+                placeholder: data.placeholder,
+                options: response,
+                openOnFocus: false,
+                searchField: ["ten", "ma"],
+                render: {
+                    option: function (item, escape) {
+                        return '<div class="d-flex"><span style="width: 70%;">' + escape(item.ten) + '</span></div>';
+                    },
+                    no_results: function (data, escape) {
+                        return '<div class="no-results">Không tìm thấy dữ liệu </div>';
+                    },
+                },
+                loadThrottle: 400,
+            });
+            mySelect.positionDropdown();
+
+            $(data.className).next().children('div.ts-control').on('click', function () {
+                mySelect.open();
+            });
+        })
+    })
 }

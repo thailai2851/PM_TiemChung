@@ -1,0 +1,56 @@
+﻿@model DmXaCuTru
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaXa" class="col-form-label required">Mã phường, xã</label>
+                <input required type="text" asp-for="@Model.MaXa" id="txtMaXa" class="form-control" placeholder="Nhập mã phường, xã">
+                <div class="invalid-feedback">
+                    Nhập mã phường, xã
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenXa" class="col-form-label required">Tên phường, xã</label>
+                <input required type="text" asp-for="@Model.TenXa" id="txtTenXa" class="form-control" placeholder="Nhập tên phường, xã">
+                <div class="invalid-feedback">
+                    Nhập tên phường, xã
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtIdtinh" class="col-form-label required">Tỉnh/TP</label>
+                <select class="form-select cbTinhCuTru" name="Idtinh" required>
+                    @if (Model.IdquanNavigation != null)
+                    {
+                        <option value="@Model.IdquanNavigation.IdtinhNavigation.Id" data-viettat="">
+                            @Model.IdquanNavigation.IdtinhNavigation.TenTinh
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtIdquan" class="col-form-label required">Quận, huyện</label>
+                <select class="form-select cbQuanCuTru" name="Idquan" required>
+                    @if (Model.IdquanNavigation != null)
+                    {
+                        <option value="@Model.IdquanNavigation.Id" data-viettat="">
+                            @Model.IdquanNavigation.TenQuan
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

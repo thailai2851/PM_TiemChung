@@ -1,0 +1,203 @@
+﻿@{
+    List<DmXaCuTru> xaCuTrus = ViewBag.Models.result;
+}
+<div class="row d-flex justify-content-between mb-3 mx-3">
+    <div class="col-4 col-sm-6 mb-1 p-0">
+        <div class="row">
+            <div class="col-6">
+                <input type="text" id="txtSearch" class="form-control" placeholder="Tìm kiếm thông tin">
+            </div>
+            <div class="col-5">
+                <select class="form-select" name="Active">
+                    <option value="true">Đang dùng</option>
+                    <option value="false">Đã xóa</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button onclick="searchWithKeyword()" class="btn btn-icon" aria-label="Button">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Page title actions -->
+    <div class="col-auto mb-2 p-0">
+        <div class="btn-list">
+            <button class="btn btn-primary d-none d-md-inline-block" onclick="showModal(0)" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thêm">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 5l0 14"></path>
+                    <path d="M5 12l14 0"></path>
+                </svg>
+                Thêm mới
+            </button>
+            <button class="btn btn-primary d-md-none btn-icon" onclick="showModal(0)">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M12 5l0 14"></path>
+                    <path d="M5 12l14 0"></path>
+                </svg>
+            </button>
+            <span class="d-md-inline">
+                <button class="btn btn-icon btn-success" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 6l16 0"></path>
+                        <path d="M4 12l16 0"></path>
+                        <path d="M4 18l16 0"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-column">
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="MaXa">Mã phường, xã</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="TenXa">Tên phường, xã</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idquan">Tên quận, huyện</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idtinh">Tên tỉnh/tp</label>
+                        </div>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="mx-3">
+    <div class="card">
+        <div style="display: none;" id="progress">
+            <div class="progress">
+                <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
+            </div>
+        </div>
+        <div class="table-responsive" style="max-height:73vh;" id="tableDM" onscroll="scrollTable()">
+            <table class="table table-vcenter card-table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center MaXa">Mã phường, xã</th>
+                        <th class="text-center TenXa">Tên phường, xã</th>
+                        <th class="text-center Idquan">Tên quận, huyện</th>
+                        <th class="text-center Idtinh">Tên tỉnh/tp</th>
+                        <th class="text-center last-th-column" style="z-index:3;">Tùy chọn</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-table">
+                    @foreach (DmXaCuTru d in xaCuTrus)
+                    {
+                        <tr data-id="@d.Id">
+                            <td class="text-center MaXa">@d.MaXa</td>
+                            <td class="text-start TenXa">@d.TenXa</td>
+                            <td class="text-start Idquan">@d.IdquanNavigation.TenQuan</td>
+                            <td class="text-start Idtinh">@d.IdquanNavigation.IdtinhNavigation.TenTinh</td>
+                            <td class="text-center last-td-column">
+                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                    <button onclick="showModal(@d.Id)" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
+                                            <path d="M16 5l3 3"></path>
+                                        </svg>
+
+                                    </button>
+                                    <button class="btn btn-icon bg-dark-lt" onclick="changeActive(@d.Id)" data-bs-toggle="tooltip" data-bs-placement="right" title="Thay đổi trạng thái">
+                                        @if (d.Active.Value)
+                                        {
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M4 7l16 0"></path>
+                                                <path d="M10 11l0 6"></path>
+                                                <path d="M14 11l0 6"></path>
+                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                            </svg>
+
+                                        }
+                                        @if (!d.Active.Value)
+                                        {
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M9 14l-4 -4l4 -4"></path>
+                                                <path d="M5 10h11a4 4 0 1 1 0 8h-1"></path>
+                                            </svg>
+
+                                        }
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination m-2 justify-content-end" id="pagi">
+            <li class="page-item disabled">
+                <button onclick="changePage(1)" class="page-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M11 7l-5 5l5 5"></path>
+                        <path d="M17 7l-5 5l5 5"></path>
+                    </svg>
+                </button>
+            </li>
+            <li class="page-item  disabled">
+                <button class="page-link"
+                        tabindex="-1"
+                        aria-disabled="true">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="icon"
+                         width="24"
+                         height="24"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         fill="none"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M15 6l-6 6l6 6"></path>
+                    </svg>
+                </button>
+            </li>
+            <li class="page-item active"><button class="page-link">1</button></li>
+            @if (ViewBag.Models.nextPage != 0)
+            {
+                <li class="page-item">
+                    <button class="page-link" onclick="changePage(2)">2</button>
+                </li>
+            }
+            <li class="page-item @(ViewBag.Models.nextPage != 0 ? "" : "disabled")">
+                <button class="page-link" onclick="changePage(2)">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="icon"
+                         width="24"
+                         height="24"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         fill="none"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M9 6l6 6l-6 6"></path>
+                    </svg>
+                </button>
+            </li>
+            <li class="page-item @(ViewBag.Models.nextPage != 0 ? "" : "disabled")">
+                <button class="page-link" onclick="changePage(-1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M7 7l5 5l-5 5"></path>
+                        <path d="M13 7l5 5l-5 5"></path>
+                    </svg>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script src="/js/DmXaCuTruJs.js" defer></script>

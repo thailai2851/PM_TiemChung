@@ -1,0 +1,42 @@
+﻿@model DmQuanCuTru
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaQuan" class="col-form-label required">Mã quận, huyện</label>
+                <input required type="text" asp-for="@Model.MaQuan" id="txtMaQuan" class="form-control" placeholder="Nhập mã quận, huyện">
+                <div class="invalid-feedback">
+                    Nhập mã quận, huyện
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenQuan" class="col-form-label required">Tên quận, huyện</label>
+                <input required type="text" asp-for="@Model.TenQuan" id="txtTenQuan" class="form-control" placeholder="Nhập tên quận, huyện">
+                <div class="invalid-feedback">
+                    Nhập tên quận, huyện
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtIdtinh" class="col-form-label required">Tỉnh</label>
+                <select class="form-select cbTinhCuTru" name="Idtinh" required>
+                    @if (Model.Idtinh != null)
+                    {
+                        <option value="@Model.IdtinhNavigation.Id">
+                            @Model.IdtinhNavigation.TenTinh
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

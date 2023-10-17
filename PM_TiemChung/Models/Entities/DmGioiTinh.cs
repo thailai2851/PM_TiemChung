@@ -18,4 +18,6 @@ public partial class DmGioiTinh
     public virtual ICollection<DmBenhNhan> DmBenhNhans { get; set; } = new List<DmBenhNhan>();
 
     public virtual ICollection<DmNhanVien> DmNhanViens { get; set; } = new List<DmNhanVien>();
+
+    public virtual ICollection<DmProfile> DmProfiles { get; set; } = new List<DmProfile>();
 }

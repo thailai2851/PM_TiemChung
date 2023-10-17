@@ -14,4 +14,6 @@ public partial class DmProfile
     public bool? Active { get; set; }
 
     public virtual ICollection<DmProfileCt> DmProfileCts { get; set; } = new List<DmProfileCt>();
+
+    public virtual DmGioiTinh? IdgtNavigation { get; set; }
 }

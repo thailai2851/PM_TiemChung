@@ -13,12 +13,36 @@
       "PackagePath": "staticwebassets\\Js\\DmGioiTinhJs.js"
     },
     {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmNgheNghiepJs.js",
+      "PackagePath": "staticwebassets\\Js\\DmNgheNghiepJs.js"
+    },
+    {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmNhanVienJs.js",
+      "PackagePath": "staticwebassets\\Js\\DmNhanVienJs.js"
+    },
+    {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmQuanCuTruJs.js",
+      "PackagePath": "staticwebassets\\Js\\DmQuanCuTruJs.js"
+    },
+    {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmQuocGiaJs.js",
+      "PackagePath": "staticwebassets\\Js\\DmQuocGiaJs.js"
+    },
+    {
       "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmThoiGianJs.js",
       "PackagePath": "staticwebassets\\Js\\DmThoiGianJs.js"
     },
     {
       "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmTinhCuTruJs.js",
       "PackagePath": "staticwebassets\\Js\\DmTinhCuTruJs.js"
+    },
+    {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmVaccineJs.js",
+      "PackagePath": "staticwebassets\\Js\\DmVaccineJs.js"
+    },
+    {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\DmXaCuTruJs.js",
+      "PackagePath": "staticwebassets\\Js\\DmXaCuTruJs.js"
     },
     {
       "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\Js\\common.js",

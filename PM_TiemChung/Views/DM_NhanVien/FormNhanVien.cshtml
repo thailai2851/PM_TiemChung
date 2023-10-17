@@ -1,0 +1,109 @@
+﻿ @model DmNhanVien
+@{
+     string   formatDay(DateTime? date)
+    {
+        if (date != null)
+        {
+            return date.Value.ToString("dd-MM-yyyy");
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+<div>
+    <input type="hidden" asp-for="@Model.Id">   
+    <div class="row row-cards">
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaNhanVien" class="col-form-label required">Mã nhân viên</label>
+                <input required type="text" asp-for="@Model.MaNhanVien" id="txtMaNhanVien"  class="form-control" placeholder="Nhập mã nhân viên" >
+                <div class="invalid-feedback">
+                    Nhập mã nhân viên
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenNhanVien" class="col-form-label required">Tên nhân viên</label>
+                <input required type="text" asp-for="@Model.TenNhanVien" id="txtTenNhanVien" class="form-control" placeholder="Nhập tên nhân viên">
+                <div class="invalid-feedback">
+                    Nhập tên nhân viên
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <label for="txtNgaySinh">Ngày sinh</label>
+            <div class="input-icon mb-2">       
+                <input type="text" name="NgaySinh" id="txtNgaySinh" class="form-control input-date" placeholder="dd-MM-yyyy" value="@formatDay(@Model.NgaySinh)">
+                <span class="input-icon-addon"><!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                </span>
+            </div>
+        </div>
+         <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtIdgt">Giới tính</label>
+                <select class="form-select" asp-for="@Model.Idgt">
+
+                    @foreach (DmGioiTinh item in ViewBag.GioiTinhs)
+                    {
+                        <option value="@item.Id"> @item.TenGioiTinh</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtDiaChi">Địa chỉ</label>
+                <input type="text" asp-for="@Model.DiaChi" id="txtDiaChi" class="form-control" placeholder="Nhập địa chỉ">
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtQueQuan">Quê quán</label>
+                <input type="text" asp-for="@Model.QueQuan" id="txtQueQuan" class="form-control" placeholder="Nhập quê quán">
+            </div>
+        </div>
+      
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtDienThoai">Điện thoại</label>
+                <input type="text" asp-for="@Model.DienThoai" id="txtDienThoai" class="form-control" pattern="[0-9]+" placeholder="Nhập số điện thoại">
+                 <div class="error-message mt-2"></div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMabhxh">Mã BHXH</label>
+                <input type="text" asp-for="@Model.Mabhxh" id="txtMabhxh" class="form-control" placeholder="Nhập mã BHXH">
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMacchn">Mã chứng chỉ hành nghề</label>
+                <input type="text" asp-for="@Model.Macchn" id="txtMacchn" class="form-control" placeholder="Nhập mã chứng chỉ hành nghề">
+            </div>
+        </div>
+         <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <label for="txtNgaycapcchn">Ngày cấp chứng chỉ hành nghề</label>
+            <div class="input-icon mb-2">
+                <input type="text" name="Ngaycapcchn" value="@formatDay(@Model.Ngaycapcchn)" id="txtNgaycapcchn" class="form-control input-date" placeholder="DD/MM/YYYY">
+                <span class="input-icon-addon"><!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                </span>
+            </div>
+        </div>
+         <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtNoicapcchn">Nơi cấp chứng chỉ hành nghề</label>
+                <input type="text" asp-for="@Model.Noicapcchn" id="txtNoicapcchn" class="form-control" placeholder="Nhập noi cấp chứng chỉ hành nghề">
+            </div>
+        </div>   
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+            <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+            <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

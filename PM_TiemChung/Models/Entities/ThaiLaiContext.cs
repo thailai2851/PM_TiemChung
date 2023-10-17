@@ -158,7 +158,7 @@ public partial class ThaiLaiContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("NGAYCAPCCHN");
             entity.Property(e => e.Noicapcchn)
-                .HasColumnType("date")
+                .HasMaxLength(500)
                 .HasColumnName("NOICAPCCHN");
             entity.Property(e => e.QueQuan).HasMaxLength(500);
             entity.Property(e => e.TenNhanVien).HasMaxLength(200);
@@ -175,6 +175,10 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idgt).HasColumnName("IDGT");
             entity.Property(e => e.TenProfile).HasMaxLength(500);
+
+            entity.HasOne(d => d.IdgtNavigation).WithMany(p => p.DmProfiles)
+                .HasForeignKey(d => d.Idgt)
+                .HasConstraintName("FK_DM_Profile_DM_GioiTinh");
         });
 
         modelBuilder.Entity<DmProfileCt>(entity =>
@@ -209,6 +213,10 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Idtinh).HasColumnName("IDTinh");
             entity.Property(e => e.MaQuan).HasMaxLength(50);
             entity.Property(e => e.TenQuan).HasMaxLength(500);
+
+            entity.HasOne(d => d.IdtinhNavigation).WithMany(p => p.DmQuanCuTrus)
+                .HasForeignKey(d => d.Idtinh)
+                .HasConstraintName("FK_DM_QuanCuTru_DM_TinhCuTru");
         });
 
         modelBuilder.Entity<DmQuocGium>(entity =>
@@ -257,6 +265,10 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Idquan).HasColumnName("IDQuan");
             entity.Property(e => e.MaXa).HasMaxLength(50);
             entity.Property(e => e.TenXa).HasMaxLength(500);
+
+            entity.HasOne(d => d.IdquanNavigation).WithMany(p => p.DmXaCuTrus)
+                .HasForeignKey(d => d.Idquan)
+                .HasConstraintName("FK_DM_XaCuTru_DM_QuanCuTru");
         });
 
         modelBuilder.Entity<HtQuyLuatMa>(entity =>

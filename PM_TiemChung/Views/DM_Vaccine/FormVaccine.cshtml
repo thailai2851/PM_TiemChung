@@ -1,0 +1,44 @@
+﻿@model DmVaccine
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaVaccine" class="col-form-label required">Mã vaccine</label>
+                <input required type="text" asp-for="@Model.MaVaccine" id="txtMaVaccine" class="form-control" placeholder="Nhập mã vaccine">
+                <div class="invalid-feedback">
+                    Nhập mã vaccine
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenVaccine" class="col-form-label required">Tên vaccine</label>
+                <input required type="text" asp-for="@Model.TenVaccine" id="txtTenVaccine" class="form-control" placeholder="Nhập tên vaccine">
+                <div class="invalid-feedback">
+                    Nhập tên vaccine
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtDonViTinh" class="col-form-label ">Đơn vị tính</label>
+                <input  type="text" asp-for="@Model.DonViTinh" id="txtDonViTinh" class="form-control" placeholder="Nhập đơn vị tính">
+                <div class="invalid-feedback">
+                    Nhập đơn vị tính
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtGiaBan" class="col-form-label">Giá bán</label>
+                <input type="text" asp-for="@Model.GiaBan" id="txtGiaBan" class="form-control formatted-number" placeholder="Nhập giá bán                                                                                                            " maxlength="5">
+            </div>
+        </div>
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

@@ -36,6 +36,38 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fSHV5ZW5DdVRydVxIdXllbkN1VHJ1LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_NgheNghiep/FormNgheNghiep.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fTmdoZU5naGllcFxGb3JtTmdoZU5naGllcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_NgheNghiep/NgheNghiep.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fTmdoZU5naGllcFxOZ2hlTmdoaWVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_NhanVien/FormNhanVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fTmhhblZpZW5cRm9ybU5oYW5WaWVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_NhanVien/NhanVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fTmhhblZpZW5cTmhhblZpZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_QuanCuTru/FormQuanCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fUXVhbkN1VHJ1XEZvcm1RdWFuQ3VUcnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_QuanCuTru/QuanCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fUXVhbkN1VHJ1XFF1YW5DdVRydS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_QuocGia/FormQuocGia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fUXVvY0dpYVxGb3JtUXVvY0dpYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_QuocGia/QuocGia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fUXVvY0dpYVxRdW9jR2lhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_ThoiGian/FormThoiGian.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVGhvaUdpYW5cRm9ybVRob2lHaWFuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,6 +82,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_TinhCuTru/TinhCuTru.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVGluaEN1VHJ1XFRpbmhDdVRydS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_Vaccine/FormVaccine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVmFjY2luZVxGb3JtVmFjY2luZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_Vaccine/Vaccine.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fVmFjY2luZVxWYWNjaW5lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_XaCuTru/FormXaCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fWGFDdVRydVxGb3JtWGFDdVRydS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_XaCuTru/XaCuTru.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fWGFDdVRydVxYYUN1VHJ1LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Project/PM_TiemChung/PM_TiemChung/Views/Home/Index.cshtml]

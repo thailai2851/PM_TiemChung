@@ -18,4 +18,8 @@ public partial class DmQuanCuTru
     public bool? Active { get; set; }
 
     public virtual ICollection<DmBenhNhan> DmBenhNhans { get; set; } = new List<DmBenhNhan>();
+
+    public virtual ICollection<DmXaCuTru> DmXaCuTrus { get; set; } = new List<DmXaCuTru>();
+
+    public virtual DmTinhCuTru? IdtinhNavigation { get; set; }
 }

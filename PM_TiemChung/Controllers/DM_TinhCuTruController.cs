@@ -73,6 +73,13 @@ namespace PM_TiemChung.Controllers
             var result = await _services.changeActive(id);
             return Ok(result);
         }
+
+        [HttpPost("getListTinhCuTru")]
+        public async Task<IActionResult> getListTinhCuTru()
+        {
+            var result = await _services.getListTinhCuTru();
+            return Ok(result);
+        }
         public string ConvertViewToString(ControllerContext controllerContext, PartialViewResult pvr, ICompositeViewEngine _viewEngine)
         {
             using (StringWriter writer = new StringWriter())

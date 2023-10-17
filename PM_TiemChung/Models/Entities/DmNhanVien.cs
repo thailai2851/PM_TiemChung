@@ -27,7 +27,7 @@ public partial class DmNhanVien
 
     public DateTime? Ngaycapcchn { get; set; }
 
-    public DateTime? Noicapcchn { get; set; }
+    public string? Noicapcchn { get; set; }
 
     public bool? Active { get; set; }
 
