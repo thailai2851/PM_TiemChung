@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WrFPiodn9Y5BjL1cAAWvjGfoUIJy2XVmUw4elMgP+SY=",
+  "Hash": "SgwWPuP05znFp8quhj4VmVe6QaTUdraloFBlZuIuHgA=",
   "Source": "PM_TiemChung",
   "BasePath": "_content/PM_TiemChung",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\PM_TiemChung.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\bootstrap.min.css",
+      "SourceId": "PM_TiemChung",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\",
+      "BasePath": "_content/PM_TiemChung",
+      "RelativePath": "dist/css/bootstrap.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\css\\bootstrap.min.css"
     },
     {
       "Identity": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\demo.css",
@@ -457,6 +474,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\dist\\css\\tabler-vendors.rtl.min.css"
+    },
+    {
+      "Identity": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\treeview.css",
+      "SourceId": "PM_TiemChung",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\",
+      "BasePath": "_content/PM_TiemChung",
+      "RelativePath": "dist/css/treeview.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\css\\treeview.css"
     },
     {
       "Identity": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\img\\flags\\ad.svg",

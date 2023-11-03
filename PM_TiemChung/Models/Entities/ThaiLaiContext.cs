@@ -41,11 +41,7 @@ public partial class ThaiLaiContext : DbContext
 
     public virtual DbSet<DmXaCuTru> DmXaCuTrus { get; set; }
 
-    public virtual DbSet<HtQuyLuatMa> HtQuyLuatMas { get; set; }
-
     public virtual DbSet<LichTiemBn> LichTiemBns { get; set; }
-
-    public virtual DbSet<SttCapSoTheoNgay> SttCapSoTheoNgays { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Connection");
@@ -73,6 +69,7 @@ public partial class ThaiLaiContext : DbContext
                 .HasColumnName("MaBN");
             entity.Property(e => e.NgayCap).HasColumnType("date");
             entity.Property(e => e.NgayDen).HasColumnType("date");
+            entity.Property(e => e.NgayKham).HasColumnType("datetime");
             entity.Property(e => e.NgaySinh).HasColumnType("datetime");
             entity.Property(e => e.NoiCap).HasMaxLength(500);
             entity.Property(e => e.SoCccd)
@@ -271,15 +268,6 @@ public partial class ThaiLaiContext : DbContext
                 .HasConstraintName("FK_DM_XaCuTru_DM_QuanCuTru");
         });
 
-        modelBuilder.Entity<HtQuyLuatMa>(entity =>
-        {
-            entity.ToTable("HT_QuyLuatMa");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.KyTuDau).HasMaxLength(3);
-            entity.Property(e => e.TenBang).HasMaxLength(50);
-        });
-
         modelBuilder.Entity<LichTiemBn>(entity =>
         {
             entity.ToTable("LichTiemBN");
@@ -321,19 +309,6 @@ public partial class ThaiLaiContext : DbContext
             entity.HasOne(d => d.IdvcNavigation).WithMany(p => p.LichTiemBns)
                 .HasForeignKey(d => d.Idvc)
                 .HasConstraintName("FK_LichTiemBN_DM_Vaccine");
-        });
-
-        modelBuilder.Entity<SttCapSoTheoNgay>(entity =>
-        {
-            entity.ToTable("STT_CapSoTheoNgay");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.IdbenhNhan).HasColumnName("IDBenhNhan");
-            entity.Property(e => e.Ngay).HasColumnType("date");
-
-            entity.HasOne(d => d.IdbenhNhanNavigation).WithMany(p => p.SttCapSoTheoNgays)
-                .HasForeignKey(d => d.IdbenhNhan)
-                .HasConstraintName("FK_STT_CapSoTheoNgay_DM_BenhNhan");
         });
 
         OnModelCreatingPartial(modelBuilder);

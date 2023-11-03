@@ -52,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fTmhhblZpZW5cTmhhblZpZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_Profile/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fUHJvZmlsZVxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Project/PM_TiemChung/PM_TiemChung/Views/DM_QuanCuTru/FormQuanCuTru.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRE1fUXVhbkN1VHJ1XEZvcm1RdWFuQ3VUcnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -106,6 +110,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Project/PM_TiemChung/PM_TiemChung/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/QL_Khambenh/KhamBenh.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUUxfS2hhbWJlbmhcS2hhbUJlbmguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/QL_TiepNhanBenhNhan/ThongTinBN.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUUxfVGllcE5oYW5CZW5oTmhhblxUaG9uZ1RpbkJOLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/QL_TiepNhanBenhNhan/ThongTinBNClear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUUxfVGllcE5oYW5CZW5oTmhhblxUaG9uZ1RpbkJOQ2xlYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Project/PM_TiemChung/PM_TiemChung/Views/QL_TiepNhanBenhNhan/TiepNhanBenhNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUUxfVGllcE5oYW5CZW5oTmhhblxUaWVwTmhhbkJlbmhOaGFuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Project/PM_TiemChung/PM_TiemChung/Views/Shared/Error.cshtml]

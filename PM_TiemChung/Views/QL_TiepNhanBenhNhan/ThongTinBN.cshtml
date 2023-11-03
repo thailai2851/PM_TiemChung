@@ -1,0 +1,178 @@
+﻿@{
+    DmBenhNhan BN = ViewBag.DmBenhNhan;
+    List<DmGioiTinh> gioiTinhs = ViewBag.GioiTinhs;
+}
+<div id="TTBenhNhan">
+    <form id="formTTHC" class="border border-dark p-2 rounded mb-1">
+        <input type="hidden" name="Id" value="@BN.Id">
+        <input type="hidden" id="IDBNUpdate" />
+        <div class="row">
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0 required">Mã BN</label>
+                <input type="text" autocomplete="off" class="form-control" name="MaBn" value="@BN.MaBn" placeholder="Auto" required readonly>
+            </div>
+            <div class="col-lg-4 col-12">
+                <label class="form-label mb-0 required">Tên bệnh nhân</label>
+                <input type="text" autocomplete="off" class="form-control" name="TenBn" value="@BN.TenBn" placeholder="Tên bệnh nhân" required>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Ngày sinh</label>
+                <div class="input-icon">
+                    <input type="text" autocomplete="off" class="form-control input-date-long-mask" name="NgaySinh" placeholder="Ngày Sinh" value="@(BN.NgaySinh == null ? "" : BN.NgaySinh.Value.ToString("dd-MM-yyyy"))">
+                    <span class="input-icon-addon">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0 required">Năm sinh</label>
+                <input type="text" autocomplete="off" class="form-control" name="NamSinh" placeholder="Năm sinh" value="@BN.NamSinh" required>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0 required">Giới tính</label>
+                <select class="form-select" name="Idgt" required>
+                    @foreach (var gt in gioiTinhs)
+                    {
+                        if (BN.Idgt == gt.Id)
+                        {
+                            <option selected value="@gt.Id">@gt.TenGioiTinh</option>
+                        }
+                        else
+                        {
+                            <option value="@gt.Id">@gt.TenGioiTinh</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-12">
+                <label class="form-label mb-0 required">Địa chỉ</label>
+                <input type="text" autocomplete="off" class="form-control" name="DiaChi" placeholder="Địa chỉ" value="@BN.DiaChi" required>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Quốc tịch</label>
+                <select class="form-select cbQuocGia" name="Idqg">
+                   @* @if (BN.Idqg != null)
+                    {
+                        <option selected value="@BN.Idqg" data-viettat="@CommonServices.getFirstChar(BN.IdqgNavigation.TenQuocGia)">
+                            @BN.IdqgNavigation?.TenQuocGia
+                        </option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Tỉnh/TP</label>
+                <select class="form-select cbTinhCuTru" name="Idtinh">
+                   @* @if (BN.Idtinh != null)
+                    {
+                        <option selected value="@BN.Idtinh" data-viettat="@CommonServices.getFirstChar(BN.IdtinhNavigation.TenTinh)">
+                            @BN.IdtinhNavigation?.TenTinh
+                        </option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Quận, huyện</label>
+                <select class="form-select cbQuanCuTru" name="Idquan">
+                  @*  @if (BN.Idquan != null)
+                    {
+                        <option value="@BN.Idquan" data-viettat="@CommonServices.getFirstChar(BN.IdquanNavigation.TenQuan)">
+                            @BN.IdquanNavigation.TenQuan
+                        </option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Phường, xã</label>
+                <select class="form-select cbXaCuTru" name="Idpx">
+                   @* @if (BN.Idpx != null)
+                    {
+                        <option value="@BN.Idpx" data-viettat="@CommonServices.getFirstChar(BN.IdpxNavigation.TenXa)">
+                            @BN.IdpxNavigation.TenXa
+                        </option>
+                    }*@
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0 required">Số ĐT</label>
+                <input type="text" autocomplete="off" class="form-control" name="DienThoai" placeholder="Số điện thoại" value="@BN.DienThoai" required>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Email</label>
+                <input autocomplete="off" type="email" class="form-control" name="Email" placeholder="Email" value="@BN.Email">
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0 required">Dân tộc</label>
+                <select class="form-select cbDanToc" name="Iddt" required>
+                   @* @if (BN.Iddt != null)
+                    {
+                        <option selected value="@BN.Iddt" data-viettat="@CommonServices.getFirstChar(BN.IddtNavigation.TenDanToc)">
+                            @BN.IddtNavigation.TenDanToc
+                        </option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Nghề nghiệp</label>
+                <select class="form-select cbNgheNghiep" name="Idnn">
+                   @* @if (BN.Idnn != null)
+                    {
+                        <option value="@BN.Idnn" data-viettat="@CommonServices.getFirstChar(BN.IdnnNavigation.TenNgheNghiep)">
+                            @BN.IdnnNavigation.TenNgheNghiep
+                        </option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Loại BN</label>
+                <select class="form-select cbLoaiBenhNhan" name="Idlbn">
+                    @*@if (BN.Idlbn != null)
+                    {
+                        <option value="@BN.Idlbn" data-viettat="@CommonServices.getFirstChar(BN.IdlbnNavigation.TenLbn)">
+                            @BN.IdlbnNavigation.TenLbn
+                        </option>
+                    }*@
+                </select>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">CCCD</label>
+                <input type="text" autocomplete="off" class="form-control" name="SoCccd" placeholder="CCCD" value="@BN.SoCccd">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Ngày cấp</label>
+                <div class="input-icon">
+                    <input type="text" autocomplete="off" class="form-control input-date" name="NgayCap" placeholder="Ngày cấp CCCD" value="@(BN.NgayCap == null ? "" : BN.NgayCap.Value.ToString("dd-MM-yyyy"))">
+                    <span class="input-icon-addon">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Nơi cấp</label>
+                <input type="text" autocomplete="off" class="form-control" name="NoiCap" value="@BN.NoiCap" placeholder="Nơi cấp">
+            </div>
+            <div class="col-lg-2 col-12">
+                <label class="form-label mb-0">Ngày đến</label>
+                <div class="input-icon">
+                    <input type="text" autocomplete="off" class="form-control input-date-default" name="NgayDen" placeholder="Ngày đến" value="@(BN.NgayDen == null ? DateTime.Now.ToString("dd-MM-yyyy") : BN.NgayDen.Value.ToString("dd-MM-yyyy"))">
+                    <span class="input-icon-addon">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                    </span>
+                </div>
+            </div>
+            <div class="mb-2 col-lg-6 col-12">
+                <label class="form-label mb-0">Ghi chú</label>
+                <input autocomplete="off" class="form-control" type="text" name="GhiChu" value="@BN.GhiChu" placeholder="Ghi chú" />
+            </div>
+        </div>
+    </form>
+</div>
+

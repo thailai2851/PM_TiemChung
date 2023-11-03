@@ -49,6 +49,10 @@
       "PackagePath": "staticwebassets\\Js\\common.js"
     },
     {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\dist\\css\\bootstrap.min.css"
+    },
+    {
       "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\demo.css",
       "PackagePath": "staticwebassets\\dist\\css\\demo.css"
     },
@@ -143,6 +147,10 @@
     {
       "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\tabler.rtl.min.css",
       "PackagePath": "staticwebassets\\dist\\css\\tabler.rtl.min.css"
+    },
+    {
+      "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\css\\treeview.css",
+      "PackagePath": "staticwebassets\\dist\\css\\treeview.css"
     },
     {
       "Id": "D:\\Project\\PM_TiemChung\\PM_TiemChung\\wwwroot\\dist\\img\\flags\\ad.svg",

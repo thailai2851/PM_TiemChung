@@ -45,6 +45,8 @@ public partial class DmBenhNhan
 
     public DateTime? NgayDen { get; set; }
 
+    public DateTime? NgayKham { get; set; }
+
     public bool? Active { get; set; }
 
     public virtual DmDanToc? IddtNavigation { get; set; }
@@ -62,6 +64,4 @@ public partial class DmBenhNhan
     public virtual DmTinhCuTru? IdtinhNavigation { get; set; }
 
     public virtual ICollection<LichTiemBn> LichTiemBns { get; set; } = new List<LichTiemBn>();
-
-    public virtual ICollection<SttCapSoTheoNgay> SttCapSoTheoNgays { get; set; } = new List<SttCapSoTheoNgay>();
 }

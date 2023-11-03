@@ -5,6 +5,24 @@ function hideProgress() {
     $('#progress').hide();
 }
 
+function formatEvenNumber(number) {
+    if (number == null) return 0;
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 1,000,000.00
+function formatOddNumber(number) {
+    if (number) {
+        if (Number.isInteger(number)) {
+            return number.toLocaleString('en-US');
+        } else {
+            return number.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+    } else {
+        return "";
+    }
+}
+
 function showModalLargel(title, content) {
     var myModal = new bootstrap.Modal(document.getElementById("modal-largel"), {
     });
