@@ -131,7 +131,7 @@ $(document).ready(function () {
                 sdt: $('#txtSdt').val(),
             },
             success: function (result) {
-                renderTableDs(result, $('#tbody-table-DS'));
+                renderTableDs(result);
             },
             error: function (error) {
                 console.error(error);
@@ -205,7 +205,7 @@ $(document).ready(function () {
             url: '/QuanLy/QL_TiepNhanBenhNhan/reloadTableDSTN',
             method: 'POST',
             success: function (result) {
-                renderTableDs(result, $('#tbody-table-TN'));
+                renderTableDstn(result);
             },
             error: function (error) {
                 console.error(error);
@@ -266,10 +266,10 @@ $(document).ready(function () {
         _benhNhan = null;
     })
 });
-function renderTableDs(datas, table) {
-    table.empty();
+function renderTableDs(datas) {
+    $('#tbody-table-DS').empty();
     datas.forEach(function (d) {
-        table.append(`<tr data-id="${d.id}">
+        $('#tbody-table-DS').append(`<tr data-id="${d.id}">
                                                     <td class="text-center MaBn">${d.maBn}</td>
                                                     <td class="text-start TenBn">${d.tenBn}</td>
                                                     <td class="text-start NgaySinh">${formatDay(d.ngaySinh)}</td>
@@ -319,7 +319,45 @@ function renderTableDs(datas, table) {
                                                 </tr>`)
     })
 }
-
+function renderTableDstn(datas) {
+    $('#tbody-table-TN').empty();
+    datas.forEach(function (d) {
+        $('#tbody-table-TN').append(`<tr data-id="${d.id}">
+                                                    <td class="text-center MaBn">${d.maBn}</td>
+                                                    <td class="text-start TenBn">${d.tenBn}</td>
+                                                    <td class="text-start NgaySinh">${formatDay(d.ngaySinh)}</td>
+                                                    <td class="text-center NamSinh">${toEmpty(d.namSinh)}</td>
+                                                    <td class="text-center Idgt">${(d.idgtNavigation == null ? "" : d.idgtNavigation.tenGioiTinh)}</td>
+                                                    <td class="text-start DiaChi">${toEmpty(d.diaChi)}</td>
+                                                    <td class="text-center Idtinh">${(d.idtinhNavigation == null ? "" : d.idtinhNavigation.tenTinh)}</td>
+                                                    <td class="text-start Idquan">${(d.idquanNavigation == null ? "" : d.idquanNavigation.tenQuan)}</td>
+                                                    <td class="text-start Idpx">${(d.idpxNavigation == null ? "" : d.idpxNavigation.tenXa)}</td>
+                                                    <td class="text-start DienThoai">${toEmpty(d.dienThoai)}</td>
+                                                    <td class="text-start Email">${toEmpty(d.email)}</td>
+                                                    <td class="text-start Iddt">${(d.iddtNavigation == null ? "" : d.iddtNavigation.tenDanToc)}</td>
+                                                    <td class="text-start Idnn">${(d.idnnNavigation == null ? "" : d.idnnNavigation.tenNgheNghiep)}</td>
+                                                    <td class="text-start Idqg">${(d.idqgNavigation == null ? "" : d.idqgNavigation.tenQuocGia)}</td>
+                                                    <td class="text-start SoCccd">${toEmpty(d.soCccd)}</td>
+                                                    <td class="text-start NgayCap">${formatDay(d.ngayCap)}</td>
+                                                    <td class="text-start GhiChu">${(d.ghiChu == null ? "" : d.ghiChu)}</td>
+                                                    <td class="text-start NgayDen">${(formatDay(d.ngayDen == null ? null : d.ngayDen))}</td>
+                                                    <td class="text-center last-td-column">
+                                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                            <button class="btn btn-icon bg-red-lt btn-unactive" value="${d.id}" data-bs-toggle="tooltip" data-bs-placement="left" title="Huỷ kích hoạt">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circuit-switch-open" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                    <path d="M2 12h2"></path>
+                                                                    <path d="M20 12h2"></path>
+                                                                    <path d="M6 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                                    <path d="M18 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                                                                    <path d="M7.5 10.5l7.5 -5.5"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>`)
+    })
+}
 function appendDataBenhNhan(bn) {
     var form = $('#formTTHC');
     form.find('input[name="Id"]').val(bn.id);
