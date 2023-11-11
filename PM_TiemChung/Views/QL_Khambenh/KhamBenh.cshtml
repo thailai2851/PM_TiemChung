@@ -1,4 +1,17 @@
-﻿<div class="page-body mb-1">
+﻿@{
+    string formatDay(DateTime? date)
+    {
+        if (date != null)
+        {
+            return date.Value.ToString("dd-MM-yyyy");
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+<div class="page-body mb-1">
     <div class="card">
         <div class="position-absolute top-0 w-100 h-100 left-0 modal-blur fade " id="Pageloader" tabindex="-1" role="dialog" aria-hidden="true" style="z-index: -1;">
             <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
@@ -80,56 +93,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Page title actions -->
-                                <div class="col-auto mb-2 p-0 me-2">
-                                    <div class="btn-list">
-                                        <a href="#" class="btn btn-primary d-md-none btn-icon">
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path d="M12 5l0 14"></path>
-                                                <path d="M5 12l14 0"></path>
-                                            </svg>
-                                        </a>
-                                        <span class="d-md-inline">
-                                            <button class="btn btn-icon btn-success" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M4 6l16 0"></path>
-                                                    <path d="M4 12l16 0"></path>
-                                                    <path d="M4 18l16 0"></path>
-                                                </svg>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <div class="dropdown-menu-columns">
-                                                    <div class="dropdown-menu-column">
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="MaBn">Mã bệnh nhân</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="TenBn">Tên bệnh nhân</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="NgaySinh">Ngày sinh</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="NamSinh">Năm sinh</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idgt">Giới tính</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="DiaChi">Địa chỉ</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idtinh">Tỉnh/TP</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idquan">Quận, huyện</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idpx">Phường, xã</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="DienThoai">Số điện thoại</label>
-                                                    </div>
-                                                    <div class="dropdown-menu-column">
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Email">Email</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Iddt">Dân tộc</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idnn">Nghề nghiệp</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idqg">Quốc tịch</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="SoCccd">CCCD</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="NgayCap">Ngày cấp</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Idnoicap">Nơi cấp</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="GhiChu">Ghi chú</label>
-                                                        <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="NgayDen">Ngày đến</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -141,8 +104,8 @@
                                         <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
                                     </div>
                                 </div>
-                                <div class="table-responsive" style="max-height:73vh;" id="tableDM" onscroll="scrollTable()">
-                                    <table class="table table-vcenter card-table table-bordered table-hover">
+                                <div class="table-responsive" style="max-height:73vh;" id="tableDM">
+                                    <table class="table table-vcenter card-table table-bordered table-hover table-nowrap">
                                         <thead>
                                             <tr>
                                                 <th class="text-center MaBn">Mã bệnh nhân</th>
@@ -167,94 +130,32 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tbody-table">
-                                            @* @foreach (DmBenhNhan d in ViewBag.BenhNhans)
+                                            @foreach (DmBenhNhan d in ViewBag.BenhNhans)
                                             {
-                                            <tr data-id="@d.Id">
-                                            <td class="ps-2 pe-2"><input class="form-check-input m-0 align-middle BN-check" type="checkbox" aria-label="Select invoice"></td>
-                                            <td class="text-center MaBn">@d.MaBn</td>
-                                            <td class="text-start TenBn">@d.TenBn</td>
-                                            <td class="text-start NgaySinh">@formatDay(d.NgaySinh)</td>
-                                            <td class="text-center NamSinh">@d.NamSinh</td>
-                                            <td class="text-center Idgt">@(d.IdgtNavigation == null ? "" : d.IdgtNavigation.TenGioiTinh)</td>
-                                            <td class="text-start DiaChi">@d.DiaChi</td>
-                                            <td class="text-center Idtinh">@(d.IdtinhNavigation == null ? "" : d.IdtinhNavigation.TenTinh)</td>
-                                            <td class="text-start Idquan">@(d.IdquanNavigation == null ? "" : d.IdquanNavigation.TenQuan)</td>
-                                            <td class="text-start Idpx">@(d.IdpxNavigation == null ? "" : d.IdpxNavigation.TenXa)</td>
-                                            <td class="text-start DienThoai">@d.DienThoai</td>
-                                            <td class="text-start Email">@d.Email</td>
-                                            <td class="text-start Iddt">@(d.IddtNavigation == null ? "" : d.IddtNavigation.TenDanToc)</td>
-                                            <td class="text-start Idnn">@(d.IdnnNavigation == null ? "" : d.IdnnNavigation.TenNgheNghiep)</td>
-                                            <td class="text-start Idqg">@(d.IdqgNavigation == null ? "" : d.IdqgNavigation.TenQuocGia)</td>
-                                            <td class="text-start SoCccd">@d.SoCccd</td>
-                                            <td class="text-start NgayCap">@formatDay(@d.NgayCap)</td>
-                                            <td class="text-start GhiChu">@(d.GhiChu == null ? "" : d.GhiChu)</td>
-                                            <td class="text-start NgayDen">@(formatDay(d.NgayDen == null ? null : d.NgayDen))</td>
-                                            <td class="text-center last-td-column">
-                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                            <button class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa" onclick="showBenhNhanVoiIDBN(@d.Id)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                            <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                            <path d="M16 5l3 3"></path>
-                                            </svg>
-                                            </button>
-                                            <button class="btn btn-icon bg-dark-lt" data-bs-toggle="tooltip" data-bs-placement="right" title="Thay đổi trạng thái">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M4 7l16 0"></path>
-                                            <path d="M10 11l0 6"></path>
-                                            <path d="M14 11l0 6"></path>
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                            </svg>
-                                            </button>
-                                            </div>
-                                            </td>
-                                            </tr>
-                                            }*@
-                                            <tr>
-                                                <td class="text-center MaBn">BN01</td>
-                                                <td class="text-start TenBn">Nguyễn Thanh Ý</td>
-                                                <td class="text-start NgaySinh">28-05-2001</td>
-                                                <td class="text-center NamSinh">2001</td>
-                                                <td class="text-center Idgt">Nam</td>
-                                                <td class="text-start DiaChi">Tuy Phước, Bình Định</td>
-                                                <td class="text-start Idtinh">Bình Định</td>
-                                                <td class="text-start Idquan">Tuy Phước</td>
-                                                <td class="text-start Idpx">Phước Lộc</td>
-                                                <td class="text-start DienThoai">0364956001</td>
-                                                <td class="text-start Email">thanhyzz123@gmail.com</td>
-                                                <td class="text-start Iddt">Kinh</td>
-                                                <td class="text-start Idnn">kỹ sư phần mềm</td>
-                                                <td class="text-start Idqg">Việt Nam</td>
-                                                <td class="text-start SoCccd">05010012110</td>
-                                                <td class="text-start NgayCap">28-05-2021</td>
-                                                <td class="text-start GhiChu">Móm</td>
-                                                <td class="text-start NgayDen">30-10-2023</td>
-                                                <td class="text-center last-td-column">
-                                                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                        <button class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa" onclick="showBenhNhanVoiIDBN()">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
-                                                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path>
-                                                                <path d="M16 5l3 3"></path>
-                                                            </svg>
-                                                        </button>
-                                                        <button class="btn btn-icon bg-dark-lt" data-bs-toggle="tooltip" data-bs-placement="right" title="Thay đổi trạng thái">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                <path d="M4 7l16 0"></path>
-                                                                <path d="M10 11l0 6"></path>
-                                                                <path d="M14 11l0 6"></path>
-                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                <tr data-id="@d.Id">
+                                                    <td class="text-center MaBn">@d.MaBn</td>
+                                                    <td class="text-start TenBn">@d.TenBn</td>
+                                                    <td class="text-start NgaySinh">@formatDay(d.NgaySinh)</td>
+                                                    <td class="text-center NamSinh">@d.NamSinh</td>
+                                                    <td class="text-center Idgt">@(d.IdgtNavigation == null ? "" : d.IdgtNavigation.TenGioiTinh)</td>
+                                                    <td class="text-start DiaChi">@d.DiaChi</td>
+                                                    <td class="text-center Idtinh">@(d.IdtinhNavigation == null ? "" : d.IdtinhNavigation.TenTinh)</td>
+                                                    <td class="text-start Idquan">@(d.IdquanNavigation == null ? "" : d.IdquanNavigation.TenQuan)</td>
+                                                    <td class="text-start Idpx">@(d.IdpxNavigation == null ? "" : d.IdpxNavigation.TenXa)</td>
+                                                    <td class="text-start DienThoai">@d.DienThoai</td>
+                                                    <td class="text-start Email">@d.Email</td>
+                                                    <td class="text-start Iddt">@(d.IddtNavigation == null ? "" : d.IddtNavigation.TenDanToc)</td>
+                                                    <td class="text-start Idnn">@(d.IdnnNavigation == null ? "" : d.IdnnNavigation.TenNgheNghiep)</td>
+                                                    <td class="text-start Idqg">@(d.IdqgNavigation == null ? "" : d.IdqgNavigation.TenQuocGia)</td>
+                                                    <td class="text-start SoCccd">@d.SoCccd</td>
+                                                    <td class="text-start NgayCap">@formatDay(@d.NgayCap)</td>
+                                                    <td class="text-start GhiChu">@(d.GhiChu == null ? "" : d.GhiChu)</td>
+                                                    <td class="text-start NgayDen">@(formatDay(d.NgayDen == null ? null : d.NgayDen))</td>
+                                                    <td class="text-center last-td-column px-2">
+                                                        <button class="status status-purple border-0">Khám</button>
+                                                    </td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
@@ -267,3 +168,4 @@
         </div>
     </div>
 </div>
+<script src="/js/qlkhambenh.js" defer asp-append-version="true"></script>
