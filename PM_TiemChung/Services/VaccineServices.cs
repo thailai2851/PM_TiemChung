@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmVaccine> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListVaccine();
     }
     public class VaccineServices : IVaccineServices
     {
@@ -156,6 +157,17 @@ namespace PM_TiemChung.Services
         {
             DmVaccine model = await _context.DmVaccines.FindAsync(id);
             return model;
+        }
+        public async Task<dynamic> getListVaccine()
+        {
+            return await _context.DmVaccines.Where(x => x.Active == true)
+                .Select(x=> new
+                {
+                    id = x.Id,
+                    ma = x.MaVaccine,
+                    ten = x.TenVaccine
+                })
+                .ToListAsync();
         }
         public async Task<dynamic> changeActive(long id)
         {

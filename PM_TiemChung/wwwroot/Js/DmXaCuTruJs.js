@@ -58,6 +58,21 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on('change', 'select.cbTinhCuTru', function () {
+        var id = $(this).val();
+        $('select.cbQuanCuTru')[0].tomselect.clear();
+        $('select.cbQuanCuTru')[0].tomselect.clearOptions();
+        $.ajax({
+            method: "post",
+            url: '/DanhMuc/DM_QuanCuTru/getListQuanCuTru',
+        }).done(function (response) {
+            var newOptions = response.filter(function (item) {
+                return item.idTinh == id;
+            });
+
+            $('select.cbQuanCuTru')[0].tomselect.addOptions(newOptions)
+        })
+    });
 })
 function changeActive(id) {
     idModel = id;
@@ -314,6 +329,18 @@ function showModal(id) {
         data: "id=" + id,
         success: function (response) {
             showModalLargel(response.title, response.view);
+            var das = [{
+                    className: 'select.cbTinhCuTru',
+                    placeholder: "-- Tỉnh cư trú --",
+                    action: "/DanhMuc/DM_TinhCuTru/getListTinhCuTru"
+                },
+                {
+                    className: 'select.cbQuanCuTru',
+                    placeholder: "-- Quận cư trú --",
+                    action: "/DanhMuc/DM_QuanCuTru/getListQuanCuTru"
+                }
+            ];
+            configCbDataBase(das);
         },
         error: function (error) {
             console.log(error);

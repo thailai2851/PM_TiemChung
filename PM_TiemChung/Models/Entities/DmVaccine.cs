@@ -17,7 +17,9 @@ public partial class DmVaccine
 
     public bool? Active { get; set; }
 
-    public virtual ICollection<DmProfileCt> DmProfileCts { get; set; } = new List<DmProfileCt>();
+    public virtual ICollection<DmProfileCt> DmProfileCtIdvaccineNavigations { get; set; } = new List<DmProfileCt>();
+
+    public virtual ICollection<DmProfileCt> DmProfileCtMuiTienQuyetNavigations { get; set; } = new List<DmProfileCt>();
 
     public virtual ICollection<LichTiemBn> LichTiemBns { get; set; } = new List<LichTiemBn>();
 }

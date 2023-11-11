@@ -32,6 +32,13 @@ namespace PM_TiemChung.Controllers
             var result = await _services.getModelsWithNumberPage(pageNumber);
             return Ok(result);
         }
+        [HttpPost("getListVaccine")]
+        // Chuyển trang 
+        public async Task<IActionResult> getListVaccine()
+        {
+            var result = await _services.getListVaccine();
+            return Ok(result);
+        }
         [HttpPost("api/getModelsWithNumberPage")]
         // Phân trang
         public async Task<IActionResult> getModelsWithNumberPage()

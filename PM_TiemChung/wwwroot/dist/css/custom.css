@@ -1,0 +1,42 @@
+﻿.form-table {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none;
+    padding: 0.25rem 0.5rem !important;
+    min-height: 0 !important;
+}
+
+    .form-table:not([readonly]):not([disabled]):focus {
+        border: 1px solid #206BC4 !important;
+        background-color: white !important;
+    }
+
+.table-input td {
+    padding: 0;
+}
+
+.table-input .btn-icon {
+    --tblr-btn-icon-size: 1.15rem;
+}
+
+.form-table .ts-control {
+    box-shadow: none !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+
+.table-active .form-table {
+    background-color: whitesmoke;
+    color: var(--tblr-table-active-color);
+}
+.table-input td {
+    padding: 0;
+}
+
+.table-input .btn-icon {
+    --tblr-btn-icon-size: 1.15rem;
+}
+
+input:read-only{
+    background-color: whitesmoke;
+}

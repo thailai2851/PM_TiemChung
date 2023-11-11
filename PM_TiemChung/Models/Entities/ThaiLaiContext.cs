@@ -43,6 +43,8 @@ public partial class ThaiLaiContext : DbContext
 
     public virtual DbSet<LichTiemBn> LichTiemBns { get; set; }
 
+    public virtual DbSet<QlMa> QlMas { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Connection");
 
@@ -197,9 +199,13 @@ public partial class ThaiLaiContext : DbContext
                 .HasForeignKey(d => d.IdthoiGian)
                 .HasConstraintName("FK_DM_Profile_CT_DM_ThoiGian");
 
-            entity.HasOne(d => d.IdvaccineNavigation).WithMany(p => p.DmProfileCts)
+            entity.HasOne(d => d.IdvaccineNavigation).WithMany(p => p.DmProfileCtIdvaccineNavigations)
                 .HasForeignKey(d => d.Idvaccine)
                 .HasConstraintName("FK_DM_Profile_CT_DM_Vaccine");
+
+            entity.HasOne(d => d.MuiTienQuyetNavigation).WithMany(p => p.DmProfileCtMuiTienQuyetNavigations)
+                .HasForeignKey(d => d.MuiTienQuyet)
+                .HasConstraintName("FK__DM_Profil__MuiTi__6383C8BA");
         });
 
         modelBuilder.Entity<DmQuanCuTru>(entity =>
@@ -309,6 +315,16 @@ public partial class ThaiLaiContext : DbContext
             entity.HasOne(d => d.IdvcNavigation).WithMany(p => p.LichTiemBns)
                 .HasForeignKey(d => d.Idvc)
                 .HasConstraintName("FK_LichTiemBN_DM_Vaccine");
+        });
+
+        modelBuilder.Entity<QlMa>(entity =>
+        {
+            entity.ToTable("QL_Ma");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.KyHieu).HasMaxLength(50);
+            entity.Property(e => e.Ngay).HasColumnType("date");
+            entity.Property(e => e.Stt).HasColumnName("STT");
         });
 
         OnModelCreatingPartial(modelBuilder);

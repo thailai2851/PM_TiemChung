@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmDanToc> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListDanToc();
     }
     public class DanTocServices : IDanTocServices
     {
@@ -183,6 +184,17 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListDanToc()
+        {
+            return await _context.DmDanTocs
+                .Select(x => new
+                {
+                    id = x.Id,
+                    ma = x.MaDanToc,
+                    ten = x.TenDanToc,
+                })
+                .ToListAsync();
         }
     }
 }

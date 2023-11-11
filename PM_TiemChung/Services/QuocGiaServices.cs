@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmQuocGium> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListQuocGia();
     }
     public class QuocGiaServices : IQuocGiaServices
     {
@@ -177,6 +178,17 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListQuocGia()
+        {
+            return await _context.DmQuocGia
+                .Select(x => new
+                {
+                    id = x.Id,
+                    ma = x.MaQuocGia,
+                    ten = x.TenQuocGia,
+                })
+                .ToListAsync();
         }
     }
 }

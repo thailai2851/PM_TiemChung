@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmQuanCuTru> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListQuanCuTru();
     }
     public class QuanCuTruServices : IQuanCuTruServices
     {
@@ -179,6 +180,18 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListQuanCuTru()
+        {
+            return await _context.DmQuanCuTrus
+                .Select(x => new
+                {
+                    id = x.Id,
+                    ma = x.MaQuan,
+                    ten = x.TenQuan,
+                    idTinh = x.Idtinh
+                })
+                .ToListAsync();
         }
     }
 }
