@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmNgheNghiep> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListNgheNghiep();
     }
     public class NgheNghiepServices : INgheNghiepServices
     {
@@ -177,6 +178,17 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListNgheNghiep()
+        {
+            return await _context.DmNgheNghieps
+                .Select(x => new
+                {
+                    id = x.Id,
+                    ma = x.MaNgheNghiep,
+                    ten = x.TenNgheNghiep,
+                })
+                .ToListAsync();
         }
     }
 }

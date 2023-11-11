@@ -73,6 +73,13 @@ namespace PM_TiemChung.Controllers
             var result = await _services.changeActive(id);
             return Ok(result);
         }
+        [HttpPost("getListDanToc")]
+        // xóa và khôi phục (chuyển active về false)
+        public async Task<IActionResult> getListDanToc()
+        {
+            var result = await _services.getListDanToc();
+            return Ok(result);
+        }
         public string ConvertViewToString(ControllerContext controllerContext, PartialViewResult pvr, ICompositeViewEngine _viewEngine)
         {
             using (StringWriter writer = new StringWriter())

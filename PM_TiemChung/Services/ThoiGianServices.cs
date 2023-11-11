@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmThoiGian> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListThoiGian();
     }
     public class ThoiGianServices : IThoiGianServices
     {
@@ -176,6 +177,10 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListThoiGian()
+        {
+            return await _context.DmThoiGians.Where(x => x.Active == true).ToListAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PM_TiemChung.Models.Entities;
+using System.Globalization;
 
 namespace PM_TiemChung.Models.Mapper
 {
@@ -50,6 +51,12 @@ namespace PM_TiemChung.Models.Mapper
 
             CreateMap<DmNhanVien, DmNhanVienMap>();
             CreateMap<DmNhanVienMap, DmNhanVien>();
+
+            CreateMap<DmBenhNhanMap, DmBenhNhan>()
+                .ForMember(dest => dest.NgayCap, opt => opt.MapFrom(src => src.NgayCap != "" ? DateTime.ParseExact(src.NgayCap, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgayKham, opt => opt.MapFrom(src => src.NgayKham != "" ? DateTime.ParseExact(src.NgayKham, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgaySinh, opt => opt.MapFrom(src => src.NgaySinh != "" ? DateTime.ParseExact(src.NgaySinh, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgayDen, opt => opt.MapFrom(src => src.NgayDen != "" ? DateTime.ParseExact(src.NgayDen, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
         }
     }
 }

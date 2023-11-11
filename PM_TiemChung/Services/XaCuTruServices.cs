@@ -13,6 +13,7 @@ namespace PM_TiemChung.Services
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
         Task<DmXaCuTru> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
+        Task<dynamic> getListXaCuTru();
     }
     public class XaCuTruServices : IXaCuTruServices
     {
@@ -158,7 +159,10 @@ namespace PM_TiemChung.Services
         }
         public async Task<DmXaCuTru> getModelWithId(long id)
         {
-            DmXaCuTru model = await _context.DmXaCuTrus.FindAsync(id);
+            DmXaCuTru model = await _context.DmXaCuTrus
+                .Include(x=>x.IdquanNavigation)
+                .ThenInclude(x=>x.IdtinhNavigation)
+                .FirstOrDefaultAsync(x=>x.Id == id);
             return model;
         }
         public async Task<dynamic> changeActive(long id)
@@ -184,6 +188,18 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListXaCuTru()
+        {
+            return await _context.DmXaCuTrus
+                .Select(x => new
+                {
+                    id = x.Id,
+                    ma = x.MaXa,
+                    ten = x.TenXa,
+                    idQuan = x.Idquan
+                })
+                .ToListAsync();
         }
     }
 }

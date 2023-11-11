@@ -46,6 +46,12 @@ namespace PM_TiemChung.Controllers
             var result = await _services.searchWithKeyword(key, active);
             return Ok(result);
         }
+        [HttpPost("getListThoiGian")]
+        // Tìm kiếm trong danh mục với từ khóa
+        public async Task<IActionResult> getListThoiGian()
+        {
+            return Ok(await _services.getListThoiGian());
+        }
         [HttpPost("showModal")]
         public async Task<IActionResult> showModal(long id)
         {

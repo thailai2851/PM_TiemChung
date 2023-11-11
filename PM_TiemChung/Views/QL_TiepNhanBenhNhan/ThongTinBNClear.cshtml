@@ -28,7 +28,10 @@
             <div class="col-lg-2 col-12">
                 <label class="form-label mb-0 required">Giới tính</label>
                 <select class="form-select" name="Idgt" required>
-                    
+                    @foreach (DmGioiTinh gt in ViewBag.GioiTinhs)
+                    {
+                        <option value="@gt.Id">@gt.TenGioiTinh</option>
+                    }
                 </select>
             </div>
         </div>

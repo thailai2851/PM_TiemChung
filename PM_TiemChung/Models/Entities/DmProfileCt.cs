@@ -26,4 +26,6 @@ public partial class DmProfileCt
     public virtual DmThoiGian? IdthoiGianNavigation { get; set; }
 
     public virtual DmVaccine? IdvaccineNavigation { get; set; }
+
+    public virtual DmVaccine? MuiTienQuyetNavigation { get; set; }
 }

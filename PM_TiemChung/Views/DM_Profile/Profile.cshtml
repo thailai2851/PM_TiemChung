@@ -1,5 +1,4 @@
-﻿
-<div class="page-body">
+﻿<div class="page-body">
     <div class="">
         <div class="card">
             <div>
@@ -20,13 +19,20 @@
                                                                 <tr>
                                                                     <th class="text-center p-2">TT</th>
                                                                     <th class="text-center">Tên Profile</th>
-                                                                    <th class="text-center">Tùy chọn</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="tbody-FormKetQua">
-                                                            <td class="text-center">1</td>
-                                                            <td class="text-start">Profile nam</td>
-                                                            <td class="text-center"></td>
+                                                            <tbody id="tbody-Form">
+                                                                @{
+                                                                    int i = 1;
+                                                                }
+                                                                @foreach (DmProfile pr in ViewBag.Profiles)
+                                                                {
+                                                                    <tr data-id="@pr.Id" style="cursor: pointer;">
+                                                                        <td class="text-center">@i</td>
+                                                                        <td class="text-start ten">@pr.TenProfile</td>
+                                                                    </tr>
+                                                                    i++;
+                                                                }
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -41,9 +47,6 @@
                                     <div class="card-body p-2">
                                         <div class="row">
                                             <div class="col-auto mb-2">
-                                                <button class="btn" id="btnXoaTrangForm">Xóa trắng</button>
-                                            </div>
-                                            <div class="col-auto mb-2">
                                                 <button class="btn btn-primary" id="btnLuuForm">Lưu</button>
                                             </div>
                                         </div>
@@ -51,12 +54,17 @@
                                             <div class="col-12 col-md-3 mb-2">
                                                 <input class="form-control" required type="text" autocomplete="off" placeholder="Tên profile" id="txtTenProfile" />
                                             </div>
-                                            <div class="col-12 col-md-1 mb-2">
-                                                <select id="cbGioiTinh" class="form-select" required>
+                                            <div class="col-12 col-md-2 mb-2">
+                                                <select id="cbGioiTinh" class="form-select" disabled>
+                                                    <option selected value="">-- Giới tính --</option>
+                                                    @foreach (DmGioiTinh gt in ViewBag.GioiTinhs)
+                                                    {
+                                                        <option value="@gt.Id">@gt.TenGioiTinh</option>
+                                                    }
                                                 </select>
                                             </div>
                                             <div class="col-2 col-md-auto mb-2">
-                                                <button class="btn btn-primary btn-icon" id="btnAddFormKQXNCt" type="button">
+                                                <button class="btn btn-primary btn-icon" id="btnAddRowCt" type="button">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                         <path d="M12 5l0 14"></path>
@@ -82,15 +90,8 @@
                                                                     <th class="text-center last-th-column" style="z-index:3;">Tùy chọn</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="tbody-table">
-                                                            <td class="text-center p-2">1</td>
-                                                            <td class="text-start">Vaccine uống ván</td>
-                                                            <td class="text-end">2</td>
-                                                            <td class="text-end">5</td>
-                                                            <td class="text-end">10</td>
-                                                            <td class="text-start">Ngày</td>
-                                                            <td class="text-start">Vaccine ho gà</td>
-                                                            <td></td>
+                                                            <tbody id="tbody-tableCt">
+                                                                
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -107,4 +108,4 @@
         </div>
     </div>
 </div>
-<script src="/dist/js/CLSJs/CLS_FormKQXN.js" defer asp-append-version="true"></script>
+<script src="/Js//DmProfileJs.js" defer asp-append-version="true"></script>
