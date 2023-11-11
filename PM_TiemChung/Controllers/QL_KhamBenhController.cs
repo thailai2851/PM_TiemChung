@@ -29,5 +29,19 @@ namespace PM_TiemChung.Controllers
                 .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date).ToListAsync();
             return View();
         }
+        [HttpPost("reloadTableDSTN")]
+        public async Task<IActionResult> reloadTableDSTN()
+        {
+            return Ok(await _context.DmBenhNhans
+                .Include(x => x.IdgtNavigation)
+                .Include(x => x.IdtinhNavigation)
+                .Include(x => x.IdquanNavigation)
+                .Include(x => x.IdpxNavigation)
+                .Include(x => x.IddtNavigation)
+                .Include(x => x.IdnnNavigation)
+                .Include(x => x.IdqgNavigation)
+                .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date
+                ).ToListAsync());
+        }
     }
 }
