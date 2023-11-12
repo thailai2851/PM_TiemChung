@@ -5,6 +5,7 @@ using PM_TiemChung.Models;
 using PM_TiemChung.Models.Entities;
 using PM_TiemChung.Models.Mapper;
 using PM_TiemChung.Services;
+using System.Globalization;
 
 namespace PM_TiemChung.Controllers
 {
@@ -73,8 +74,9 @@ namespace PM_TiemChung.Controllers
             }
         }
         [HttpPost("timKiemBenhNhan")]
-        public async Task<IActionResult> timKiemBenhNhan(string ma, string ten, string sdt)
+        public async Task<IActionResult> timKiemBenhNhan(string ma, string ten, string sdt, string ngay)
         {
+            DateTime Ngay = DateTime.ParseExact(ngay, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             return Ok(await _context.DmBenhNhans
                 .Include(x => x.IdgtNavigation)
                 .Include(x => x.IdtinhNavigation)
@@ -83,7 +85,8 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IddtNavigation)
                 .Include(x => x.IdnnNavigation)
                 .Include(x => x.IdqgNavigation)
-                .Where(x => x.Active == true
+                .Where(x => (x.Active == true)
+                && (x.NgayKham.Value.Date == Ngay.Date)
                 && (ma == null ? true : x.MaBn.ToLower().Contains(ma.ToLower()))
                 && (ten == null ? true : x.TenBn.ToLower().Contains(ten.ToLower()))
                 && (sdt == null ? true : x.DienThoai.ToLower().Contains(sdt.ToLower()))
