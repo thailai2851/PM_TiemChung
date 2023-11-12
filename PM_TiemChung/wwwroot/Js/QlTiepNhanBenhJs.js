@@ -127,21 +127,24 @@ $(document).ready(function () {
 
     $(document).on('click', '.btn-active', function () {
         var id = $(this).val();
-        if (id) {
-            $.ajax({
-                url: '/QuanLy/QL_TiepNhanBenhNhan/kichHoat',
-                method: 'POST',
-                data: {
-                    id: id 
-                },
-                success: function (result) {
-                    showToast(result.message, result.statusCode);
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-        }
+        showModalDanger('Bạn có muốn thực hiện thao tác!');
+        $('#btnDanger').on('click', function () {
+            if (id) {
+                $.ajax({
+                    url: '/QuanLy/QL_TiepNhanBenhNhan/kichHoat',
+                    method: 'POST',
+                    data: {
+                        id: id
+                    },
+                    success: function (result) {
+                        showToast(result.message, result.statusCode);
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+        })
     });
     $('#txtNgay').on('dp.change', function () {
         searchBenhNhan();
