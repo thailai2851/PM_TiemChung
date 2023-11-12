@@ -105,37 +105,38 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="tabs-DSBenhNhan" role="tabpanel">
-                    <div>
-                        <div class="w-100">
-                            <div class="row d-flex justify-content-between">
-                                <div class="row col-9 col-lg-6 mb-2 p-0">
-                                    <form id="formSearch" class="row">
-                                        <div class="col-2 ms-2">
-                                            <div class="input-group">
-                                                <input type="text" autocomplete="off" id="txtMa" class="form-control" placeholder="Tìm theo mã BN">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="input-group">
-                                                <input type="text" autocomplete="off" id="txtTen" class="form-control" placeholder="Tìm theo tên bệnh nhân">
-                                            </div>
-                                        </div>
-                                        <div class="col-2 me-2">
-                                            <div class="input-group">
-                                                <input type="text" autocomplete="off" id="txtSdt" class="form-control" placeholder="Tìm theo SĐT">
-                                            </div>
-                                        </div>
-                                        <div class="col-auto p-0">
-                                            <button id="btnSearch" class="btn btn-icon" aria-label="Button" type="submit">
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                    <form id="formSearch" class="row">
+                        <div class="col-2 ms-2">
+                            <div class="input-icon">
+                                <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" id="txtNgay">
+                                <span class="input-icon-addon">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                                </span>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-2 ms-2">
+                            <div class="input-group">
+                                <input type="text" autocomplete="off" id="txtMa" class="form-control" placeholder="Tìm theo mã BN">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <input type="text" autocomplete="off" id="txtTen" class="form-control" placeholder="Tìm theo tên bệnh nhân">
+                            </div>
+                        </div>
+                        <div class="col-2 me-2">
+                            <div class="input-group">
+                                <input type="text" autocomplete="off" id="txtSdt" class="form-control" placeholder="Tìm theo SĐT">
+                            </div>
+                        </div>
+                        <div class="col-auto p-0">
+                            <button id="btnSearch" class="btn btn-icon" aria-label="Button" type="submit">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                            </button>
+                        </div>
+                    </form>
                     <div>
                         <div class="w-100">
                             <div class="card">

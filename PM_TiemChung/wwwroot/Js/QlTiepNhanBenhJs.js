@@ -122,21 +122,7 @@ $(document).ready(function () {
     });
     $('#formSearch').on('submit', function (event) {
         event.preventDefault();
-        $.ajax({
-            url: '/QuanLy/QL_TiepNhanBenhNhan/timKiemBenhNhan',
-            method: 'POST',
-            data: {
-                ma: $('#txtMa').val(),
-                ten: $('#txtTen').val(),
-                sdt: $('#txtSdt').val(),
-            },
-            success: function (result) {
-                renderTableDs(result);
-            },
-            error: function (error) {
-                console.error(error);
-            }
-        });
+        searchBenhNhan();
     });
 
     $(document).on('click', '.btn-active', function () {
@@ -156,6 +142,9 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+    $('#txtNgay').on('dp.change', function () {
+        searchBenhNhan();
     });
     $(document).on('click', '.btn-remove', function () {
         var id = $(this).val();
@@ -266,6 +255,24 @@ $(document).ready(function () {
         _benhNhan = null;
     })
 });
+function searchBenhNhan() {
+    $.ajax({
+        url: '/QuanLy/QL_TiepNhanBenhNhan/timKiemBenhNhan',
+        method: 'POST',
+        data: {
+            ma: $('#txtMa').val(),
+            ten: $('#txtTen').val(),
+            sdt: $('#txtSdt').val(),
+            ngay: $('#txtNgay').val(),
+        },
+        success: function (result) {
+            renderTableDs(result);
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+}
 function renderTableDs(datas) {
     $('#tbody-table-DS').empty();
     datas.forEach(function (d) {
