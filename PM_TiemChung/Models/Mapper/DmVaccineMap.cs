@@ -10,6 +10,8 @@
 
         public string? DonViTinh { get; set; }
 
+        public string? SoCode { get; set; }
+
         public double? GiaBan { get; set; }
 
         public bool? Active { get; set; }

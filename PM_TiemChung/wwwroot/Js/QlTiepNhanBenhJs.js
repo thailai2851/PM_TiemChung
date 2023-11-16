@@ -97,7 +97,7 @@ $(document).ready(function () {
         var form = document.getElementById('formTTHC');
         if (!form.checkValidity()) {
             form.classList.add('was-validated');
-            showBtn(btn, "Lưu");
+            showBtn(btn, "Tiếp nhận");
         } else {
             form.classList.remove('was-validated');
             var formData = $('#formTTHC').serialize();
@@ -106,7 +106,7 @@ $(document).ready(function () {
                 method: 'POST',
                 data: formData,
                 success: function (result) {
-                    showBtn(btn, "Lưu");
+                    showBtn(btn, "Tiếp nhận");
                     showToast(result.message, result.statusCode);
                     if (result.statusCode == 200) {
                         _benhNhan = result.data

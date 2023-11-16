@@ -31,7 +31,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x=>x.IddtNavigation)
                 .Include(x=>x.IdnnNavigation)
                 .Include(x=>x.IdqgNavigation)
-                .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date).ToListAsync();
+                .Where(x => x.Active == true && x.NgayDen.Value.Date == DateTime.Now.Date).ToListAsync();
             return View();
         }
         [HttpPost("LuuBenhNhan")]
@@ -86,7 +86,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdnnNavigation)
                 .Include(x => x.IdqgNavigation)
                 .Where(x => (x.Active == true)
-                && (x.NgayKham.Value.Date == Ngay.Date)
+                && (x.NgayDen.Value.Date == Ngay.Date)
                 && (ma == null ? true : x.MaBn.ToLower().Contains(ma.ToLower()))
                 && (ten == null ? true : x.TenBn.ToLower().Contains(ten.ToLower()))
                 && (sdt == null ? true : x.DienThoai.ToLower().Contains(sdt.ToLower()))

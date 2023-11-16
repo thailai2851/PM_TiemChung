@@ -4,15 +4,15 @@
         <input type="hidden" name="Id" value="0">
         <div class="row">
             <div class="col-lg-2 col-12">
-                <label class="form-label mb-0 required">Mã BN</label>
+                <label class="form-label mb-1 mt-2 required">Mã BN</label>
                 <input type="text" autocomplete="off" class="form-control" name="MaBn" placeholder="Auto" required readonly>
             </div>
             <div class="col-lg-4 col-12">
-                <label class="form-label mb-0 required">Tên bệnh nhân</label>
+                <label class="form-label mb-1 mt-2 required">Tên bệnh nhân</label>
                 <input type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tên bệnh nhân" required>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Ngày sinh</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Ngày sinh</label>
                 <div class="input-icon">
                     <input type="text" autocomplete="off" class="form-control input-date-long-mask" name="NgaySinh" placeholder="Ngày Sinh">
                     <span class="input-icon-addon">
@@ -21,12 +21,14 @@
                     </span>
                 </div>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0 required">Năm sinh</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2 required">Năm sinh</label>
                 <input type="text" autocomplete="off" class="form-control" name="NamSinh" placeholder="Năm sinh" required>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-2 col-12">
-                <label class="form-label mb-0 required">Giới tính</label>
+                <label class="form-label mb-1 mt-2 required">Giới tính</label>
                 <select class="form-select" name="Idgt" required>
                     @foreach (DmGioiTinh gt in ViewBag.GioiTinhs)
                     {
@@ -34,59 +36,61 @@
                     }
                 </select>
             </div>
+            <div class="col-lg-10 col-12">
+                <label class="form-label mb-1 mt-2 ">Địa chỉ</label>
+                <input type="text" autocomplete="off" class="form-control " name="DiaChi" placeholder="Địa chỉ" >
+            </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-12">
-                <label class="form-label mb-0 required">Địa chỉ</label>
-                <input type="text" autocomplete="off" class="form-control " name="DiaChi" placeholder="Địa chỉ" required>
-            </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Quốc tịch</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Quốc tịch</label>
                 <select class="form-select cbQuocGia" name="Idqg">
                 </select>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Tỉnh/TP</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Tỉnh/TP</label>
                 <select class="form-select cbTinhCuTru" name="Idtinh">
                 </select>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Quận, huyện</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Quận, huyện</label>
                 <select class="form-select cbQuanCuTru" name="Idquan">
                 </select>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Phường, xã</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Phường, xã</label>
                 <select class="form-select cbXaCuTru" name="Idpx">
                 </select>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0 required">Số ĐT</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2 required">Số ĐT</label>
                 <input type="text" autocomplete="off" class="form-control" name="DienThoai" placeholder="Số điện thoại" required>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Email</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Email</label>
                 <input autocomplete="off" type="email" class="form-control" name="Email" placeholder="Email">
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0 required">Dân tộc</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2 required">Dân tộc</label>
                 <select class="form-select cbDanToc" name="Iddt" required>
                 </select>
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Nghề nghiệp</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Nghề nghiệp</label>
                 <select class="form-select cbNgheNghiep" name="Idnn">
                 </select>
             </div>
-            
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">CCCD</label>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">CCCD</label>
                 <input type="text" autocomplete="off" class="form-control" name="SoCccd" placeholder="CCCD">
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-lbael mb-0">Ngày cấp</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Ngày cấp</label>
                 <div class="input-icon">
                     <input type="text" autocomplete="off" class="form-control input-date" name="NgayCap" placeholder="Ngày cấp CCCD">
                     <span class="input-icon-addon">
@@ -95,14 +99,12 @@
                     </span>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Nơi cấp</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Nơi cấp</label>
                 <input type="text" autocomplete="off" class="form-control" name="NoiCap" placeholder="Nơi cấp">
             </div>
-            <div class="col-lg-2 col-12">
-                <label class="form-label mb-0">Ngày đến</label>
+            <div class="col-lg-3 col-12">
+                <label class="form-label mb-1 mt-2">Ngày lưu hồ sơ</label>
                 <div class="input-icon">
                     <input type="text" autocomplete="off" class="form-control input-date-default" name="NgayDen" placeholder="Ngày đến">
                     <span class="input-icon-addon">
@@ -111,8 +113,10 @@
                     </span>
                 </div>
             </div>
-            <div class="mb-2 col-lg-8 col-12">
-                <label class="form-label mb-0">Ghi chú</label>
+        </div>
+        <div class="row">
+            <div class="mb-2 col-lg-12 col-12">
+                <label class="form-label mb-1 mt-2">Ghi chú</label>
                 <input type="text" autocomplete="off" class="form-control" name="GhiChu" placeholder="Ghi chú" />
             </div>
         </div>
