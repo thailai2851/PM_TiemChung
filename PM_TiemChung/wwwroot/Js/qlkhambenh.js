@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var _idBenhNhan = null;
+$(document).ready(function () {
     configDateDefault();
 
     $('#btnReloadDSTN').on('click', function () {
@@ -13,8 +14,70 @@
             }
         });
     });
+
+    $(document).on('click', '.btn-kham', function () {
+        var id = $(this).val();
+        if (id) {
+            $.ajax({
+                url: '/QuanLy/QL_KhamBenh/loadTTLichTiem',
+                method: 'POST',
+                data: "idBn=" + id,
+                success: function (result) {
+                    console.log(result);
+                    _idBenhNhan = result.idBenhNhan;
+                    var tabLapPhieu = document.getElementById('tabsKhamBenh');
+                    var tab = new bootstrap.Tab(tabLapPhieu);
+                    tab.show();
+                    $('#txtTenProfile').val(result.tenProFile);
+                    $('#txtTenBN').val(result.tenBenhNhan);
+                    $('#txtTuoi').val(result.tuoi);
+
+                    renderTableLichTiem(result.lichTiems, result.soNgayTuoi);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+    });
+
+    $('#btnLuu').on('click', function () {
+        if (_idBenhNhan) {
+            var listLichTiem = [];
+            $('#tbody-lichTiem tr').each(function () {
+                var lichTiem = getDataFromTr($(this));
+                listLichTiem.push(lichTiem);
+            })
+
+            $.ajax({
+                url: '/QuanLy/QL_KhamBenh/luuLichTiem',
+                method: 'POST',
+                data: JSON.stringify(listLichTiem),
+                contentType: "application/json",
+                success: function (result) {
+                    showToast(result.message, result.statusCode);
+                    var datas = result.data;
+                    var inputIds = [];
+                    if (result.statusCode == 200) {
+                        $('#tbody-lichTiem tr').each(function () {
+                            var inputId = $(this).find('input[name="Id"]');
+                            if (inputId.val() == 0) {
+                                inputIds.push(inputId);
+                            }
+                        });
+                        inputIds.forEach(function (item, index) {
+                            item.val(datas[index]);
+                        })
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+    });
 })
-function renderTableDs(datas, table) {
+function renderTableDs(datas) {
     $('#tbody-table').empty();
     datas.forEach(function (d) {
         $('#tbody-table').append(`<tr data-id="${d.id}">
@@ -40,5 +103,44 @@ function renderTableDs(datas, table) {
                                                         <button class="status status-purple border-0 btn-kham" value="${d.id}">Khám</button>
                                                     </td>
                                                 </tr>`)
+    })
+}
+function renderTableLichTiem(datas, soNgayTuoi) {
+    $('#tbody-lichTiem').empty();
+    datas.forEach(function (d) {
+        var checkDuDk = (soNgayTuoi >= (d.tgsomNhat * d.idthoiGianNavigation.soNgay)) && (soNgayTuoi <= (d.tgtreNhat * d.idthoiGianNavigation.soNgay));
+
+        $('#tbody-lichTiem').append(`<tr data-id="${d.id}">
+                                                    <td class="p-0">
+                                                        <input readonly class="form-table form-control" type="text" value="${toEmpty(d.idvcNavigation.tenVaccine)}" style="width: 210px"/>
+                                                        <input type="hidden" name="Id" value="${toEmpty(d.id)}"/>
+                                                        <input type="hidden" name="Idbn" value="${toEmpty(_idBenhNhan)}"/>
+                                                        <input type="hidden" name="Idvc" value="${toEmpty(d.idvcNavigation.id)}"/>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <input name="SoLanTiem" readonly class="form-table form-control" type="text" value="${toEmpty(d.soLanTiem)}" style="width: 110px"/>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <input name="TgsomNhat" readonly class="form-table form-control" type="text" value="${toEmpty(d.tgsomNhat)}" style="width: 110px"/>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <input name="TgtreNhat" readonly class="form-table form-control" type="text" value="${toEmpty(d.tgtreNhat)}" style="width: 110px"/>
+                                                    </td>
+                                                    <td class="">
+                                                        <input readonly class="form-table form-control" type="text" value="${toEmpty(d.idthoiGianNavigation.tenTg)}" style="width: 110px"/>
+                                                        <input type="hidden" name="IdthoiGian" value="${toEmpty(d.idthoiGianNavigation.id)}"/>
+                                                    </td>
+                                                    <td class="">
+                                                        <input readonly class="form-table form-control" type="text" value="${toEmpty(d.muiTienQuyetNavigation == null ? "" : d.muiTienQuyetNavigation.tenVaccine)}" style="width: 210px"/>
+                                                        <input type="hidden" name="MuiTienQuyet" value="${toEmpty(d.muiTienQuyetNavigation == null ? "" : d.muiTienQuyetNavigation.id)}"/>
+                                                    </td>
+                                                    <td class="text-center"><input ${d.ngayTiem ? "checked" : ""} type="checkbox" class="form-check-input" name="DaTiem"/></td>
+                                                    <td class="text-start"><input ${checkDuDk ? `` : `disabled`} value="${formatDay(toEmpty(d.ngayTiem))}" class="form-control form-table input-date-long-mask w-100" name="NgayTiem"/></td>
+                                                    <td class="text-center"><input ${checkDuDk ? `` : `disabled`} ${d.deNghiTiem ? "checked" : ""} type="checkbox" class="form-check-input" name="DeNghiTiem"/></td>
+                                                    <td class="text-start"><input ${checkDuDk ? `` : `disabled`} value="${formatDay(toEmpty(d.ngayDeNghi))}" class="form-control form-table input-date-long-mask w-100" name="NgayDeNghiTiem"/></td>
+                                                    <td class="text-start px-0"><input ${checkDuDk ? `` : `disabled`} value="${formatDay(toEmpty(d.ngayHen))}" class="form-control form-table input-date-long-mask w-100" name="NgayHen"/></td>
+                                                </tr>`);
+        var tr = $('#tbody-lichTiem tr:last');
+        configDateLongMaskWithElement(tr.find('.input-date-long-mask'));
     })
 }
