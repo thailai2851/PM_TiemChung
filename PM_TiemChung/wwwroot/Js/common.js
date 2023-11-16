@@ -217,7 +217,11 @@ function getDataFromTr(tr) {
     var formData = {};
     tr.find('input, select, textarea').each(function () {
         if (this.name) {
-            formData[this.name] = this.value ?? null;
+            if (this.type === 'checkbox') {
+                formData[this.name] = this.checked;
+            } else {
+                formData[this.name] = this.value ?? null;
+            }
         }
     });
 
@@ -226,6 +230,9 @@ function getDataFromTr(tr) {
 }
 function configDateLongMask() {
     $('.input-date-long-mask').inputmask({ alias: "datetime", inputFormat: 'dd-mm-yyyy', placeholder: '__-__-____' });
+}
+function configDateLongMaskWithElement(e) {
+    e.inputmask({ alias: "datetime", inputFormat: 'dd-mm-yyyy', placeholder: '__-__-____' });
 }
 function configDateDefault() {
     var today = new Date();

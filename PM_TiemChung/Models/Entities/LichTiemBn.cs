@@ -25,7 +25,7 @@ public partial class LichTiemBn
 
     public DateTime? NgayKham { get; set; }
 
-    public bool? DeNghiTiem { get; set; }
+    public bool DeNghiTiem { get; set; }
 
     public DateTime? NgayDeNghiTiem { get; set; }
 
@@ -39,11 +39,13 @@ public partial class LichTiemBn
 
     public long? IdnhanVienThu { get; set; }
 
-    public bool? DaTiem { get; set; }
+    public int? DaTiem { get; set; }
 
     public DateTime? NgayTiem { get; set; }
 
     public long? IdnhanVienTiem { get; set; }
+
+    public DateTime? NgayHen { get; set; }
 
     public virtual DmBenhNhan? IdbnNavigation { get; set; }
 
@@ -56,4 +58,6 @@ public partial class LichTiemBn
     public virtual DmThoiGian? IdthoiGianNavigation { get; set; }
 
     public virtual DmVaccine? IdvcNavigation { get; set; }
+
+    public virtual DmVaccine? MuiTienQuyetNavigation { get; set; }
 }

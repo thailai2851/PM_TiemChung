@@ -57,6 +57,12 @@ namespace PM_TiemChung.Models.Mapper
                 .ForMember(dest => dest.NgayKham, opt => opt.MapFrom(src => src.NgayKham != "" ? DateTime.ParseExact(src.NgayKham, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
                 .ForMember(dest => dest.NgaySinh, opt => opt.MapFrom(src => src.NgaySinh != "" ? DateTime.ParseExact(src.NgaySinh, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
                 .ForMember(dest => dest.NgayDen, opt => opt.MapFrom(src => src.NgayDen != "" ? DateTime.ParseExact(src.NgayDen, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
+            CreateMap<LichTiemBnMap, LichTiemBn>()
+                .ForMember(dest => dest.NgayDeNghiTiem, opt => opt.MapFrom(src => src.NgayDeNghiTiem != "" ? DateTime.ParseExact(src.NgayDeNghiTiem, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgayKham, opt => opt.MapFrom(src => src.NgayKham != "" ? DateTime.ParseExact(src.NgayKham, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgayThu, opt => opt.MapFrom(src => src.NgayThu != "" ? DateTime.ParseExact(src.NgayThu, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgayHen, opt => opt.MapFrom(src => src.NgayHen != "" ? DateTime.ParseExact(src.NgayHen, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+                .ForMember(dest => dest.NgayTiem, opt => opt.MapFrom(src => src.NgayTiem != "" ? DateTime.ParseExact(src.NgayTiem, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
         }
     }
 }
