@@ -35,5 +35,32 @@ namespace PM_TiemChung.Services
         {
             return data == null ? "" : data;
         }
+        public static string CalculateAgeString(DateTime birthday)
+        {
+            int ageInMonths = CalculateAge(birthday);
+
+            if (ageInMonths < 72)
+            {
+                return $"{ageInMonths} tháng";
+            }
+            else
+            {
+                int ageInYears = ageInMonths / 12;
+                return $"{ageInYears} tuổi";
+            }
+        }
+
+        public static int CalculateAge(DateTime birthday)
+        {
+            DateTime currentDate = DateTime.Now;
+            int ageInMonths = (currentDate.Year - birthday.Year) * 12 + currentDate.Month - birthday.Month;
+
+            if (currentDate.Day < birthday.Day)
+            {
+                ageInMonths--;
+            }
+
+            return ageInMonths;
+        }
     }
 }

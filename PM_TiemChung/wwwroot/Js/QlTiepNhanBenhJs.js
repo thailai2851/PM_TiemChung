@@ -99,6 +99,13 @@ $(document).ready(function () {
             form.classList.add('was-validated');
             showBtn(btn, "Tiếp nhận");
         } else {
+            var namSinh = parseInt($('input[name="NamSinh"]').val());
+            var toDay = new Date();
+            if ((toDay.getFullYear() - namSinh) <= 6 && $('input[name="NgaySinh"]').val() == '') {
+                showToast('Bệnh nhân dưới dưới 6 tuổi, vui lòng nhập ngày tháng năm sinh!', 400);
+                showBtn(btn, "Lưu");
+                return;
+            }
             form.classList.remove('was-validated');
             var formData = $('#formTTHC').serialize();
             $.ajax({

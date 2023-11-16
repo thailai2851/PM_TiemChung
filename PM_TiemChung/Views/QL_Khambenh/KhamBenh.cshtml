@@ -1,4 +1,4 @@
-﻿@{
+@{
     string formatDay(DateTime? date)
     {
         if (date != null)
@@ -33,7 +33,7 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs nav-fill" id="myTab" data-bs-toggle="tabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="#tab-DSBenhNhan" class="nav-link text-dark active" data-bs-toggle="tab" aria-selected="true" role="tab">
+                    <a href="#tabs-DanhSach" id="tabsdanhsach" class="nav-link text-dark active" data-bs-toggle="tab" aria-selected="true" role="tab">
                         <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="#tabs-KhamBenh" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+                    <a href="#tabs-KhamBenh" class="nav-link text-dark" id="tabsKhamBenh" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
                         <!-- Download SVG icon from http://tabler-icons.io/i/user -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-stethoscope me-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 4h-1a2 2 0 0 0 -2 2v3.5h0a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1"></path><path d="M8 15a6 6 0 1 0 12 0v-3"></path><path d="M11 3v2"></path><path d="M6 3v2"></path><path d="M20 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path></svg>
                         Khám bệnh
@@ -71,7 +71,8 @@
         </div>
         <div class="card-body p-2">
             <div class="tab-content">
-                <div class="tab-pane active show" id="tab-DSBenhNhan" role="tabpanel">
+
+                <div class="tab-pane active show" id="tabs-DanhSach" role="tabpanel">
                     <div>
                         <div class="w-100">
                             <div class="row d-flex justify-content-between">
@@ -129,7 +130,7 @@
                                                 <th class="text-center SoCccd">CCCD</th>
                                                 <th class="text-center NgayCap">Ngày cấp</th>
                                                 <th class="text-center GhiChu">Ghi chú</th>
-                                                <th class="text-center NgayDen">Ngày lưu hồ sơ</th>
+                                                <th class="text-center NgayDen">Ngày đến</th>
                                                 <th class="text-center last-th-column" style="z-index:3;">Tùy chọn</th>
                                             </tr>
                                         </thead>
@@ -169,34 +170,108 @@
                 </div>
 
                 <div class="tab-pane" id="tabs-KhamBenh" role="tabpanel">
-
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-1">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-label col-form-label mb-0">Tên profile</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="txtTenProfile" readonly type="text" autocomplete="off" class="form-control" name="" placeholder="Tên profile">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 mb-1">
+                            <div class="row mb-1">
+                                <div class="col-3">
+                                    <label class="form-label col-form-label mb-0">Tên bệnh nhân</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="txtTenBN" readonly type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tên bệnh nhân">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3 mb-1">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-label col-form-label mb-0">Tuổi</label>
+                                </div>
+                                <div class="col-9">
+                                    <input id="txtTuoi" readonly type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tuổi">
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-auto mb-1">
+                        <button class="btn btn-primary btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 5l0 14"></path>
+                        <path d="M5 12l14 0"></path>
+                        </svg>
+                        </button>
+                        </div>*@
+                        <div class="col-12 mb-2">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table table-vcenter card-table table-bordered table-hover table-nowrap table-input">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center p-1">Tên vaccine</th>
+                                                <th class="text-center p-1">Số lần tiêm</th>
+                                                <th class="text-center p-1">TG sớm nhất</th>
+                                                <th class="text-center p-1">TG trễ nhất</th>
+                                                <th class="text-center p-1">Tên thời gian</th>
+                                                <th class="text-center p-1">Mũi tiên quyết</th>
+                                                <th class="text-center p-1">Đã tiêm</th>
+                                                <th class="text-center p-1">Ngày tiêm</th>
+                                                <th class="text-center p-1">Đề nghị tiêm</th>
+                                                <th class="text-center p-1">Ngày đề nghị</th>
+                                                <th class="text-center p-1">Ngày hẹn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody-lichTiem">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="row justify-content-end">
+                                <div class="col-auto">
+                                    <button class="btn btn-primary" id="btnLuu">
+                                        Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tab-pane" id="tabs-ThuNgan" role="tabpanel">
-                        <div class="w-100">
-                            <div class="row d-flex justify-content-between">
-                                <div class="row col-9 col-lg-6 mb-2 p-0">
-                                    <div class="row">
-                                        <div class="col-3 ms-2">
-                                            <div class="input-icon">
-                                                <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" disabled>
-                                                <span class="input-icon-addon">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="col-auto p-0">
-                                            <button id="btnReloadDSTN" class="btn btn-icon" aria-label="Button">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
-                                                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
-                                                </svg>
-                                            </button>
+                    <div class="w-100">
+                        <div class="row d-flex justify-content-between">
+                            <div class="row col-9 col-lg-6 mb-2 p-0">
+                                <div class="row">
+                                    <div class="col-3 ms-2">
+                                        <div class="input-icon">
+                                            <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" disabled>
+                                            <span class="input-icon-addon">
+                                                <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
+                                            </span>
                                         </div>
                                     </div>
+                                    <div class="col-auto p-0">
+                                        <button id="btnReloadDSTN" class="btn btn-icon" aria-label="Button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
+                            </div>
                         </div>
                         <div class="w-100">
                             <div class="card">
@@ -221,23 +296,23 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tbody-table">
-                                           
-                                                <tr>
-                                                    <td class="text-center p-2">
-                                                        <input class="form-check-input border-dark single-checkbox" name="ChonPhieuThu" type="checkbox" checked style="transform: scale(1.35);">
-                                                    </td>
-                                                    <td class="text-center STT">1</td>
-                                                    <td class="text-start TenBN">Thái Lai</td>
-                                                    <td class="text-start TenVaccine">Covid</td>
-                                                    <td class="text-end SoLuong">1</td>
-                                                    <td class="text-end DonGia">30000</td>
-                                                    <td class="text-center">
+
+                                            <tr>
+                                                <td class="text-center p-2">
+                                                    <input class="form-check-input border-dark single-checkbox" name="ChonPhieuThu" type="checkbox" checked style="transform: scale(1.35);">
+                                                </td>
+                                                <td class="text-center STT">1</td>
+                                                <td class="text-start TenBN">Thái Lai</td>
+                                                <td class="text-start TenVaccine">Covid</td>
+                                                <td class="text-end SoLuong">1</td>
+                                                <td class="text-end DonGia">30000</td>
+                                                <td class="text-center">
                                                     <input class="form-check-input border-dark single-checkbox" name="DaThu" type="checkbox" checked style="transform: scale(1.35);">
-                                                    </td>
+                                                </td>
                                                 <td class="text-center NgayThu">16/11/2023</td>
-                                                    <td class="text-end SoPhieuThu">1</td>
-                                                </tr>
-                                          
+                                                <td class="text-end SoPhieuThu">1</td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -250,7 +325,7 @@
                             </div>
                         </div>
                     </div>
-               </div>
+                </div>
 
                 <div class="tab-pane" id="tabs-TiemChung" role="tabpanel">
                     <div class="w-100">
@@ -301,22 +376,22 @@
                                                 <th class="text-center NgayTiem p-2 w-2">Ngày tiêm</th>
                                             </tr>
                                         </thead>
-                                           <tbody id="tbody-table">
+                                        <tbody id="tbody-table">
 
-                                        <tr>
-                                        <td class="text-center p-2 STT">1</td>
-                                        <td class="text-start TenBn">Thái Lai</td>
-                                        <td class="text-start TenVaccine">covid</td>
-                                        <td class="text-end SoLuong">1</td>
-                                        <td class="text-center SoCode">0001</td>
-                                        <td class="text-center last-td-column px-2">
-                                          <button class="status status-purple border-0 btn-kham" value="">Kiểm tra</button>
-                                        </td>
-                                        <td class="text-center">
-                                          <input class="form-check-input border-dark single-checkbox" name="DaTiem" type="checkbox" checked style="transform: scale(1.35);">
-                                        </td>
-                                        <td class="text-center NgayThu">16/11/2023</td>
-                                        </tr>
+                                            <tr>
+                                                <td class="text-center p-2 STT">1</td>
+                                                <td class="text-start TenBn">Thái Lai</td>
+                                                <td class="text-start TenVaccine">covid</td>
+                                                <td class="text-end SoLuong">1</td>
+                                                <td class="text-center SoCode">0001</td>
+                                                <td class="text-center last-td-column px-2">
+                                                    <button class="status status-purple border-0 btn-kham" value="">Kiểm tra</button>
+                                                </td>
+                                                <td class="text-center">
+                                                    <input class="form-check-input border-dark single-checkbox" name="DaTiem" type="checkbox" checked style="transform: scale(1.35);">
+                                                </td>
+                                                <td class="text-center NgayThu">16/11/2023</td>
+                                            </tr>
 
                                         </tbody>
                                     </table>
@@ -331,6 +406,7 @@
                     </div>
                 </div>
 
+            </div>
         </div>
     </div>
 </div>

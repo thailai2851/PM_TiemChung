@@ -257,6 +257,7 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.DonViTinh).HasMaxLength(50);
             entity.Property(e => e.MaVaccine).HasMaxLength(50);
+            entity.Property(e => e.SoCode).HasMaxLength(50);
             entity.Property(e => e.TenVaccine).HasMaxLength(500);
         });
 
@@ -286,6 +287,7 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.IdthoiGian).HasColumnName("IDThoiGian");
             entity.Property(e => e.Idvc).HasColumnName("IDVC");
             entity.Property(e => e.NgayDeNghiTiem).HasColumnType("datetime");
+            entity.Property(e => e.NgayHen).HasColumnType("date");
             entity.Property(e => e.NgayKham).HasColumnType("datetime");
             entity.Property(e => e.NgayThu).HasColumnType("datetime");
             entity.Property(e => e.NgayTiem).HasColumnType("datetime");
@@ -312,9 +314,13 @@ public partial class ThaiLaiContext : DbContext
                 .HasForeignKey(d => d.IdthoiGian)
                 .HasConstraintName("FK_LichTiemBN_DM_ThoiGian");
 
-            entity.HasOne(d => d.IdvcNavigation).WithMany(p => p.LichTiemBns)
+            entity.HasOne(d => d.IdvcNavigation).WithMany(p => p.LichTiemBnIdvcNavigations)
                 .HasForeignKey(d => d.Idvc)
                 .HasConstraintName("FK_LichTiemBN_DM_Vaccine");
+
+            entity.HasOne(d => d.MuiTienQuyetNavigation).WithMany(p => p.LichTiemBnMuiTienQuyetNavigations)
+                .HasForeignKey(d => d.MuiTienQuyet)
+                .HasConstraintName("FK__LichTiemB__MuiTi__66603565");
         });
 
         modelBuilder.Entity<QlMa>(entity =>
