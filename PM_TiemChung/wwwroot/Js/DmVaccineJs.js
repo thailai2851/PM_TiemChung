@@ -69,6 +69,7 @@ function getRowTable(data) {
     <td class="text-center MaVaccine">${data.maVaccine == null ? "" : data.maVaccine}</td>
     <td class="text-start TenVaccine">${data.tenVaccine == null ? "" : data.tenVaccine}</td>
     <td class="text-center DonViTinh">${data.donViTinh == null ? "" : data.donViTinh}</td>
+    <td class="text-end SoCode">${data.soCode == null ? "" : data.soCode}</td>
     <td class="text-end GiaBan">${data.giaBan == null ? "" : data.giaBan}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -196,6 +197,10 @@ function getSessionColumnShow() {
             },
             {
                 columnName: "DonViTinh",
+                value: true,
+            },
+            {
+                columnName: "SoCode",
                 value: true,
             },
             {

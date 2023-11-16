@@ -38,7 +38,8 @@ namespace PM_TiemChung.Services
                 models = await _context.DmVaccines.Where(x => ((x.MaVaccine != null && x.MaVaccine.ToLower().Contains(key.ToLower())) ||
                                                (x.TenVaccine != null && x.TenVaccine.ToLower().Contains(key.ToLower())) ||
                                                (x.DonViTinh != null && x.DonViTinh.ToLower().Contains(key.ToLower())) ||
-                                               ( x.GiaBan != null && x.GiaBan.ToString().ToLower().Contains(key.ToLower()))) &&
+                                               (x.SoCode != null && x.SoCode.ToLower().Contains(key.ToLower())) ||
+                                               (x.GiaBan != null && x.GiaBan.ToString().ToLower().Contains(key.ToLower()))) &&
                                                 x.Active == active)
                     .OrderBy(x => x.TenVaccine.Trim())
                     .ToListAsync();
@@ -127,6 +128,7 @@ namespace PM_TiemChung.Services
                         modelNew.MaVaccine = model.MaVaccine;
                         modelNew.TenVaccine = model.TenVaccine;
                         modelNew.DonViTinh = model.DonViTinh;
+                        modelNew.SoCode = model.SoCode;
                         modelNew.GiaBan = model.GiaBan;
                         _context.DmVaccines.Update(modelNew);
                     }
