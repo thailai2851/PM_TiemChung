@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Đăng nhập</title>
+
+    <link rel="icon" href="/images/logo.png" type="image/x-icon">
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- CSS files -->
+    <link href="/dist/css/tabler.min.css?1685976846" rel="stylesheet">
+    <link href="/dist/css/tabler-flags.min.css?1685976846" rel="stylesheet">
+    <link href="/dist/css/tabler-payments.min.css?1685976846" rel="stylesheet">
+    <link href="/dist/css/tabler-vendors.min.css?1685976846" rel="stylesheet">
+    <link href="/dist/css/demo.min.css?1685976846" rel="stylesheet">
+    <style>
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+    </style>
+</head>
+<body class="d-flex flex-column">
+    <div class="page page-center">
+        <div class="container container-tight py-4" style="max-width:revert-layer;">
+            <div class="text-center mb-4">
+                <a href="#" class="navbar-brand navbar-brand-autodark"><img src="/images/logo.png" height="56" alt=""></a>
+                <h1 class="fw-bold">@ViewBag.ThongTinDoanhNghiep.TenDoanhNghiep</h1>
+                <div class="page-pretitle" style="font-size: larger; text-transform: unset; font-weight:400">
+                    <em>@ViewBag.ThongTinDoanhNghiep.DienThoai - @ViewBag.ThongTinDoanhNghiep.Email</em>
+                </div>
+            </div>
+            <div class="card card-md">
+                <div id="divLogin" class="signin-wrapper">
+                    <div class="card-body">
+                        <h2 class="h2 text-center mb-4">ĐĂNG NHẬP</h2>
+                        <form id="loginForm">
+                            <div id="divMessage" class="col-12 text-danger text-center">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Tài khoản</label>
+                                <input id="userName" name="UserName" type="text" class="form-control" placeholder="Nhập tài khoản" autocomplete="off">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Mật khẩu</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="password" id="passWord" name="PassWord" class="form-control" placeholder="Nhập mật khẩu" autocomplete="off">
+                                    <span class="input-group-text show-password">
+                                        <a href="#" class="link-secondary" data-bs-toggle="tooltip" aria-label="Show password" data-bs-original-title="Show password">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                                <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                    <span class="input-group-text hide-password" style="display: none;">
+                                        <a href="#" class="link-secondary" data-bs-toggle="tooltip" aria-label="Hide password" data-bs-original-title="Hide password">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828"></path>
+                                                <path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87"></path>
+                                                <path d="M3 3l18 18"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-footer">
+                                <button type="submit" id="btnLogin" class="btn btn-primary w-100">Đăng nhập</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Libs JS -->
+
+    <script src="/dist/js/tabler.min.js?1685976846" defer=""></script>
+    <script src="/dist/js/demo.min.js?1685976846" defer=""></script>
+
+    <script src="/dist/libs/jquery/jquery.min.js"></script>
+    <script src="/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/dist/libs/tom-select/dist/js/tom-select.base.min.js?1684106062"
+            defer></script>
+    <script src="/Js/Common.js" defer asp-append-version="true"></script>
+    <script src="/Js/DangNhap.js" defer asp-append-version="true"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            $('.show-password').click(function () {
+                $('.show-password').css("display", "none");
+                $('.hide-password').css("display", "block");
+                $('#passWord').attr('type', 'text')
+            });
+            $('.hide-password').click(function () {
+                $('.hide-password').css("display", "none");
+                $('.show-password').css("display", "block");
+                $('#passWord').attr('type', 'password')
+            });
+        })
+    </script>
+
+</body>
+</html>

@@ -39,7 +39,7 @@ public partial class LichTiemBn
 
     public long? IdnhanVienThu { get; set; }
 
-    public int? DaTiem { get; set; }
+    public bool? DaTiem { get; set; }
 
     public DateTime? NgayTiem { get; set; }
 

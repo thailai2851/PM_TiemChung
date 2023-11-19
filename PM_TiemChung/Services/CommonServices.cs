@@ -1,6 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 using PM_TiemChung.Models.Entities;
 using System.Data;
+using System.Globalization;
 
 namespace PM_TiemChung.Services
 {
@@ -30,6 +35,32 @@ namespace PM_TiemChung.Services
 
                 return kyKieu + qlMa.Ngay.Value.ToString("yyyyMMdd") + qlMa.Stt.Value.ToString("D4");
             }
+        }
+        public static string FormatEvenNumber<T>(T number) where T : struct, IConvertible
+        {
+            if (!typeof(T).IsPrimitive)
+            {
+                throw new ArgumentException("Chỉ được phép nhập số");
+            }
+
+            // Chuyển đổi giá trị số sang kiểu dữ liệu double để định dạng
+            double doubleValue = Convert.ToDouble(number, CultureInfo.InvariantCulture);
+
+            // Định dạng theo chuỗi "#,###"
+            return doubleValue.ToString("#,###", CultureInfo.InvariantCulture);
+        }
+        public static string FormatOddNumber<T>(T number) where T : struct, IConvertible
+        {
+            if (!typeof(T).IsPrimitive)
+            {
+                throw new ArgumentException("Chỉ được phép nhập số");
+            }
+
+            // Chuyển đổi giá trị số sang kiểu dữ liệu double để định dạng
+            double doubleValue = Convert.ToDouble(number, CultureInfo.InvariantCulture);
+
+            // Định dạng theo chuỗi "#,###"
+            return doubleValue.ToString("#,###", CultureInfo.InvariantCulture);
         }
         public static object toEmpty(object data)
         {
@@ -61,6 +92,25 @@ namespace PM_TiemChung.Services
             }
 
             return ageInMonths;
+        }
+        public static string ConvertViewToString(ControllerContext controllerContext, PartialViewResult pvr, ICompositeViewEngine _viewEngine)
+        {
+            using (StringWriter writer = new StringWriter())
+            {
+                ViewEngineResult vResult = _viewEngine.FindView(controllerContext, pvr.ViewName, false);
+                ViewContext viewContext = new ViewContext(controllerContext, vResult.View, pvr.ViewData, pvr.TempData, writer, new HtmlHelperOptions());
+
+                vResult.View.RenderAsync(viewContext);
+
+                return writer.GetStringBuilder().ToString();
+            }
+        }
+        public static string ConvertImageToBase64(IWebHostEnvironment h, string imagePath)
+        {
+            byte[] imageBytes = System.IO.File.ReadAllBytes(h.WebRootPath + imagePath);
+            string base64String = Convert.ToBase64String(imageBytes);
+
+            return base64String;
         }
     }
 }

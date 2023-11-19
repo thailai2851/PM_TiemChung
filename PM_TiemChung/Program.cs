@@ -1,9 +1,25 @@
 using Microsoft.EntityFrameworkCore;
 using PM_TiemChung.Models.Entities;
 using PM_TiemChung.Services;
+using WkHtmlToPdfDotNet.Contracts;
+using WkHtmlToPdfDotNet;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/NotFound";
+        options.LoginPath = "/DangNhap";
+        options.LogoutPath = "/logout";
+        options.Cookie.Name = "medialab_auth";
+    });
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(Program));
@@ -25,7 +41,7 @@ builder.Services.AddScoped<IQuanCuTruServices, QuanCuTruServices>();
 builder.Services.AddScoped<IXaCuTruServices, XaCuTruServices>();
 builder.Services.AddScoped<INhanVienServices, NhanVienServices>();
 
-
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
 
 
@@ -45,7 +61,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseCookiePolicy();
 
 app.MapControllerRoute(
     name: "default",
