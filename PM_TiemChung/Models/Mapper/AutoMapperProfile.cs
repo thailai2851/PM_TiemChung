@@ -63,6 +63,9 @@ namespace PM_TiemChung.Models.Mapper
                 .ForMember(dest => dest.NgayThu, opt => opt.MapFrom(src => src.NgayThu != "" ? DateTime.ParseExact(src.NgayThu, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
                 .ForMember(dest => dest.NgayHen, opt => opt.MapFrom(src => src.NgayHen != "" ? DateTime.ParseExact(src.NgayHen, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
                 .ForMember(dest => dest.NgayTiem, opt => opt.MapFrom(src => src.NgayTiem != "" ? DateTime.ParseExact(src.NgayTiem, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
+
+            CreateMap<NhaCungCap, DmNhaCungCapMap>();
+            CreateMap<DmNhaCungCapMap, NhaCungCap>();
         }
     }
 }

@@ -1,0 +1,65 @@
+﻿@model NhaCungCap
+
+<div>
+    <input type="hidden" asp-for="@Model.Idncc">
+    <div class="row row-cards">
+        <div class="col-sm-3 col-md-3 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMaNhaCungCap" class="col-form-label required">Mã nhà cung cấp</label>
+                <input required type="text" asp-for="@Model.MaNcc" id="txtMaNhaCungCap" class="form-control" placeholder="Nhập mã nhà cung cấp">
+                <div class="invalid-feedback">
+                    Nhập mã nhà cung cấp
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-md-5 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtTenNhaCungCap" class="col-form-label required">Tên nhà cung cấp</label>
+                <input required type="text" asp-for="@Model.TenNcc" id="txtTenNhaCungCap" class="form-control" placeholder="Nhập tên nhà cung cấp">
+                <div class="invalid-feedback">
+                    Nhập tên nhà cung cấp
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtDiaChi" class="col-form-label">Địa chỉ</label>
+                <input  type="text" asp-for="@Model.DiaChi " id="txtDiaChi" class="form-control" placeholder="Nhập địa chỉ">
+                <div class="invalid-feedback">
+                    Nhập địa chỉ
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtDienThoai" class="col-form-label ">Điện thoại</label>
+                <input  type="text" asp-for="@Model.DienThoai" id="txtDienThoai" class="form-control" placeholder="Nhập điện thoại">
+                <div class="invalid-feedback">
+                    Nhập điện thoại
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtMail" class="col-form-label ">Email</label>
+                <input  type="text" asp-for="@Model.Mail" id="txtMail" class="form-control" placeholder="Nhập email">
+                <div class="invalid-feedback">
+                    Nhập email
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtGhiChu" class="col-form-label ">Ghi Chú</label>
+                <input  type="text" asp-for="@Model.GhiChu" id="txtGhiChu" class="form-control" placeholder="Nhập ghi chú">
+                <div class="invalid-feedback">
+                    Nhập ghi chú
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

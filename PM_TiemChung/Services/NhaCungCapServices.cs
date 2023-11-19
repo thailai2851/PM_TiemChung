@@ -6,51 +6,50 @@ using PM_TiemChung.Models.Mapper;
 
 namespace PM_TiemChung.Services
 {
-    public interface IVaccineServices
+    public interface INhaCungCapServices
     {
-        Task<List<DmVaccine>> searchWithKeyword(string key, bool active);
-        Task<ResponseModel> UpdateVaccine(DmVaccineMap modelMap);
-        Task<dynamic> getModelsWithNumberPage(int pageNumber, bool isActive);
-        Task<DmVaccine> getModelWithId(long id);
+        Task<List<NhaCungCap>> searchWithKeyword(string key, bool active);
+        Task<ResponseModel> UpdateNhaCungCap(DmNhaCungCapMap modelMap);
+        Task<dynamic> getModelsWithNumberPage(int pageNumber);
+        Task<NhaCungCap> getModelWithId(long id);
         Task<dynamic> changeActive(long id);
-        Task<dynamic> getListVaccine();
+        Task<dynamic> getListNhaCungCap();
     }
-    public class VaccineServices : IVaccineServices
+    public class NhaCungCapServices : INhaCungCapServices
     {
         private ThaiLaiContext _context;
         private readonly IMapper _mapper;
 
-        public VaccineServices(IMapper mapper, ThaiLaiContext context)
+        public NhaCungCapServices(IMapper mapper, ThaiLaiContext context)
         {
             _context = context;
             _mapper = mapper;
         }
-        public async Task<List<DmVaccine>> searchWithKeyword(string key, bool active)
+        public async Task<List<NhaCungCap>> searchWithKeyword(string key, bool active)
         {
             // Tìm kiếm theo từ khóa tất cả các thuộc tính
-            List<DmVaccine> models;
+            List<NhaCungCap> models;
             if (key == null)
             {
-                models = await getModelsWithNumberPage(1, active);
+                models = await getModelsWithNumberPage(1);
             }
             else
             {
-                models = await _context.DmVaccines.Where(x => ((x.MaVaccine != null && x.MaVaccine.ToLower().Contains(key.ToLower())) ||
-                                               (x.TenVaccine != null && x.TenVaccine.ToLower().Contains(key.ToLower())) ||
-                                               (x.DonViTinh != null && x.DonViTinh.ToLower().Contains(key.ToLower())) ||
-                                               (x.SoCode != null && x.SoCode.ToLower().Contains(key.ToLower())) ||
-                                               (x.GiaBan != null && x.GiaBan.ToString().ToLower().Contains(key.ToLower()))) &&
+                models = await _context.NhaCungCaps.Where(x => ((x.MaNcc != null && x.MaNcc.ToLower().Contains(key.ToLower())) ||
+                                                (x.DiaChi != null && x.DiaChi.ToLower().Contains(key.ToLower())) ||
+                                                (x.DienThoai != null && x.DienThoai.ToLower().Contains(key.ToLower())) ||
+                                                (x.TenNcc != null && x.TenNcc.ToLower().Contains(key.ToLower()))) &&
                                                 x.Active == active)
-                    .OrderBy(x => x.TenVaccine.Trim())
+                    .OrderBy(x => x.TenNcc.Trim())
                     .ToListAsync();
             }
             return models;
         }
-        public async Task<dynamic> getModelsWithNumberPage(int pageNumber, bool isActive)
+        public async Task<dynamic> getModelsWithNumberPage(int pageNumber)
         {
             //lấy danh sách tất cả record trong danh mục IcpYhct
-            List<DmVaccine> models = await _context.DmVaccines.Where(x => x.Active == isActive)
-               .OrderBy(x => x.TenVaccine.Trim())
+            List<NhaCungCap> models = await _context.NhaCungCaps.Where(x => x.Active == true)
+               .OrderBy(x => x.TenNcc.Trim())
                .ToListAsync();
             // trường hợp trang cuối, lấy các dòng record cuối của bảng
             if (pageNumber == -1)
@@ -108,29 +107,30 @@ namespace PM_TiemChung.Services
 
             }
         }
-        public async Task<ResponseModel> UpdateVaccine(DmVaccineMap modelMap)
+        public async Task<ResponseModel> UpdateNhaCungCap(DmNhaCungCapMap modelMap)
         {
-            DmVaccine model = _mapper.Map<DmVaccine>(modelMap);
-            DmVaccine modelNew = new DmVaccine();
+            NhaCungCap model = _mapper.Map<NhaCungCap>(modelMap);
+            NhaCungCap modelNew = new NhaCungCap();
             using var tran = _context.Database.BeginTransaction();
             try
             {
-                if (model.Id == 0)
+                if (model.Idncc == 0)
                 {
                     model.Active = true;
-                    await _context.DmVaccines.AddAsync(model);
+                    await _context.NhaCungCaps.AddAsync(model);
                 }
                 else
                 {
-                    modelNew = await _context.DmVaccines.FindAsync(model.Id);
+                    modelNew = await _context.NhaCungCaps.FindAsync(model.Idncc);
                     if (modelNew != null)
                     {
-                        modelNew.MaVaccine = model.MaVaccine;
-                        modelNew.TenVaccine = model.TenVaccine;
-                        modelNew.DonViTinh = model.DonViTinh;
-                        modelNew.SoCode = model.SoCode;
-                        modelNew.GiaBan = model.GiaBan;
-                        _context.DmVaccines.Update(modelNew);
+                        modelNew.MaNcc = model.MaNcc;
+                        modelNew.TenNcc = model.TenNcc;
+                        modelNew.DiaChi = model.DiaChi;
+                        modelNew.DienThoai = model.DienThoai;
+                        modelNew.Mail = model.Mail;
+                        modelNew.GhiChu = model.GhiChu;
+                        _context.NhaCungCaps.Update(modelNew);
                     }
                 }
 
@@ -155,29 +155,18 @@ namespace PM_TiemChung.Services
                 };
             }
         }
-        public async Task<DmVaccine> getModelWithId(long id)
+        public async Task<NhaCungCap> getModelWithId(long id)
         {
-            DmVaccine model = await _context.DmVaccines.FindAsync(id);
+            NhaCungCap model = await _context.NhaCungCaps.FindAsync(id);
             return model;
-        }
-        public async Task<dynamic> getListVaccine()
-        {
-            return await _context.DmVaccines.Where(x => x.Active == true)
-                .Select(x=> new
-                {
-                    id = x.Id,
-                    ma = x.MaVaccine,
-                    ten = x.TenVaccine
-                })
-                .ToListAsync();
         }
         public async Task<dynamic> changeActive(long id)
         {
             try
             {
-                var model = await _context.DmVaccines.FindAsync(id);
+                var model = await _context.NhaCungCaps.FindAsync(id);
                 model.Active = !model.Active;
-                _context.DmVaccines.Update(model);
+                _context.NhaCungCaps.Update(model);
                 await _context.SaveChangesAsync();
 
                 return new ResponseModel()
@@ -194,6 +183,17 @@ namespace PM_TiemChung.Services
                     message = "Thất bại! "
                 };
             }
+        }
+        public async Task<dynamic> getListNhaCungCap()
+        {
+            return await _context.NhaCungCaps
+                .Select(x => new
+                {
+                    id = x.Idncc,
+                    ma = x.MaNcc,
+                    ten = x.TenNcc,
+                })
+                .ToListAsync();
         }
     }
 }
