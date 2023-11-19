@@ -31,6 +31,8 @@ public partial class DmNhanVien
 
     public bool? Active { get; set; }
 
+    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
+
     public virtual DmGioiTinh? IdgtNavigation { get; set; }
 
     public virtual ICollection<LichTiemBn> LichTiemBnIdbskNavigations { get; set; } = new List<LichTiemBn>();

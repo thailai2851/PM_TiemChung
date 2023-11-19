@@ -15,6 +15,8 @@ public partial class ThaiLaiContext : DbContext
     {
     }
 
+    public virtual DbSet<Account> Accounts { get; set; }
+
     public virtual DbSet<DmBenhNhan> DmBenhNhans { get; set; }
 
     public virtual DbSet<DmDanToc> DmDanTocs { get; set; }
@@ -45,11 +47,27 @@ public partial class ThaiLaiContext : DbContext
 
     public virtual DbSet<QlMa> QlMas { get; set; }
 
+    public virtual DbSet<ThongTinDoanhNghiep> ThongTinDoanhNghieps { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Connection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.ToTable("Account");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IdnhanVien).HasColumnName("IDNhanVien");
+            entity.Property(e => e.Password).HasMaxLength(50);
+            entity.Property(e => e.UserName).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.Accounts)
+                .HasForeignKey(d => d.IdnhanVien)
+                .HasConstraintName("FK__Account__IDNhanV__0C85DE4D");
+        });
+
         modelBuilder.Entity<DmBenhNhan>(entity =>
         {
             entity.ToTable("DM_BenhNhan");
@@ -331,6 +349,25 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.KyHieu).HasMaxLength(50);
             entity.Property(e => e.Ngay).HasColumnType("date");
             entity.Property(e => e.Stt).HasColumnName("STT");
+        });
+
+        modelBuilder.Entity<ThongTinDoanhNghiep>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("ThongTinDoanhNghiep");
+
+            entity.Property(e => e.ChuTk).HasMaxLength(200);
+            entity.Property(e => e.DiaChi).HasMaxLength(500);
+            entity.Property(e => e.DienThoai).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Mst)
+                .HasMaxLength(50)
+                .HasColumnName("MST");
+            entity.Property(e => e.NganHang).HasMaxLength(50);
+            entity.Property(e => e.SoTk).HasMaxLength(50);
+            entity.Property(e => e.TenDoanhNghiep).HasMaxLength(500);
         });
 
         OnModelCreatingPartial(modelBuilder);

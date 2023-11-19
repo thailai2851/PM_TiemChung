@@ -216,6 +216,7 @@
                                     <table class="table table-vcenter card-table table-bordered table-hover table-nowrap table-input">
                                         <thead>
                                             <tr>
+                                                <th class="text-center p-1">STT</th>
                                                 <th class="text-center p-1">Tên vaccine</th>
                                                 <th class="text-center p-1">Số lần tiêm</th>
                                                 <th class="text-center p-1">TG sớm nhất</th>
@@ -254,7 +255,7 @@
                                 <div class="row">
                                     <div class="col-3 ms-2">
                                         <div class="input-icon">
-                                            <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" disabled>
+                                            <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày đề nghị" value="" id="txtNgayDeNghi">
                                             <span class="input-icon-addon">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
@@ -262,7 +263,7 @@
                                         </div>
                                     </div>
                                     <div class="col-auto p-0">
-                                        <button id="btnReloadDSTN" class="btn btn-icon" aria-label="Button">
+                                        <button id="btnReloadDSThuNgan" class="btn btn-icon" aria-label="Button">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
@@ -281,49 +282,82 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive" style="max-height:73vh;" id="tableDM">
-                                    <table class="table table-vcenter card-table table-bordered table-hover table-nowrap">
+                                    <table class="table table-vcenter card-table table-bordered table-hover table-nowrap table-input">
                                         <thead>
                                             <tr>
-                                                <th class="text-center p-2 w-2 "></th>
                                                 <th class="text-center p-2 w-2 ">STT</th>
-                                                <th class="text-center TenBenhNhan col-2">Tên bệnh nhân</th>
                                                 <th class="text-center TenVaccine">Tên vaccine</th>
                                                 <th class="text-center SoLuong p-2 w-2">Số lượng</th>
                                                 <th class="text-center DonGia p-2 w-2">Đơn giá</th>
                                                 <th class="text-center DaThu col-1">Đã thu</th>
                                                 <th class="text-center NgayThu p-2 w-2">Ngày thu</th>
-                                                <th class="text-center SoPhieuThu p-2 w-2">Số phiếu thu</th>
+                                                <th class="text-center p-2 w-2">Thao tác</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tbody-table">
+                                        <tbody id="tbody-tableThuNhan">
+                                            @{
+                                                List<LichTiemBn> lichTiem = ViewBag.DanhSachDeNghi;
+                                                var groupBenhNhan = lichTiem.GroupBy(x => x.IdbnNavigation)
+                                                .Select(x => new
+                                                {
+                                                    idbnNavigation = x.Key,
+                                                    datas = x.ToList(),
+                                                    sl = x.Where(y => y.DaThu != true).Count()
+                                                })
+                                                .OrderByDescending(x => x.sl)
+                                                .ToList();
+                                            }
+                                            @foreach (var gr in groupBenhNhan)
+                                            {
+                                                <tr class="bg-azure-lt">
+                                                    <td class="px-2 py-1 text-center">
+                                                        <button class="btn btn-icon bg-green-lt btn-print-thungan" value="@gr.idbnNavigation.Id" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
+                                                        </button>
+                                                    </td>
+                                                    <td colspan="6" class="px-2 py-1">
+                                                        @gr.idbnNavigation.MaBn - @gr.idbnNavigation.TenBn
+                                                    </td>
+                                                </tr>
+                                                int i = 1;
+                                                foreach (var lt in gr.datas)
+                                                {
+                                                    var checkDaThu = lt.DaThu == true;
 
-                                            <tr>
-                                                <td class="text-center p-2">
-                                                    <input class="form-check-input border-dark single-checkbox" name="ChonPhieuThu" type="checkbox" checked style="transform: scale(1.35);">
-                                                </td>
-                                                <td class="text-center STT">1</td>
-                                                <td class="text-start TenBN">Thái Lai</td>
-                                                <td class="text-start TenVaccine">Covid</td>
-                                                <td class="text-end SoLuong">1</td>
-                                                <td class="text-end DonGia">30000</td>
-                                                <td class="text-center">
-                                                    <input class="form-check-input border-dark single-checkbox" name="DaThu" type="checkbox" checked style="transform: scale(1.35);">
-                                                </td>
-                                                <td class="text-center NgayThu">16/11/2023</td>
-                                                <td class="text-end SoPhieuThu">1</td>
-                                            </tr>
+                                                    <tr data-id="">
+                                                        <td class="text-center STT px-2">@i
+                                                            <input type="hidden" value="@lt.Id" name="Id"/>
+                                                        </td>
+                                                        <td class="text-start TenVaccine px-2">@lt.IdvcNavigation.TenVaccine</td>
+                                                        <td class="text-end SoLuong px-2">1</td>
+                                                        <td class="text-end DonGia px-2">@lt.IdvcNavigation.GiaBan?.ToString("#,##0.##")</td>
+                                                        <td class="text-center">
+                                                            <input name="DaThu" class="form-check-input border-dark single-checkbox" @(checkDaThu ? "checked disabled" : "") type="checkbox" style="transform: scale(1.2);">
+                                                        </td>
+                                                        <td class="text-center NgayThu">
+                                                            <input style="width: 140px" name="NgayThu" class="form-control form-table input-date-long-mask" @(checkDaThu ? "disabled" : "") value="@(lt.NgayThu?.ToString("dd-MM-yyyy"))" />
+                                                        </td>
+                                                        <td class="text-center last-td-column px-1">
+                                                            <button class="btn btn-icon bg-azure-lt btn-save-thungan" @(checkDaThu ? "disabled" : "") value="@lt.Id" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                            }
 
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" md-1>
+                        @*<div class="row" md-1>
                             <div class="form-selectgroup-label d-flex align-items-center  justify-content-end">
-                                <button class="btn btn-primary mb-2 me-2" id="btnLuuBN">Lưu</button>
+                                <button class="btn btn-primary mb-2 me-2" id="btnLuuThuNgan">Lưu</button>
                                 <button class="btn btn-success mb-2" id="btnIn">In</button>
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
 
@@ -334,7 +368,7 @@
                                 <div class="row">
                                     <div class="col-3 ms-2">
                                         <div class="input-icon">
-                                            <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" disabled>
+                                            <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày thu ngân" value="" id="txtNgayThuNgan">
                                             <span class="input-icon-addon">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
@@ -342,7 +376,7 @@
                                         </div>
                                     </div>
                                     <div class="col-auto p-0">
-                                        <button id="btnReloadDSTN" class="btn btn-icon" aria-label="Button">
+                                        <button id="btnReloadDSTiemChung" class="btn btn-icon" aria-label="Button">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                 <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
@@ -362,8 +396,8 @@
                                         <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
                                     </div>
                                 </div>
-                                <div class="table-responsive" style="max-height:73vh;" id="tableDM">
-                                    <table class="table table-vcenter card-table table-bordered table-hover table-nowrap">
+                                <div class="table-responsive" style="max-height:73vh;">
+                                    <table class="table table-vcenter card-table table-bordered table-hover table-nowrap table-input">
                                         <thead>
                                             <tr>
                                                 <th class="text-center p-2 w-2 ">STT</th>
@@ -374,34 +408,47 @@
                                                 <th class="text-center p-2 w-2 ">Kiểm tra thuốc</th>
                                                 <th class="text-center DaTiem col-1">Đã tiêm</th>
                                                 <th class="text-center NgayTiem p-2 w-2">Ngày tiêm</th>
+                                                <th class="text-center p-2">Thao tác</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tbody-table">
-
-                                            <tr>
-                                                <td class="text-center p-2 STT">1</td>
-                                                <td class="text-start TenBn">Thái Lai</td>
-                                                <td class="text-start TenVaccine">covid</td>
-                                                <td class="text-end SoLuong">1</td>
-                                                <td class="text-center SoCode">0001</td>
-                                                <td class="text-center last-td-column px-2">
-                                                    <button class="status status-purple border-0 btn-kham" value="">Kiểm tra</button>
-                                                </td>
-                                                <td class="text-center">
-                                                    <input class="form-check-input border-dark single-checkbox" name="DaTiem" type="checkbox" checked style="transform: scale(1.35);">
-                                                </td>
-                                                <td class="text-center NgayThu">16/11/2023</td>
-                                            </tr>
-
+                                        <tbody id="tbody-tiemchung">
+                                            @{
+                                                int stt = 1;
+                                            }
+                                            @foreach (LichTiemBn lt in ViewBag.DanhSachTiemChung)
+                                            {
+                                                var checkDaTiem = lt.DaTiem == true;
+                                                <tr>
+                                                    <td class="text-center STT px-2">@stt
+                                                        <input class="code-vaccine" value="@lt.IdvcNavigation.SoCode" type="hidden"/>
+                                                    </td>
+                                                    <td class="text-start TenBn px-2">@lt.IdbnNavigation.TenBn</td>
+                                                    <td class="text-start TenVaccine px-2">@lt.IdvcNavigation.TenVaccine</td>
+                                                    <td class="text-end SoLuong px-2">@lt.SoLuong</td>
+                                                    <td class="text-center SoCode">
+                                                        <input style="width: 140px" @(checkDaTiem ? "disabled" : "") class="form-control form-table socode" value="" />
+                                                    </td>
+                                                    <td class="text-center last-td-column px-2">
+                                                        <button @(checkDaTiem ? "disabled" : "") class="status status-purple border-0 btn-kiemtra">Kiểm tra</button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input @(checkDaTiem ? "disabled checked" : "") class="form-check-input border-dark single-checkbox daTiem" name="DaTiem" type="checkbox" style="transform: scale(1.2);">
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input @(checkDaTiem ? "disabled" : "") name="NgayTiem" style="width: 140px" class="form-control form-table input-date-long-mask" value="@(lt.NgayTiem?.ToString("dd-MM-yyyy"))" />
+                                                    </td>
+                                                    <td class="text-center last-td-column px-2">
+                                                        <button value="@lt.Id" disabled class="btn btn-icon bg-azure-lt btn-save-tiemchung" data-bs-toggle="tooltip" data-bs-placement="left" title="Tiêm chủng">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                stt++;
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row" md-1>
-                        <div class="form-selectgroup-label d-flex align-items-center  justify-content-end">
-                            <button class="btn btn-primary mb-2 me-2" id="btnLuuBN">Lưu</button>
                         </div>
                     </div>
                 </div>

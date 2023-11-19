@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PM_TiemChung.Models;
@@ -9,6 +10,7 @@ using System.Globalization;
 
 namespace PM_TiemChung.Controllers
 {
+    [Authorize]
     [Route("QuanLy/[controller]")]
     public class QL_TiepNhanBenhNhanController : Controller
     {
