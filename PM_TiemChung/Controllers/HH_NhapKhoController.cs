@@ -11,13 +11,16 @@ namespace PM_TiemChung.Controllers
     public class HH_NhapKhoController : Controller
     {
         private IVaccineServices _vcServices;
+        private INhaCungCapServices _servicesNCC;
+
         private ThaiLaiContext _context;
         private readonly IMapper _mapper;
-        public HH_NhapKhoController(IVaccineServices vaccineServices, ThaiLaiContext context, IMapper mapper)
+        public HH_NhapKhoController(IVaccineServices vaccineServices, ThaiLaiContext context, IMapper mapper, INhaCungCapServices servicesNCC)
         {
             _vcServices = vaccineServices;
             _context = context; 
             _mapper = mapper;
+            _servicesNCC = servicesNCC;
         }
         [HttpGet]
         public IActionResult NhapKho()
@@ -35,6 +38,12 @@ namespace PM_TiemChung.Controllers
             string date = now.ToString("yyyyMMdd");
             var phieuNhap = _context.PhieuNhaps.Where(x => x.SoPn.Contains(date)).ToList();
             return $"PN-{date}-{(phieuNhap.Count() + 1).ToString("D2")}";
+        }
+        [HttpPost("getListNhaCungCap")]
+        public async Task<IActionResult> getListNhaCungCap()
+        {
+            var result = await _servicesNCC.getListNhaCungCap();
+            return Ok(result);
         }
         [HttpPost("getDVT")]
         public async Task<string> getDVT(long idVC)

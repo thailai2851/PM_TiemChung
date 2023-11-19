@@ -4,7 +4,13 @@
             className: ".cbHangHoa",
             placeholder: "-- Vaccine --",
             action: "HH_NhapKho/getListVaccine",
+        },
+        {
+            className: ".cbNhaCungCap",
+            placeholder: "-- Nơi cung Cấp --",
+            action: "HH_NhapKho/getListNhaCungCap",
         }
+
     ];
     configCbDataBase(datas);
     $('#tBody-ThemChiTietPhieuNhap').on('change', 'select[name="IdhangHoa"]', function () {
@@ -273,7 +279,7 @@ function luuPhieuNhap() {
     var ghiChu = $('#GhiChuPhieuNhap').val();
     dataPhieuNhapMaster.append("GhiChu", ghiChu);
     dataPhieuNhapMaster.append("NgayNhap", ngayNhap);
-    dataPhieuNhapMaster.append("Idncc", 1);
+    dataPhieuNhapMaster.append("Idncc", idNCC);
     dataPhieuNhapMaster.append("SoHd", soHD);
     dataPhieuNhapMaster.append("NgayHd", ngayHD);
 
@@ -317,8 +323,7 @@ function xoaTrangPhieuNhapKho() {
     $("#tBody-BaoCaoChiTiet").empty();
     $("#tBody-BaoCaoTongHop").empty();
 
-    addNewRowTableThemMoiChiTietPhieuNhap(0);
-
+    addRowChiTietNhapKho();
     clearForm("formThemPhieuNhapKho");
     $("#formThemPhieuNhapKho").removeClass('was-validated');
 

@@ -180,6 +180,36 @@ function configDateTimeDefault() {
 function configDateShortMask() {
     $('.input-date-short-mask').inputmask({ alias: "datetime", inputFormat: 'dd-mm-yy', placeholder: '__-__-__' });
 }
+function clearForm(formName) {
+    var form = $('#' + formName);
+    // các input text = ""
+    form.find('input[type="text"].form-control').val("");
+    form.find('input[type="number"].form-control').val("");
+    form.find('input[type="email"].form-control').val("");
+    form.find('input[tyoe="hidden"]').val("");
+    form.find('textarea').text("");
+    form.find('textarea').val("");
+
+    form.find('input[type="text"][readonly].form-control.input-date-time').val("");
+    form.find('input[type="text"].form-control.input-date-time').val(getDateTimeNow());
+
+    form.find('input[type="text"][readonly].form-control.input-date').val("");
+    form.find('input[type="text"].form-control.input-date').val();
+    form.find('input[type="text"].form-control.input-date-default').val(getDateNow());
+    form.find('input[type="text"].form-control.input-date-time-default').val(getDateTimeNow());
+    var selects = document.getElementById(formName).querySelectorAll("select");
+
+    selects.forEach(function (select) {
+        if (select.tomselect) {
+            select.tomselect.clear();
+        } else {
+            select.selectedIndex = 0;
+        }
+    })
+
+    form.find('input[type="checkbox"]').prop("checked", false).trigger("change");
+    form.find('input[type="checkbox"]').val("false");
+}
 function configCbDataBase(datas) {
     
     datas.forEach(data => {
