@@ -119,6 +119,67 @@ function formatDay(inputString) {
         return ""
     }
 }
+function formatNumber() {
+    $(".formatted-number-float").inputmask({
+        alias: "numeric",
+        radixPoint: ".",
+        groupSeparator: ",",
+        autoGroup: true,
+        digits: 2,
+        digitsOptional: true,
+        allowMinus: true,
+        prefix: "",
+    });
+}
+function configDateDefault() {
+    var today = new Date();
+    $('.input-date-default').datetimepicker({
+        locale: 'vi',
+        useStrict: true,
+        defaultDate: today,
+        format: "DD-MM-yyyy",
+        extraFormats: ["DD-MM-yyyy", "DD/MM/yyyy", "yyyy"],
+        icons: {
+            date: "ti ti-calendar",
+            up: "ti ti-chevron-up",
+            down: "ti ti-chevron-down",
+            previous: 'ti ti-chevron-left',
+            next: 'ti ti-chevron-right',
+            time: "ti ti-alarm"
+        },
+        keyBinds: {
+            left: null,
+            right: null,
+        }
+    });
+}
+function configDateTimeDefault() {
+    var today = new Date();
+    $('.input-date-time-default').datetimepicker({
+        locale: 'vi',
+        useStrict: true,
+        defaultDate: today,
+        format: "DD-MM-yyyy HH:mm",
+        extraFormats: ["DD-MM-yyyy HH:mm", "DD/MM/yyyy HH:mm", "yyyy"],
+        icons: {
+            date: "ti ti-calendar",
+            up: "ti ti-chevron-up",
+            down: "ti ti-chevron-down",
+            previous: 'ti ti-chevron-left',
+            next: 'ti ti-chevron-right',
+            time: "ti ti-alarm"
+        },
+        keyBinds: {
+            left: null,
+            right: null,
+        }
+    });
+}
+
+
+function configDateShortMask() {
+    $('.input-date-short-mask').inputmask({ alias: "datetime", inputFormat: 'dd-mm-yy', placeholder: '__-__-__' });
+}
 function configCbDataBase(datas) {
     
     datas.forEach(data => {
@@ -153,6 +214,21 @@ function configCbDataBase(datas) {
             });
         })
     })
+}
+function queryStringToData(queryString) {
+    // Phân tích cú pháp và xử lý chuỗi query string
+    var params = new URLSearchParams(queryString);
+    var jsonData = {};
+
+    // Lặp qua các cặp key-value trong chuỗi query string
+    for (var pair of params.entries()) {
+        var key = pair[0];
+        var value = pair[1];
+
+        // Gán giá trị vào đối tượng JSON
+        jsonData[key] = value;
+    }
+    return jsonData;
 }
 function showDropdownMenu(select, dropdownElement) {
     var dropdown = $(dropdownElement.dropdown);
