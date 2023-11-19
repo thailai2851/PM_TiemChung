@@ -63,6 +63,35 @@ namespace PM_TiemChung.Models.Mapper
                 .ForMember(dest => dest.NgayThu, opt => opt.MapFrom(src => src.NgayThu != "" ? DateTime.ParseExact(src.NgayThu, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
                 .ForMember(dest => dest.NgayHen, opt => opt.MapFrom(src => src.NgayHen != "" ? DateTime.ParseExact(src.NgayHen, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
                 .ForMember(dest => dest.NgayTiem, opt => opt.MapFrom(src => src.NgayTiem != "" ? DateTime.ParseExact(src.NgayTiem, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
+            CreateMap<PhieuNhap, PhieuNhapMap>()
+            .ForMember(dest => dest.Idncc, opt => opt.MapFrom(src => src.Idncc.ToString()))
+            .ForMember(dest => dest.Idnv, opt => opt.MapFrom(src => src.Idnv.ToString()))
+            .ForMember(dest => dest.NgayNhap, opt => opt.MapFrom(src => src.NgayNhap.ToString()))
+            .ForMember(dest => dest.NgayHd, opt => opt.MapFrom(src => src.NgayHd.ToString()));
+            CreateMap<PhieuNhapMap, PhieuNhap>()
+            .ForMember(dest => dest.NgayNhap, opt => opt.MapFrom(src => src.NgayNhap != "" ? DateTime.ParseExact(src.NgayNhap, "dd-MM-yyyy HH:mm", CultureInfo.InvariantCulture) : (DateTime?)null))
+            .ForMember(dest => dest.NgayHd, opt => opt.MapFrom(src => src.NgayHd != "" ? DateTime.ParseExact(src.NgayHd, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+            .ForMember(dest => dest.Idncc, opt => opt.MapFrom(src => src.Idncc != null ? long.Parse(src.Idncc) : (long?)null))
+            .ForMember(dest => dest.Idnv, opt => opt.MapFrom(src => src.Idnv != null ? long.Parse(src.Idnv) : (long?)null));
+            CreateMap<ChiTietPhieuNhap, ChiTietPhieuNhapMap>()
+            .ForMember(dest => dest.Idpn, opt => opt.MapFrom(src => src.Idpn.ToString()))
+            .ForMember(dest => dest.Idvaccine, opt => opt.MapFrom(src => src.Idvaccine.ToString()))
+            .ForMember(dest => dest.SoLuong, opt => opt.MapFrom(src => src.SoLuong.ToString()))
+            .ForMember(dest => dest.DonGia, opt => opt.MapFrom(src => src.DonGia.ToString()))
+            .ForMember(dest => dest.Cktm, opt => opt.MapFrom(src => src.Cktm.ToString()))
+            .ForMember(dest => dest.Thue, opt => opt.MapFrom(src => src.Thue.ToString()))
+            .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx.ToString()))
+            .ForMember(dest => dest.Hsd, opt => opt.MapFrom(src => src.Hsd.ToString()));
+            CreateMap<ChiTietPhieuNhapMap, ChiTietPhieuNhap>()
+            .ForMember(dest => dest.Idpn, opt => opt.MapFrom(src => src.Idpn != null ? long.Parse(src.Idpn) : (long?)null))
+            .ForMember(dest => dest.Idvaccine, opt => opt.MapFrom(src => src.Idvaccine != null ? long.Parse(src.Idvaccine) : (long?)null))
+             .ForMember(dest => dest.SoLuong, opt => opt.MapFrom(src => src.SoLuong != "" ? double.Parse(src.SoLuong.Replace(",", "")) : (double?)null))
+             .ForMember(dest => dest.DonGia, opt => opt.MapFrom(src => src.DonGia != "" ? double.Parse(src.DonGia.Replace(",", "")) : (double?)null))
+            .ForMember(dest => dest.Cktm, opt => opt.MapFrom(src => src.Cktm != "" ? double.Parse(src.Cktm.Replace(",", "")) : (double?)null))
+            .ForMember(dest => dest.Thue, opt => opt.MapFrom(src => src.Thue != "" ? double.Parse(src.Thue.Replace(",", "")) : (double?)null))
+            .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx != "" ? DateTime.ParseExact(src.Nsx, "dd-MM-yy", CultureInfo.InvariantCulture) : (DateTime?)null))
+            .ForMember(dest => dest.Hsd, opt => opt.MapFrom(src => src.Hsd != "" ? DateTime.ParseExact(src.Hsd, "dd-MM-yy", CultureInfo.InvariantCulture) : (DateTime?)null));
+
         }
     }
 }
