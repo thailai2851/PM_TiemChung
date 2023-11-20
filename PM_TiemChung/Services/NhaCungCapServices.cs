@@ -157,7 +157,7 @@ namespace PM_TiemChung.Services
         }
         public async Task<NhaCungCap> getModelWithId(long id)
         {
-            NhaCungCap model = await _context.NhaCungCaps.FindAsync(id);
+            NhaCungCap model = await _context.NhaCungCaps.FirstOrDefaultAsync(x => x.Idncc == id);
             return model;
         }
         public async Task<dynamic> changeActive(long id)
