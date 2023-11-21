@@ -25,7 +25,7 @@ public partial class LichTiemBn
 
     public DateTime? NgayKham { get; set; }
 
-    public bool DeNghiTiem { get; set; }
+    public bool? DeNghiTiem { get; set; }
 
     public DateTime? NgayDeNghiTiem { get; set; }
 

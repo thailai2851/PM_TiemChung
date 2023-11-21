@@ -18,7 +18,7 @@ $(document).ready(function () {
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
 
             $.ajax({
-                url: '/DanhMuc/DM_Vaccine/update', // Đường dẫn đến action xử lý form
+                url: '/DanhMuc/DM_NhaCungCap/update', // Đường dẫn đến action xử lý form
                 method: 'POST',
                 data: formData,
                 success: function (response) {
@@ -45,7 +45,7 @@ $(document).ready(function () {
     $(document).on('click', '#btnDanger', function () {
         $.ajax({
             type: "post",
-            url: "/DanhMuc/DM_Vaccine/changeActive",
+            url: "/DanhMuc/DM_NhaCungCap/changeActive",
             data: "id=" + idModel,
             success: function (response) {
                 if (response.statusCode == 200) {
@@ -58,12 +58,6 @@ $(document).ready(function () {
             }
         });
     });
-
-    $('#TrangThai').on('change', function () {
-        searchWithKeyword();
-    })
-
-
 })
 function changeActive(id) {
     idModel = id;
@@ -72,11 +66,12 @@ function changeActive(id) {
 
 function getRowTable(data) {
     return `<tr data-id="${data.id}">
-    <td class="text-center MaVaccine">${data.maVaccine == null ? "" : data.maVaccine}</td>
-    <td class="text-start TenVaccine">${data.tenVaccine == null ? "" : data.tenVaccine}</td>
-    <td class="text-center DonViTinh">${data.donViTinh == null ? "" : data.donViTinh}</td>
-    <td class="text-end SoCode">${data.soCode == null ? "" : data.soCode}</td>
-    <td class="text-end GiaBan">${data.giaBan == null ? "" : data.giaBan}</td>
+    <td class="text-center MaNhaCungCap">${data.maNhaCungCap == null ? "" : data.maNhaCungCap}</td>
+    <td class="text-start TenNhaCungCap">${data.tenNhaCungCap == null ? "" : data.tenNhaCungCap}</td>
+     <td class="text-start DiaChi">${data.diaChi == null ? "" : data.diaChi}</td>
+    <td class="text-end DienThoai">${data.dienThoai == null ? "" : data.dienThoai}</td>
+     <td class="text-start Mail">${data.mail == null ? "" : data.mail}</td>
+    <td class="text-start GhiChu">${data.ghiChu == null ? "" : data.ghiChu}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <button onclick="showModal(${data.id})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
@@ -154,11 +149,11 @@ function updatePagi(prePage, nextPage, pageNumber) {
 }
 function changePage(pageNumber) {
     showProgress();
-    var isActive = $('select[name="Active"]').val();
+
     $.ajax({
         type: "post",
-        url: "/DanhMuc/DM_Vaccine/changePage",
-        data: "pageNumber=" + pageNumber + "&active=" + isActive,
+        url: "/DanhMuc/DM_NhaCungCap/changePage",
+        data: "pageNumber=" + pageNumber,
         success: function (response) {
             hideProgress();
             updateDataOfTable(response.result);
@@ -194,23 +189,27 @@ function getSessionColumnShow() {
         // Tạo mới session với giá trị mặc định
         var defaultValue = [
             {
-                columnName: "MaVaccine",
+                columnName: "MaNhaCungCap",
                 value: true,
             },
             {
-                columnName: "TenVaccine",
+                columnName: "TenNhaCungCap",
                 value: true,
             },
             {
-                columnName: "DonViTinh",
+                columnName: "DiaChi",
                 value: true,
             },
             {
-                columnName: "SoCode",
+                columnName: "DienThoai",
                 value: true,
             },
             {
-                columnName: "GiaBan",
+                columnName: "Mail",
+                value: true,
+            },
+            {
+                columnName: "GhiChu",
                 value: true,
             },
         ];
@@ -284,11 +283,8 @@ function searchWithKeyword() {
     if (key == "") {
         $.ajax({
             type: "post",
-            url: "/DanhMuc/DM_Vaccine/api/getModelsWithNumberPage",
-            data: "active=" + $('select[name="Active"]').val(),
+            url: "/DanhMuc/DM_NhaCungCap/api/getModelsWithNumberPage",
             success: function (response) {
-                console.log($('select[name="Active"]').val());
-                console.log(response.result);
                 dataResponse = [];
                 hideProgress();
                 updateDataOfTable(response.result);
@@ -303,7 +299,7 @@ function searchWithKeyword() {
     } else {
         $.ajax({
             type: "post",
-            url: "/DanhMuc/DM_Vaccine/api/searchWithKeyword",
+            url: "/DanhMuc/DM_NhaCungCap/api/searchWithKeyword",
             data: "key=" + key + "&active=" + $('select[name="Active"]').val(),
             success: function (response) {
 
@@ -320,12 +316,13 @@ function searchWithKeyword() {
                 console.log(error);
             }
         });
+
     }
 }
 function showModal(id) {
     $.ajax({
         type: "post",
-        url: "/DanhMuc/DM_Vaccine/showModal",
+        url: "/DanhMuc/DM_NhaCungCap/showModal",
         data: "id=" + id,
         success: function (response) {
             showModalLargel(response.title, response.view);

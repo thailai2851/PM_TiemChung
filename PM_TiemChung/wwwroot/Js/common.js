@@ -119,6 +119,97 @@ function formatDay(inputString) {
         return ""
     }
 }
+function formatNumber() {
+    $(".formatted-number-float").inputmask({
+        alias: "numeric",
+        radixPoint: ".",
+        groupSeparator: ",",
+        autoGroup: true,
+        digits: 2,
+        digitsOptional: true,
+        allowMinus: true,
+        prefix: "",
+    });
+}
+function configDateDefault() {
+    var today = new Date();
+    $('.input-date-default').datetimepicker({
+        locale: 'vi',
+        useStrict: true,
+        defaultDate: today,
+        format: "DD-MM-yyyy",
+        extraFormats: ["DD-MM-yyyy", "DD/MM/yyyy", "yyyy"],
+        icons: {
+            date: "ti ti-calendar",
+            up: "ti ti-chevron-up",
+            down: "ti ti-chevron-down",
+            previous: 'ti ti-chevron-left',
+            next: 'ti ti-chevron-right',
+            time: "ti ti-alarm"
+        },
+        keyBinds: {
+            left: null,
+            right: null,
+        }
+    });
+}
+function configDateTimeDefault() {
+    var today = new Date();
+    $('.input-date-time-default').datetimepicker({
+        locale: 'vi',
+        useStrict: true,
+        defaultDate: today,
+        format: "DD-MM-yyyy HH:mm",
+        extraFormats: ["DD-MM-yyyy HH:mm", "DD/MM/yyyy HH:mm", "yyyy"],
+        icons: {
+            date: "ti ti-calendar",
+            up: "ti ti-chevron-up",
+            down: "ti ti-chevron-down",
+            previous: 'ti ti-chevron-left',
+            next: 'ti ti-chevron-right',
+            time: "ti ti-alarm"
+        },
+        keyBinds: {
+            left: null,
+            right: null,
+        }
+    });
+}
+
+
+function configDateShortMask() {
+    $('.input-date-short-mask').inputmask({ alias: "datetime", inputFormat: 'dd-mm-yy', placeholder: '__-__-__' });
+}
+function clearForm(formName) {
+    var form = $('#' + formName);
+    // các input text = ""
+    form.find('input[type="text"].form-control').val("");
+    form.find('input[type="number"].form-control').val("");
+    form.find('input[type="email"].form-control').val("");
+    form.find('input[tyoe="hidden"]').val("");
+    form.find('textarea').text("");
+    form.find('textarea').val("");
+
+    form.find('input[type="text"][readonly].form-control.input-date-time').val("");
+    form.find('input[type="text"].form-control.input-date-time').val(getDateTimeNow());
+
+    form.find('input[type="text"][readonly].form-control.input-date').val("");
+    form.find('input[type="text"].form-control.input-date').val();
+    form.find('input[type="text"].form-control.input-date-default').val(getDateNow());
+    form.find('input[type="text"].form-control.input-date-time-default').val(getDateTimeNow());
+    var selects = document.getElementById(formName).querySelectorAll("select");
+
+    selects.forEach(function (select) {
+        if (select.tomselect) {
+            select.tomselect.clear();
+        } else {
+            select.selectedIndex = 0;
+        }
+    })
+
+    form.find('input[type="checkbox"]').prop("checked", false).trigger("change");
+    form.find('input[type="checkbox"]').val("false");
+}
 function configCbDataBase(datas) {
     
     datas.forEach(data => {
@@ -153,6 +244,21 @@ function configCbDataBase(datas) {
             });
         })
     })
+}
+function queryStringToData(queryString) {
+    // Phân tích cú pháp và xử lý chuỗi query string
+    var params = new URLSearchParams(queryString);
+    var jsonData = {};
+
+    // Lặp qua các cặp key-value trong chuỗi query string
+    for (var pair of params.entries()) {
+        var key = pair[0];
+        var value = pair[1];
+
+        // Gán giá trị vào đối tượng JSON
+        jsonData[key] = value;
+    }
+    return jsonData;
 }
 function showDropdownMenu(select, dropdownElement) {
     var dropdown = $(dropdownElement.dropdown);

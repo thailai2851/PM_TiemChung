@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -9,43 +8,35 @@ using PM_TiemChung.Services;
 
 namespace PM_TiemChung.Controllers
 {
-    [Authorize]
     [Route("DanhMuc/[controller]")]
-    public class DM_VaccineController : Controller
+    public class DM_NhaCungCapController : Controller
     {
-        private IVaccineServices _services;
+        private INhaCungCapServices _services;
         private ICompositeViewEngine _viewEngine;
 
-        public DM_VaccineController(IVaccineServices dmIcdYhctServices, ICompositeViewEngine viewEngine)
+        public DM_NhaCungCapController(INhaCungCapServices dmIcdYhctServices, ICompositeViewEngine viewEngine)
         {
             _services = dmIcdYhctServices;
             _viewEngine = viewEngine;
         }
         [HttpGet]
-        public async Task<IActionResult> Vaccine()
+        public async Task<IActionResult> NhaCungCap()
         {
-            ViewBag.Models = await _services.getModelsWithNumberPage(1, true);
+            ViewBag.Models = await _services.getModelsWithNumberPage(1);
             return View();
         }
         [HttpPost("changePage")]
         // Chuyển trang 
-        public async Task<IActionResult> changePage(int pageNumber, bool active)
+        public async Task<IActionResult> changePage(int pageNumber)
         {
-            var result = await _services.getModelsWithNumberPage(pageNumber, active);
-            return Ok(result);
-        }
-        [HttpPost("getListVaccine")]
-        // Chuyển trang 
-        public async Task<IActionResult> getListVaccine()
-        {
-            var result = await _services.getListVaccine();
+            var result = await _services.getModelsWithNumberPage(pageNumber);
             return Ok(result);
         }
         [HttpPost("api/getModelsWithNumberPage")]
         // Phân trang
-        public async Task<IActionResult> getModelsWithNumberPage(bool active)
+        public async Task<IActionResult> getModelsWithNumberPage()
         {
-            var models = await _services.getModelsWithNumberPage(1, active);
+            var models = await _services.getModelsWithNumberPage(1);
             return Ok(models);
         }
         [HttpPost("api/searchWithKeyword")]
@@ -60,19 +51,19 @@ namespace PM_TiemChung.Controllers
         {
             var model = await _services.getModelWithId(id);
 
-            PartialViewResult partialViewResult = PartialView("FormVaccine", model == null ? new DmVaccine() : model);
+            PartialViewResult partialViewResult = PartialView("FormNhaCungCap", model == null ? new NhaCungCap() : model);
             string viewContent = ConvertViewToString(ControllerContext, partialViewResult, _viewEngine);
             return Ok(new
             {
                 view = viewContent,
-                title = model == null ? "Thêm vaccine" : "Chỉnh sửa vaccine"
+                title = model == null ? "Thêm nhà cung cấp" : "Chỉnh sửa nhà cung cấp"
             });
         }
         [HttpPost("update")]
         // thêm và cập nhập
-        public async Task<IActionResult> update(DmVaccineMap modelMap)
+        public async Task<IActionResult> update(DmNhaCungCapMap modelMap)
         {
-            var result = await _services.UpdateVaccine(modelMap);
+            var result = await _services.UpdateNhaCungCap(modelMap);
             return Ok(result);
         }
         [HttpPost("changeActive")]
@@ -80,6 +71,12 @@ namespace PM_TiemChung.Controllers
         public async Task<IActionResult> changeActive(long id)
         {
             var result = await _services.changeActive(id);
+            return Ok(result);
+        }
+        [HttpPost("getListNhaCungCap")]
+        public async Task<IActionResult> getListNhaCungCap()
+        {
+            var result = await _services.getListNhaCungCap();
             return Ok(result);
         }
         public string ConvertViewToString(ControllerContext controllerContext, PartialViewResult pvr, ICompositeViewEngine _viewEngine)

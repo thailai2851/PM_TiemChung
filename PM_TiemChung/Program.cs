@@ -40,6 +40,8 @@ builder.Services.AddScoped<IVaccineServices, VaccineServices>();
 builder.Services.AddScoped<IQuanCuTruServices, QuanCuTruServices>();
 builder.Services.AddScoped<IXaCuTruServices, XaCuTruServices>();
 builder.Services.AddScoped<INhanVienServices, NhanVienServices>();
+builder.Services.AddScoped<INhaCungCapServices, NhaCungCapServices>();
+
 
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
