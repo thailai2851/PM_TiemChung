@@ -76,16 +76,6 @@ namespace PM_TiemChung.Controllers
                 }
                 await _context.ChiTietPhieuNhaps.AddRangeAsync(chiTietPhieuNhaps);
                 await _context.SaveChangesAsync();
-                List<TonKho> tonKhos = new List<TonKho>();
-                foreach (ChiTietPhieuNhap chiTiet1 in chiTietPhieuNhaps)
-                {
-                    TonKho tonKho = new TonKho();
-                    tonKho.Idctpn = chiTiet1.Idctpn;
-                    tonKho.Slcon = chiTiet1.SoLuong;
-                    tonKho.NgayNhap = phieuNhap.NgayNhap;
-                    tonKhos.Add(tonKho);
-                }
-                await _context.TonKhos.AddRangeAsync(tonKhos);
                 await _context.SaveChangesAsync();
                 tran.Commit();
                 return new

@@ -25,6 +25,8 @@ public partial class ChiTietPhieuNhap
 
     public string? GhiChu { get; set; }
 
+    public int? SoLuongXuat { get; set; }
+
     public bool? Active { get; set; }
 
     public virtual ICollection<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; } = new List<ChiTietPhieuXuat>();
@@ -32,6 +34,4 @@ public partial class ChiTietPhieuNhap
     public virtual PhieuNhap? IdpnNavigation { get; set; }
 
     public virtual DmVaccine? IdvaccineNavigation { get; set; }
-
-    public virtual ICollection<TonKho> TonKhos { get; set; } = new List<TonKho>();
 }

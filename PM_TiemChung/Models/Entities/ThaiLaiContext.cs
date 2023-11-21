@@ -15,6 +15,8 @@ public partial class ThaiLaiContext : DbContext
     {
     }
 
+    public virtual DbSet<Account> Accounts { get; set; }
+
     public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
 
     public virtual DbSet<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; }
@@ -55,13 +57,23 @@ public partial class ThaiLaiContext : DbContext
 
     public virtual DbSet<QlMa> QlMas { get; set; }
 
-    public virtual DbSet<TonKho> TonKhos { get; set; }
+    public virtual DbSet<ThongTinDoanhNghiep> ThongTinDoanhNghieps { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:Connection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.ToTable("Account");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IdnhanVien).HasColumnName("IDNhanVien");
+            entity.Property(e => e.Password).HasMaxLength(50);
+            entity.Property(e => e.UserName).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<ChiTietPhieuNhap>(entity =>
         {
             entity.HasKey(e => e.Idctpn);
@@ -476,20 +488,21 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Stt).HasColumnName("STT");
         });
 
-        modelBuilder.Entity<TonKho>(entity =>
+        modelBuilder.Entity<ThongTinDoanhNghiep>(entity =>
         {
-            entity.HasKey(e => e.Idtk);
+            entity.ToTable("ThongTinDoanhNghiep");
 
-            entity.ToTable("TonKho");
-
-            entity.Property(e => e.Idtk).HasColumnName("IDTK");
-            entity.Property(e => e.Idctpn).HasColumnName("IDCTPN");
-            entity.Property(e => e.NgayNhap).HasColumnType("datetime");
-            entity.Property(e => e.Slcon).HasColumnName("SLCon");
-
-            entity.HasOne(d => d.IdctpnNavigation).WithMany(p => p.TonKhos)
-                .HasForeignKey(d => d.Idctpn)
-                .HasConstraintName("FK_TonKho_ChiTietPhieuNhap");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ChuTk).HasMaxLength(200);
+            entity.Property(e => e.DiaChi).HasMaxLength(500);
+            entity.Property(e => e.DienThoai).HasMaxLength(50);
+            entity.Property(e => e.Email).HasMaxLength(50);
+            entity.Property(e => e.Mst)
+                .HasMaxLength(50)
+                .HasColumnName("MST");
+            entity.Property(e => e.NganHang).HasMaxLength(50);
+            entity.Property(e => e.SoTk).HasMaxLength(50);
+            entity.Property(e => e.TenDoanhNghiep).HasMaxLength(500);
         });
 
         OnModelCreatingPartial(modelBuilder);
