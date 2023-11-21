@@ -413,3 +413,47 @@ function getDateNow() {
     // Định dạng chuỗi ngày tháng
     return (day < 10 ? '0' : '') + day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
 }
+function getDateTimeNow() {
+    // Lấy ngày giờ hiện tại
+    var currentDate = new Date();
+
+    // Lấy các thành phần ngày, tháng, năm, giờ và phút
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1; // Tháng bắt đầu từ 0, cần +1 để đúng
+    var year = currentDate.getFullYear();
+    var hours = currentDate.getHours();
+    var minutes = currentDate.getMinutes();
+
+    // Chuyển đổi thành định dạng "dd-MM-yyyy HH:mm"
+    return ("0" + day).slice(-2) + "-" + ("0" + month).slice(-2) + "-" + year + " " + ("0" + hours).slice(-2) + ":" + ("0" + minutes).slice(-2);
+}
+
+function getDateNow() {
+    // Lấy ngày giờ hiện tại
+    var currentDate = new Date();
+
+    // Lấy các thành phần ngày, tháng và năm
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1; // Ghi chú: Tháng trong JavaScript bắt đầu từ 0
+    var year = currentDate.getFullYear();
+
+    // Định dạng chuỗi ngày tháng
+    return (day < 10 ? '0' : '') + day + '-' + (month < 10 ? '0' : '') + month + '-' + year;
+}
+function formatEvenNumber(number) {
+    if (number == null) return 0;
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 1,000,000.00
+function formatOddNumber(number) {
+    if (number) {
+        if (Number.isInteger(number)) {
+            return number.toLocaleString('en-US');
+        } else {
+            return number.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+    } else {
+        return "";
+    }
+}

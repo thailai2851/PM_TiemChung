@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PM_TiemChung.Models;
@@ -6,6 +7,7 @@ using PM_TiemChung.Models.Entities;
 
 namespace PM_TiemChung.Controllers
 {
+    [Authorize]
     [Route("DanhMuc/[controller]")]
     public class DM_ProfileController : Controller
     {
