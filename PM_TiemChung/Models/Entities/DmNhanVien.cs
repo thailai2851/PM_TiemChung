@@ -31,6 +31,8 @@ public partial class DmNhanVien
 
     public bool? Active { get; set; }
 
+    public virtual ICollection<Account> Accounts { get; set; } = new List<Account>();
+
     public virtual DmGioiTinh? IdgtNavigation { get; set; }
 
     public virtual ICollection<LichTiemBn> LichTiemBnIdbskNavigations { get; set; } = new List<LichTiemBn>();
@@ -38,4 +40,8 @@ public partial class DmNhanVien
     public virtual ICollection<LichTiemBn> LichTiemBnIdnhanVienThuNavigations { get; set; } = new List<LichTiemBn>();
 
     public virtual ICollection<LichTiemBn> LichTiemBnIdnhanVienTiemNavigations { get; set; } = new List<LichTiemBn>();
+
+    public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; } = new List<PhieuNhap>();
+
+    public virtual ICollection<PhieuXuat> PhieuXuats { get; set; } = new List<PhieuXuat>();
 }
