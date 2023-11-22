@@ -48,9 +48,9 @@ namespace PM_TiemChung.Controllers
         }
         [HttpPost("showModal")]
         // sửa long
-        public async Task<IActionResult> showModal(int id)
+        public async Task<IActionResult> showModal(int idncc)
         {
-            var model = await _services.getModelWithId(id);
+            var model = await _services.getModelWithId(idncc);
 
             PartialViewResult partialViewResult = PartialView("FormNhaCungCap", model == null ? new NhaCungCap() : model);
             string viewContent = ConvertViewToString(ControllerContext, partialViewResult, _viewEngine);
@@ -69,9 +69,9 @@ namespace PM_TiemChung.Controllers
         }
         [HttpPost("changeActive")]
         // xóa và khôi phục (chuyển active về false) sửa long
-        public async Task<IActionResult> changeActive(int id)
+        public async Task<IActionResult> changeActive(int idncc)
         {
-            var result = await _services.changeActive(id);
+            var result = await _services.changeActive(idncc);
             return Ok(result);
         }
         [HttpPost("getListNhaCungCap")]
