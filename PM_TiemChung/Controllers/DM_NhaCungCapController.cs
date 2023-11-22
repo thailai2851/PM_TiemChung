@@ -47,7 +47,8 @@ namespace PM_TiemChung.Controllers
             return Ok(result);
         }
         [HttpPost("showModal")]
-        public async Task<IActionResult> showModal(long id)
+        // sửa long
+        public async Task<IActionResult> showModal(int id)
         {
             var model = await _services.getModelWithId(id);
 
@@ -67,8 +68,8 @@ namespace PM_TiemChung.Controllers
             return Ok(result);
         }
         [HttpPost("changeActive")]
-        // xóa và khôi phục (chuyển active về false)
-        public async Task<IActionResult> changeActive(long id)
+        // xóa và khôi phục (chuyển active về false) sửa long
+        public async Task<IActionResult> changeActive(int id)
         {
             var result = await _services.changeActive(id);
             return Ok(result);

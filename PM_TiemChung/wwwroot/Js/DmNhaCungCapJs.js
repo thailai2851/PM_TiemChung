@@ -65,9 +65,9 @@ function changeActive(id) {
 }
 
 function getRowTable(data) {
-    return `<tr data-id="${data.id}">
-    <td class="text-center MaNCC">${data.maNCC == null ? "" : data.maNCC}</td>
-    <td class="text-start TenNCC">${data.tenNCC == null ? "" : data.tenNCC}</td>
+    return `<tr data-idncc="${data.idncc}">
+    <td class="text-center MaNCC">${data.maNcc == null ? "" : data.maNcc}</td>
+    <td class="text-start TenNCC">${data.tenNcc == null ? "" : data.tenNcc}</td>
      <td class="text-start DiaChi">${data.diaChi == null ? "" : data.diaChi}</td>
     <td class="text-end DienThoai">${data.dienThoai == null ? "" : data.dienThoai}</td>
      <td class="text-start Mail">${data.mail == null ? "" : data.mail}</td>

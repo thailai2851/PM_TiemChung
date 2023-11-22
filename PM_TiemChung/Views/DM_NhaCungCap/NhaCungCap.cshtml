@@ -1,7 +1,7 @@
 ﻿@{
     List<NhaCungCap> nhaCungCaps = ViewBag.Models.result;
 }
-<div class="row d-flex justify-content-between mb-3 mx-3">
+<div class="row d-flex justify-content-between mb-3 mx-3 mt-3">
     <div class="col-4 col-sm-6 mb-1 p-0">
         <div class="row">
             <div class="col-6">
@@ -77,8 +77,8 @@
             <table class="table table-vcenter card-table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center MaNhaCungCap">Mã nhà cung cấp</th>
-                        <th class="text-center TenNhaCungCap">Tên nhà cung cấp</th>
+                        <th class="text-center MaNcc">Mã nhà cung cấp</th>
+                        <th class="text-center TenNcc">Tên nhà cung cấp</th>
                         <th class="text-center DiaChi">Địa chỉ</th>
                         <th class="text-center DienThoai">Điện thoại</th>
                         <th class="text-center Mail">Email</th>
@@ -90,8 +90,8 @@
                     @foreach (NhaCungCap d in nhaCungCaps)
                     {
                         <tr data-id="@d.Idncc">
-                            <td class="text-center MaNhaCungCap">@d.MaNcc</td>
-                            <td class="text-start TenNhaCungCap">@d.TenNcc</td>
+                            <td class="text-center MaNcc">@d.MaNcc</td>
+                            <td class="text-start TenNcc">@d.TenNcc</td>
                             <td class="text-start DiaChi">@d.DiaChi</td>
                             <td class="text-end DienThoai">@d.DienThoai</td>
                             <td class="text-start Mail">@d.Mail</td>

@@ -11,8 +11,8 @@ namespace PM_TiemChung.Services
         Task<List<NhaCungCap>> searchWithKeyword(string key, bool active);
         Task<ResponseModel> UpdateNhaCungCap(DmNhaCungCapMap modelMap);
         Task<dynamic> getModelsWithNumberPage(int pageNumber);
-        Task<NhaCungCap> getModelWithId(long id);
-        Task<dynamic> changeActive(long id);
+        Task<NhaCungCap> getModelWithId(int id); //sửa long
+        Task<dynamic> changeActive(int id); // long
         Task<dynamic> getListNhaCungCap();
     }
     public class NhaCungCapServices : INhaCungCapServices
@@ -36,9 +36,7 @@ namespace PM_TiemChung.Services
             else
             {
                 models = await _context.NhaCungCaps.Where(x => ((x.MaNcc != null && x.MaNcc.ToLower().Contains(key.ToLower())) ||
-                                                (x.DiaChi != null && x.DiaChi.ToLower().Contains(key.ToLower())) ||
-                                                (x.DienThoai != null && x.DienThoai.ToLower().Contains(key.ToLower())) ||
-                                                (x.TenNcc != null && x.TenNcc.ToLower().Contains(key.ToLower()))) &&
+                                               (x.TenNcc != null && x.TenNcc.ToLower().Contains(key.ToLower()))) &&
                                                 x.Active == active)
                     .OrderBy(x => x.TenNcc.Trim())
                     .ToListAsync();
@@ -155,12 +153,12 @@ namespace PM_TiemChung.Services
                 };
             }
         }
-        public async Task<NhaCungCap> getModelWithId(long id)
+        public async Task<NhaCungCap> getModelWithId(int id)
         {
             NhaCungCap model = await _context.NhaCungCaps.FirstOrDefaultAsync(x => x.Idncc == id);
             return model;
         }
-        public async Task<dynamic> changeActive(long id)
+        public async Task<dynamic> changeActive(int id)
         {
             try
             {

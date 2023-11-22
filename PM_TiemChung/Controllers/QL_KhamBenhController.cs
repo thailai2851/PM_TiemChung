@@ -48,7 +48,7 @@ namespace PM_TiemChung.Controllers
             ViewBag.DanhSachDeNghi = await _context.LichTiemBns
                 .Include(x=>x.IdbnNavigation)
                 .Include(x=>x.IdvcNavigation)
-                .Where(x => x.NgayDeNghiTiem.Value.Date == d && x.DeNghiTiem).ToListAsync();
+                .Where(x => x.NgayDeNghiTiem.Value.Date == d && x.DeNghiTiem.Value).ToListAsync();
             ViewBag.DanhSachTiemChung = await _context.LichTiemBns
                 .Include(x => x.IdbnNavigation)
                 .Include(x => x.IdvcNavigation)
@@ -78,7 +78,7 @@ namespace PM_TiemChung.Controllers
             return Ok(await _context.LichTiemBns
                 .Include(x => x.IdbnNavigation)
                 .Include(x => x.IdvcNavigation)
-                .Where(x => x.NgayDeNghiTiem.Value.Date == d && x.DeNghiTiem)
+                .Where(x => x.NgayDeNghiTiem.Value.Date == d && x.DeNghiTiem.Value)
                 .GroupBy(x => x.IdbnNavigation)
                 .Select(x => new
                 {
