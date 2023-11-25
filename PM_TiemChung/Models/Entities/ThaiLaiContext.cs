@@ -107,23 +107,17 @@ public partial class ThaiLaiContext : DbContext
 
         modelBuilder.Entity<ChiTietPhieuXuat>(entity =>
         {
-            entity.HasKey(e => e.Idctpx);
-
             entity.ToTable("ChiTietPhieuXuat");
 
-            entity.Property(e => e.Idctpx).HasColumnName("IDCTPX");
-            entity.Property(e => e.Cktm).HasColumnName("CKTM");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Idbn).HasColumnName("IDBN");
             entity.Property(e => e.Idctpn).HasColumnName("IDCTPN");
-            entity.Property(e => e.Idpx).HasColumnName("IDPX");
             entity.Property(e => e.Idvaccine).HasColumnName("IDVaccine");
+            entity.Property(e => e.NgayXuat).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdctpnNavigation).WithMany(p => p.ChiTietPhieuXuats)
                 .HasForeignKey(d => d.Idctpn)
                 .HasConstraintName("FK_ChiTietPhieuXuat_ChiTietPhieuNhap");
-
-            entity.HasOne(d => d.IdpxNavigation).WithMany(p => p.ChiTietPhieuXuats)
-                .HasForeignKey(d => d.Idpx)
-                .HasConstraintName("FK_ChiTietPhieuXuat_PhieuXuat");
 
             entity.HasOne(d => d.IdvaccineNavigation).WithMany(p => p.ChiTietPhieuXuats)
                 .HasForeignKey(d => d.Idvaccine)
