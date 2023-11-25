@@ -1,0 +1,126 @@
+﻿
+        <div class="card">
+            <div class="card-body p-2">
+                        <div class="card mb-2">
+                            <div class="card-status-top bg-blue"></div>
+                            <div class="card-header p-1">
+                                <div class="container px-0">
+                                    <form class="row" id="formBaoCaoNhapKho">
+                                        <div class="col-12 mb-1 mt-2">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-3 mb-1">
+                                                    <div class="row">
+                                                        <label class="col-form-label col-4 col-lg-4">
+                                                            Từ ngày:
+                                                        </label>
+                                                        <div class="col-lg-8 col-8">
+                                                            <input required type="text" autocomplete="off" class="form-control input-date-default" name="TuNgay">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-3 mb-1">
+                                                    <div class="row">
+                                                        <label class="col-form-label col-lg-4 col-4">
+                                                            Đến ngày:
+                                                        </label>
+                                                        <div class="col-8 col-lg-8">
+                                                            <input required type="text" autocomplete="off" class="form-control input-date-default" name="DenNgay">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-1">
+                                                    <div class="row">
+                                                        <label class="col-form-label col-lg-2 col-4">
+                                                            Nơi cung cấp:
+                                                        </label>
+                                                        <div class="col-8 col-lg-10">
+                                                            <select class="form-select cbNhaCungCap" name="IdNhaCungCap">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 md-1 mt-2">
+                                            <div class="row mb-1">
+                                                <div class="col-12 col-lg-6 mb-1">
+                                                    <div class="row">
+                                                        <label class="col-form-label col-2 col-lg-2">
+                                                            Hàng hóa:
+                                                        </label>
+                                                        <div class="col-10 col-lg-10">
+                                                            <select class="form-select cbHangHoa" name="IdHangHoa">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-1 mb-1">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-auto">
+                                                            <button class="btn btn-icon" type="submit">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body p-2">
+                                <div class="card">
+                                    <div class="table-responsive vh-lg-53">
+                                        <table id="tableBaoCaoChiTiet" class="table text-nowrap table-bordered table-vcenter">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center p-1">#</th>
+                                                    <th class="text-center p-1">Ngày</th>
+                                                    <th class="text-center p-1">Số phiếu</th>
+                                                    <th class="text-center p-1">Tên nhà cung cấp</th>
+                                                    <th class="text-center p-1">Số HĐ</th>
+                                                    <th class="text-center p-1">Ngày HĐ</th>
+                                                    <th class="text-center p-1">Tên hàng hoá</th>
+                                                    <th class="text-center p-1">SL nhập</th>
+                                                    <th class="text-center p-1">ĐVT</th>
+                                                    <th class="text-center p-1">Giá nhập</th>
+                                                    <th class="text-center p-1">Thành tiền</th>
+                                                    <th class="text-center p-1">Hạn dùng</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tBody-BaoCaoChiTiet">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer p-2">
+                                <div class="container p-0">
+                                    <div class="row justify-content-end">
+                                        <div class="col-auto">
+                                            <button id="btnInPDFBaoCao" class="btn btn-primary bg-green-lt" type="button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2"></path>
+                                                    <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4"></path>
+                                                    <path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z"></path>
+                                                </svg>
+                                                Xuất PDF
+                                            </button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button id="btnXuatExcelBaoCao" class="btn btn-primary bg-indigo-lt" type="button">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-export" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                                    <path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3"></path>
+                                                </svg>
+                                                Xuất Excel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        </div>

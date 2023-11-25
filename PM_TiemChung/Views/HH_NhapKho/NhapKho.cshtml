@@ -114,13 +114,11 @@
                                                         <th class="text-center p-1 text-wrap">ĐVT</th>
                                                         <th class="text-center p-1 text-wrap">Giá nhập</th>
                                                         <th class="text-center p-1 text-wrap">Thành tiền</th>
-                                                        <th class="text-center p-1 text-wrap">Chiếc khấu</th>
-                                                        <th class="text-center p-1 text-wrap">VAT</th>
                                                         <th class="text-center p-1 text-wrap">Ngày SX</th>
                                                         <th class="text-center p-1 text-wrap">Hạn SD</th>
                                                         <th class="text-center p-1 text-wrap">Ghi Chú</th>
                                                         <th class="text-center last-th-column p-1">
-                                                            <a href="#" class="text-red" id="remove-all-phieuNhapCt">
+                                                            <a class="text-red" id="remove-all-phieuNhapCt">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                                     <path d="M4 7l16 0"></path>
@@ -155,12 +153,6 @@
                                                         <td style="width:100px;">
                                                             <input autocomplete="off" type="text" class="form-control form-table formatted-number-float"  value="" name="ThanhTien" />
                                                         </td>
-                                                        <td style="width:40px;">
-                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ChiecKhau" />
-                                                        </td>
-                                                        <td style="width:40px;">
-                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value=""  name="ThueVat" />
-                                                        </td>
                                                         <td style="width:90px;">
                                                             <input autocomplete="off" type="text" class="form-control form-table input-date-long-mask" name="NgaySanXuat" />
                                                         </td>
@@ -189,21 +181,11 @@
                         </div>
                         <div class="card-footer p-2">
                             <div class="row">
+                                <div class="col-lg-6 col-12 mb-1 ms-6">
+                                </div>
                                 <div class="col-lg-2 col-12 ms-6">
                                     <label class="form-label mb-0">Tổng tiền hàng:</label>
                                     <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTienHang" placeholder="Tổng tiền hàng" readonly>
-                                </div>
-                                <div class="col-lg-2 col-12 mb-1 ms-6">
-                                    <label class="form-label mb-0">Tổng chiếc khấu:</label>
-                                    <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTienCK" placeholder="Tổng chiếc khấu" readonly>
-                                </div>
-                                <div class="col-lg-2 col-12 mb-1 ms-6">
-                                    <label class="form-label mb-0">Tổng thuế VAT:</label>
-                                    <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTienThue" placeholder="Tổng thuế" readonly>
-                                </div>
-                                <div class="col-lg-2 col-12 mb-1 ms-6">
-                                    <label class="form-label mb-0">Tổng cộng:</label>
-                                    <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTra" placeholder="Tổng cộng" readonly>
                                 </div>
                                 <div class="col-2 mb-1">
                                     <label class="form-label mb-0 text-white">.</label>
@@ -219,6 +201,8 @@
                                             </button>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-1 ms-6">
                                 </div>
                             </div>
                         </div>
@@ -332,27 +316,6 @@
                                                     <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
                                                 </svg>
                                                 Hàng
-                                            </th>
-                                            <th class="text-center p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sum" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
-                                                </svg>
-                                                CK
-                                            </th>
-                                            <th class="text-center p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sum" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
-                                                </svg>
-                                                VAT
-                                            </th>
-                                            <th class="text-center p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sum" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
-                                                </svg>
-                                                Tổng
                                             </th>
                                             <th class="text-center last-th-column p-1">
                                                 Thao tác
