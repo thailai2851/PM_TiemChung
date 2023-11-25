@@ -34,6 +34,7 @@ $(document).ready(function () {
                         showColumnFromSesion();
                         $('#modal-largel').modal('hide');
                     }
+                    formatNumber();
                 },
                 error: function (xhr, status, error) {
                     // Xử lý lỗi (nếu có) khi gửi form
@@ -76,7 +77,7 @@ function getRowTable(data) {
     <td class="text-start TenVaccine">${data.tenVaccine == null ? "" : data.tenVaccine}</td>
     <td class="text-center DonViTinh">${data.donViTinh == null ? "" : data.donViTinh}</td>
     <td class="text-end SoCode">${data.soCode == null ? "" : data.soCode}</td>
-    <td class="text-end GiaBan">${data.giaBan == null ? "" : data.giaBan}</td>
+    <td class="text-end formatted-number-float GiaBan">${data.giaBan == null ? "" : data.giaBan}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <button onclick="showModal(${data.id})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
@@ -106,6 +107,7 @@ function updateDataOfTable(datas) {
     );
     showColumnFromSesion();
     hideProgress();
+    formatNumber();
 }
 function updatePagi(prePage, nextPage, pageNumber) {
 
@@ -257,6 +259,7 @@ function showColumnFromSesion() {
         // Thiết lập thuộc tính "checked" của phần tử input dựa trên giá trị
         $input.prop("checked", element.value);
     });
+    formatNumber();
 }
 function scrollTable() {
     var table = document.getElementById('tableDM');
@@ -329,9 +332,11 @@ function showModal(id) {
         data: "id=" + id,
         success: function (response) {
             showModalLargel(response.title, response.view);
+            formatNumber();
         },
         error: function (error) {
             console.log(error);
         }
     });
+   
 }

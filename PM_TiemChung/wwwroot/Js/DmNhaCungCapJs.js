@@ -26,10 +26,10 @@ $(document).ready(function () {
                     if (response.statusCode == 200) {
                         var data = response.data;
                         var tr = getRowTable(data);
-                        if ($("tr[data-id=" + data.id + "]").length) {
-                            $("tr[data-id=" + data.id + "]").replaceWith(tr);
+                        if ($("tr[data-idncc=" + data.idncc + "]").length) {
+                            $("tr[data-idncc=" + data.idncc + "]").replaceWith(tr);
                         } else {
-                            $("tr[data-id=" + data.id + "]").append(tr);
+                            $("tr[data-idncc=" + data.idncc + "]").append(tr);
                         }
                         showColumnFromSesion();
                         $('#modal-largel').modal('hide');
@@ -46,10 +46,10 @@ $(document).ready(function () {
         $.ajax({
             type: "post",
             url: "/DanhMuc/DM_NhaCungCap/changeActive",
-            data: "id=" + idModel,
+            data: "idncc=" + idModel,
             success: function (response) {
                 if (response.statusCode == 200) {
-                    $("tr[data-id=" + idModel + "]").remove();
+                    $("tr[data-idncc=" + idModel + "]").remove();
                 }
                 showToast(response.message, response.statusCode);
             },
@@ -59,22 +59,22 @@ $(document).ready(function () {
         });
     });
 })
-function changeActive(id) {
-    idModel = id;
+function changeActive(idncc) {
+    idModel = idncc;
     showModalDanger('Bạn có muốn thao tác?');
 }
 
 function getRowTable(data) {
-    return `<tr data-id="${data.id}">
-    <td class="text-center MaNhaCungCap">${data.maNhaCungCap == null ? "" : data.maNhaCungCap}</td>
-    <td class="text-start TenNhaCungCap">${data.tenNhaCungCap == null ? "" : data.tenNhaCungCap}</td>
+    return `<tr data-idncc="${data.idncc}">
+    <td class="text-center MaNCC">${data.maNcc == null ? "" : data.maNcc}</td>
+    <td class="text-start TenNCC">${data.tenNcc == null ? "" : data.tenNcc}</td>
      <td class="text-start DiaChi">${data.diaChi == null ? "" : data.diaChi}</td>
     <td class="text-end DienThoai">${data.dienThoai == null ? "" : data.dienThoai}</td>
      <td class="text-start Mail">${data.mail == null ? "" : data.mail}</td>
     <td class="text-start GhiChu">${data.ghiChu == null ? "" : data.ghiChu}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <button onclick="showModal(${data.id})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
+            <button onclick="showModal(${data.idncc})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
@@ -83,7 +83,7 @@ function getRowTable(data) {
                         </svg>
     
                     </button>
-                    <button class="btn btn-icon bg-dark-lt" onclick="changeActive(${data.id})" data-bs-toggle="tooltip" data-bs-placement="right" title="Thay đổi trạng thái">
+                    <button class="btn btn-icon bg-dark-lt" onclick="changeActive(${data.idncc})" data-bs-toggle="tooltip" data-bs-placement="right" title="Thay đổi trạng thái">
                     ${data.active ? '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">< path stroke = "none" d = "M0 0h24v24H0z" fill = "none" ></path ><path d="M4 7l16 0"></path><path d="M10 11l0 6"></path><path d="M14 11l0 6"></path><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path></svg > ' :
             '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">< path stroke = "none" d = "M0 0h24v24H0z" fill = "none" ></path ><path d="M9 14l-4 -4l4 -4"></path><path d="M5 10h11a4 4 0 1 1 0 8h-1"></path></svg > '
         }
@@ -189,11 +189,11 @@ function getSessionColumnShow() {
         // Tạo mới session với giá trị mặc định
         var defaultValue = [
             {
-                columnName: "MaNhaCungCap",
+                columnName: "MaNCC",
                 value: true,
             },
             {
-                columnName: "TenNhaCungCap",
+                columnName: "TenNCC",
                 value: true,
             },
             {
@@ -319,11 +319,11 @@ function searchWithKeyword() {
 
     }
 }
-function showModal(id) {
+function showModal(idncc) {
     $.ajax({
         type: "post",
         url: "/DanhMuc/DM_NhaCungCap/showModal",
-        data: "id=" + id,
+        data: "idncc=" + idncc,
         success: function (response) {
             showModalLargel(response.title, response.view);
         },

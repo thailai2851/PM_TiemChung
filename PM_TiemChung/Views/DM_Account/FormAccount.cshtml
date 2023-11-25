@@ -1,0 +1,49 @@
+﻿@model Account
+
+<div>
+    <input type="hidden" asp-for="@Model.Id">
+    <div class="row row-cards">
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtUserName" class="col-form-label required">Tên tài khoản</label>
+                <input required type="text" asp-for="@Model.UserName" id="txtUserName" class="form-control" placeholder="Nhập tên tài khoản">
+                <div class="invalid-feedback">
+                    Nhập tên tài khoản
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtPassword" class="col-form-label required">Mật khẩu</label>
+                <input required type="text" asp-for="@Model.Password" id="txtPassword" class="form-control" placeholder="Nhập mật khẩu">
+                <div class="invalid-feedback">
+                    Nhập mật khẩu
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2">
+                <label for="txtIdNhanVien">Nhân viên</label>
+                <select class="form-select" asp-for="@Model.IdnhanVien">
+                    <option selected disabled> --Nhân viên-- </option>
+                    @foreach (DmNhanVien item in ViewBag.nhanViens)
+                    {
+                        <option value="@item.Id"> @item.TenNhanVien</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 pr-0 mt-2">
+            <div class="mb-2 mt-4">
+                <label class="form-check">
+                    <input class="form-check-input border-dark single-checkbox" style="height:20px; width:20px;" type="checkbox" value="@(Model.QuanLy.HasValue ? (Model.QuanLy.Value ? "true": "false") : "false")" name="QuanLy" @(Model.QuanLy.HasValue ? (Model.QuanLy.Value ? "checked" : "") : "")>
+                    <span for="txtQuanLy" class="form-check-label p-1 required-checkbox ms-2">Quản lý</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div b-27zrlt93sg="" class="d-flex justify-content-between border-top border-dark pt-4 mt-2">
+    <button b-27zrlt93sg="" type="button" class="btn me-auto" data-bs-dismiss="modal">Đóng</button>
+    <button b-27zrlt93sg="" type="submit" class="btn btn-primary" id="btnModal">Lưu</button>
+</div>

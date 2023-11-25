@@ -129,6 +129,7 @@
     formatNumber();
     configDateDefault();
     configDateTimeDefault();
+    configDateLongMask();
 });
 function updateThongSoQuanLy(tr, donGiaNhap, soLuongNhap) {
     console.log(donGiaNhap, soLuongNhap);
@@ -148,42 +149,42 @@ function addRowChiTietNhapKho() {
 
 
 var newRow = $(`<tr id="moi">
-                <td class="first-td-column text-center ps-0 td-sticky">
-                    <input autocomplete="off" type="text" class="form-control form-table text-center stt" readonly value="${GanSTT()}" style="width:32px;z-index:2;" />
+                <td class="first-td-column text-center ps-0 td-sticky" style="width:32px;z-index:2;">
+                    <input autocomplete="off" type="text" class="form-control form-table text-center stt" readonly value="${GanSTT()}" />
                     <input type="hidden" name="Id" value="0" />
                 </td>
                 <td class="td-sticky md-sticky" style="left: 33px;background-color: #fff !important; z-index:2">
                     <select name="IdhangHoa" class="form-select form-table cbHangHoa" style="position:relative;width:400px;">
                     </select>
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" style="width:55px;" name="SoLuongNhap" />
+                <td style="width:55px;">
+                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" name="SoLuongNhap" />
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table" style="width:60px;" readonly name="tenDvt" tabindex="-1" />
+                <td style="width:60px;">
+                    <input autocomplete="off" type="text" class="form-control form-table" readonly name="tenDvt" tabindex="-1" />
                 </td>
-                <td>
-                    <input autocomplete="off" t type="text" class="form-control form-table formatted-number-float" style="width:80px;" value="" name="DonGiaNhap" />
+                <td style="width:80px;">
+                    <input autocomplete="off" t type="text" class="form-control form-table formatted-number-float" value="" name="DonGiaNhap" />
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" style="width:100px;" value="" name="ThanhTien" />
+                <td style="width:100px;">
+                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ThanhTien" />
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" style="width:40px;" value="" name="ChiecKhau" />
+                <td style="width:40px;">
+                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ChiecKhau" />
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" style="width:40px;" name="ThueVat" />
+                <td style="width:40px;">
+                    <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ThueVat" />
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table input-date-short-mask" style="width:90px;" name="NgaySanXuat" />
+                <td style="width:90px;">
+                    <input autocomplete="off" type="text" class="form-control form-table input-date-long-mask" name="NgaySanXuat" />
                 </td>
-                <td>
-                    <input autocomplete="off" type="text" class="form-control form-table input-date-short-mask" style="width:90px;" name="HanDung" />
-                <td>
-                    <textarea autocomplete="off" rows="1" class="form-control form-table" style="width: 200px" name="GhiChuHangNhap"></textarea>
+                <td style="width:90px;">
+                    <input autocomplete="off" type="text" class="form-control form-table input-date-long-mask" name="HanDung" />
+                <td style="width: 200px">
+                    <textarea autocomplete="off" rows="1" class="form-control form-table" name="GhiChuHangNhap"></textarea>
                 </td>
                                                         
-                <td class="text-center last-td-column pe-0">
+                <td class="text-center last-td-column pe-0" style="width:40px;">
                     <button type="button" class="btn btn-icon btn-sm text-red remove-phieuNhapCt">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -199,6 +200,7 @@ var newRow = $(`<tr id="moi">
     configChoRowThemChiTietNhapKho(newRow);
     formatNumber();
     configDateShortMask();
+    configDateLongMask();
 
 };
 function GanSTT() {

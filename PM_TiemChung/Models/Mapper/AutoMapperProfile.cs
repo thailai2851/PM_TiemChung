@@ -66,6 +66,10 @@ namespace PM_TiemChung.Models.Mapper
 
             CreateMap<NhaCungCap, DmNhaCungCapMap>();
             CreateMap<DmNhaCungCapMap, NhaCungCap>();
+
+            CreateMap<Account, DmAccountMap>();
+            CreateMap<DmAccountMap, Account>();
+
             CreateMap<PhieuNhap, PhieuNhapMap>()
             .ForMember(dest => dest.Idncc, opt => opt.MapFrom(src => src.Idncc.ToString()))
             .ForMember(dest => dest.Idnv, opt => opt.MapFrom(src => src.Idnv.ToString()))
@@ -92,8 +96,8 @@ namespace PM_TiemChung.Models.Mapper
              .ForMember(dest => dest.DonGia, opt => opt.MapFrom(src => src.DonGia != "" ? double.Parse(src.DonGia.Replace(",", "")) : (double?)null))
             .ForMember(dest => dest.Cktm, opt => opt.MapFrom(src => src.Cktm != "" ? double.Parse(src.Cktm.Replace(",", "")) : (double?)null))
             .ForMember(dest => dest.Thue, opt => opt.MapFrom(src => src.Thue != "" ? double.Parse(src.Thue.Replace(",", "")) : (double?)null))
-            .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx != "" ? DateTime.ParseExact(src.Nsx, "dd-MM-yy", CultureInfo.InvariantCulture) : (DateTime?)null))
-            .ForMember(dest => dest.Hsd, opt => opt.MapFrom(src => src.Hsd != "" ? DateTime.ParseExact(src.Hsd, "dd-MM-yy", CultureInfo.InvariantCulture) : (DateTime?)null));
+            .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx != "" ? DateTime.ParseExact(src.Nsx, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+            .ForMember(dest => dest.Hsd, opt => opt.MapFrom(src => src.Hsd != "" ? DateTime.ParseExact(src.Hsd, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
 
         }
     }
