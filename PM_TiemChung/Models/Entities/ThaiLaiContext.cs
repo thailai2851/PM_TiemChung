@@ -358,6 +358,7 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Idbsk).HasColumnName("IDBSK");
             entity.Property(e => e.IdnhanVienThu).HasColumnName("IDNhanVienThu");
             entity.Property(e => e.IdnhanVienTiem).HasColumnName("IDNhanVienTiem");
+            entity.Property(e => e.Idpnct).HasColumnName("IDPNCT");
             entity.Property(e => e.IdthoiGian).HasColumnName("IDThoiGian");
             entity.Property(e => e.Idvc).HasColumnName("IDVC");
             entity.Property(e => e.NgayDeNghiTiem).HasColumnType("datetime");
@@ -383,6 +384,10 @@ public partial class ThaiLaiContext : DbContext
             entity.HasOne(d => d.IdnhanVienTiemNavigation).WithMany(p => p.LichTiemBnIdnhanVienTiemNavigations)
                 .HasForeignKey(d => d.IdnhanVienTiem)
                 .HasConstraintName("FK_LichTiemBN_DM_NhanVien2");
+
+            entity.HasOne(d => d.IdpnctNavigation).WithMany(p => p.LichTiemBns)
+                .HasForeignKey(d => d.Idpnct)
+                .HasConstraintName("FK__LichTiemB__IDPNC__1C873BEC");
 
             entity.HasOne(d => d.IdthoiGianNavigation).WithMany(p => p.LichTiemBns)
                 .HasForeignKey(d => d.IdthoiGian)
