@@ -45,6 +45,8 @@ public partial class LichTiemBn
 
     public long? IdnhanVienTiem { get; set; }
 
+    public int? Idpnct { get; set; }
+
     public DateTime? NgayHen { get; set; }
 
     public virtual DmBenhNhan? IdbnNavigation { get; set; }
@@ -54,6 +56,8 @@ public partial class LichTiemBn
     public virtual DmNhanVien? IdnhanVienThuNavigation { get; set; }
 
     public virtual DmNhanVien? IdnhanVienTiemNavigation { get; set; }
+
+    public virtual ChiTietPhieuNhap? IdpnctNavigation { get; set; }
 
     public virtual DmThoiGian? IdthoiGianNavigation { get; set; }
 

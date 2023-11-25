@@ -34,4 +34,6 @@ public partial class ChiTietPhieuNhap
     public virtual PhieuNhap? IdpnNavigation { get; set; }
 
     public virtual DmVaccine? IdvaccineNavigation { get; set; }
+
+    public virtual ICollection<LichTiemBn> LichTiemBns { get; set; } = new List<LichTiemBn>();
 }

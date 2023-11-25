@@ -208,17 +208,8 @@ namespace PM_TiemChung.Controllers
                 var lichTiem = await _context.LichTiemBns
                     .Include(x=>x.IdvcNavigation)
                     .FirstOrDefaultAsync(x => x.Id == id);
-                lichTiem.DaThu = true;
-                lichTiem.NgayThu = NgayThu;
-                lichTiem.SoLuong = 1;
-                lichTiem.DonGia = lichTiem.IdvcNavigation.GiaBan;
-                lichTiem.IdnhanVienThu = _userId;
-                _context.LichTiemBns.Update(lichTiem);
-                await _context.SaveChangesAsync();
-
                 var ctPhieuNhap = await _context.ChiTietPhieuNhaps
                     .FirstOrDefaultAsync(x => (x.Idvaccine == lichTiem.Idvc) && (x.SoLuong > (x.SoLuongXuat ?? 0)));
-
                 if (ctPhieuNhap == null)
                 {
                     tran.Rollback();
@@ -228,6 +219,16 @@ namespace PM_TiemChung.Controllers
                         message = "Đã hết vacine!"
                     });
                 }
+                lichTiem.Idpnct = ctPhieuNhap.Idctpn;
+                lichTiem.DaThu = true;
+                lichTiem.NgayThu = NgayThu;
+                lichTiem.SoLuong = 1;
+                lichTiem.DonGia = lichTiem.IdvcNavigation.GiaBan;
+                lichTiem.IdnhanVienThu = _userId;
+                _context.LichTiemBns.Update(lichTiem);
+                await _context.SaveChangesAsync();
+
+                
                 if (ctPhieuNhap.SoLuongXuat == null)
                 {
                     ctPhieuNhap.SoLuongXuat = 1;
