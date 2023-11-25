@@ -78,37 +78,35 @@ $(document).ready(function () {
             ngayDeNghiTiem.val('').prop('disabled', true);
             ngayHen.val('').prop('disabled', true);
         } else {
-            deNghi.prop('disabled', false);
-            ngayDeNghiTiem.prop('disabled', false);
-            ngayHen.prop('disabled', false);
+            if ($(this).data('checkdudk')) {
+                deNghi.prop('disabled', false);
+                ngayDeNghiTiem.prop('disabled', false);
+                ngayHen.prop('disabled', false);
+            }
         }
     });
     $(document).on('click', '.btn-kham', function () {
         var id = $(this).val();
-        if (id) {
+        showBn(id, true);
+    });
+    $('#btnReloadBn').click(function () {
+        if (_idBenhNhan) {
             $.ajax({
-                url: '/QuanLy/QL_KhamBenh/loadTTLichTiem',
+                url: '/QuanLy/QL_KhamBenh/reloadTTLichTiem',
                 method: 'POST',
-                data: "idBn=" + id,
+                data: "idBn=" + _idBenhNhan,
                 success: function (result) {
-                    console.log(result);
-                    _idBenhNhan = result.idBenhNhan;
-                    var tabLapPhieu = document.getElementById('tabsKhamBenh');
-                    var tab = new bootstrap.Tab(tabLapPhieu);
-                    tab.show();
-                    $('#txtTenProfile').val(result.tenProFile);
-                    $('#txtTenBN').val(result.tenBenhNhan);
-                    $('#txtTuoi').val(result.tuoi);
-
-                    renderTableLichTiem(result.lichTiems, result.soNgayTuoi);
+                    showToast(result.message, result.statusCode);
+                    if (result.statusCode == 200) {
+                        showBn(_idBenhNhan, false);
+                    }
                 },
                 error: function (error) {
                     console.error(error);
                 }
             });
         }
-    });
-
+    })
     $('#btnLuu').on('click', function () {
         if (_idBenhNhan) {
             var listLichTiem = [];
@@ -167,6 +165,7 @@ $(document).ready(function () {
                             daThu.prop('disabled', true);
                             btn.prop('disabled', true);
                             ngayThu.prop('disabled', true);
+                            showBn(_idBenhNhan, false);
                         }
                     },
                     error: function (error) {
@@ -179,10 +178,20 @@ $(document).ready(function () {
     $(document).on('click', '.btn-print-thungan', function () {
         var id = $(this).val();
         if (id) {
+
+            var s = [];
+            $(`input[data-idbn="${id}"]:checked`).each(function () {
+                s.push(parseInt($(this).val()));
+            });
+            var model = {
+                IdBn: id,
+                ListIn: s
+            }
             $.ajax({
                 url: '/QuanLy/QL_KhamBenh/printThuNgan',
                 method: 'POST',
-                data: "id=" + id,
+                data: JSON.stringify(model),
+                contentType: "application/json",
                 xhrFields: {
                     responseType: 'blob'
                 },
@@ -237,11 +246,12 @@ $(document).ready(function () {
                     success: function (result) {
                         showToast(result.message, result.statusCode);
                         if (result.statusCode == 200) {
-                            daTiem.prop('disabled', true);
+                            /*daTiem.prop('disabled', true);
                             btn.prop('disabled', true);
                             ngayTiem.prop('disabled', true);
                             tr.find('.btn-kiemtra').prop('disabled', true);
-                            tr.find('.socode').prop('disabled', true);
+                            tr.find('.socode').prop('disabled', true);*/
+                            $('#btnReloadDSTiemChung').click();
                         }
                     },
                     error: function (error) {
@@ -252,6 +262,32 @@ $(document).ready(function () {
         })
     })
 })
+function showBn(id, show) {
+    if (id) {
+        $.ajax({
+            url: '/QuanLy/QL_KhamBenh/loadTTLichTiem',
+            method: 'POST',
+            data: "idBn=" + id,
+            success: function (result) {
+                console.log(result);
+                _idBenhNhan = result.idBenhNhan;
+                if (show) {
+                    var tabLapPhieu = document.getElementById('tabsKhamBenh');
+                    var tab = new bootstrap.Tab(tabLapPhieu);
+                    tab.show();
+                }
+                $('#txtTenProfile').val(result.tenProFile);
+                $('#txtTenBN').val(result.tenBenhNhan);
+                $('#txtTuoi').val(result.tuoi);
+
+                renderTableLichTiem(result.lichTiems, result.soNgayTuoi);
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    }
+}
 function renderTableDs(datas) {
     $('#tbody-table').empty();
     datas.forEach(function (d) {
@@ -283,7 +319,17 @@ function renderTableDs(datas) {
 function renderTableLichTiem(datas, soNgayTuoi) {
     $('#tbody-lichTiem').empty();
     datas.forEach(function (d, index) {
-        var checkDuDk = (soNgayTuoi >= (d.tgsomNhat * d.idthoiGianNavigation.soNgay)) && (soNgayTuoi <= (d.tgtreNhat * d.idthoiGianNavigation.soNgay));
+        var checkMuiTienQuyet = true;
+        
+        if (d.muiTienQuyetNavigation) {
+            checkMuiTienQuyet = false;
+            datas.forEach(function (vc) { 
+                if ((vc.idvcNavigation.id == d.muiTienQuyetNavigation.id) && vc.daTiem) {
+                    checkMuiTienQuyet = true;
+                }
+            })
+        }
+        var checkDuDk = (soNgayTuoi >= (d.tgsomNhat * d.idthoiGianNavigation.soNgay)) && (soNgayTuoi <= (d.tgtreNhat * d.idthoiGianNavigation.soNgay)) && checkMuiTienQuyet && !d.daThu;
 
         $('#tbody-lichTiem').append(`<tr data-id="${d.id}" class="${checkDuDk && !d.daTiem ? "text-azure" : ""}">
                                                     <td class="p-0 text-center">
@@ -312,7 +358,7 @@ function renderTableLichTiem(datas, soNgayTuoi) {
                                                         <input readonly class="form-table form-control" type="text" value="${toEmpty(d.muiTienQuyetNavigation == null ? "" : d.muiTienQuyetNavigation.tenVaccine)}" style="width: 210px"/>
                                                         <input type="hidden" name="MuiTienQuyet" value="${toEmpty(d.muiTienQuyetNavigation == null ? "" : d.muiTienQuyetNavigation.id)}"/>
                                                     </td>
-                                                    <td class="text-center"><input ${d.daTiem ? "checked disabled" : ""} type="checkbox" class="form-check-input checkDaTiem" name="DaTiem" style="transform: scale(1.2);"/></td>
+                                                    <td class="text-center"><input ${d.daTiem ? "checked disabled" : ""} data-checkDuDk="${checkDuDk}" type="checkbox" class="form-check-input checkDaTiem" name="DaTiem" style="transform: scale(1.2);"/></td>
                                                     <td class="text-start"><input ${d.daTiem ? "disabled" : ""} value="${formatDay(toEmpty(d.ngayTiem))}" class="form-control form-table input-date-long-mask w-100" name="NgayTiem"/></td>
                                                     <td class="text-center"><input ${checkDuDk ? `` : `disabled`} ${d.daTiem ? "disabled" : ""} ${d.deNghiTiem ? "checked" : ""} type="checkbox" class="form-check-input" name="DeNghiTiem" style="transform: scale(1.2);"/></td>
                                                     <td class="text-start"><input ${checkDuDk ? `` : `disabled`} ${d.daTiem ? "disabled" : ""} value="${formatDay(toEmpty(d.ngayDeNghiTiem))}" class="form-control form-table input-date-long-mask w-100" name="NgayDeNghiTiem"/></td>
@@ -331,13 +377,16 @@ function renderTableDsThuNgan(gr) {
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
                                                         </button>
                                                     </td>
-                                                    <td colspan="6" class="px-2 py-1">
+                                                    <td colspan="7" class="px-2 py-1">
                                                         ${item.idbnNavigation.maBn + " - " + item.idbnNavigation.tenBn}
                                                     </td>
                                                 </tr>`);
         item.datas.forEach(function (lt, i) {
             i++;
             $('#tbody-tableThuNhan').append(`<tr>
+                                                        <td class="text-center px-2">
+                                                            <input data-idbn="${item.idbnNavigation.id}" class="form-check-input border-dark single-checkbox checkIn" type="checkbox" value="${lt.id}" style="transform: scale(1.2);" />
+                                                        </td>
                                                         <td class="text-center STT px-2">
                                                             ${i}
                                                             <input type="hidden" value="${lt.id}" name="Id"/>

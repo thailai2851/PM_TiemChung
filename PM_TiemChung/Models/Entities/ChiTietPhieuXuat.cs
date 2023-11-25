@@ -5,9 +5,9 @@ namespace PM_TiemChung.Models.Entities;
 
 public partial class ChiTietPhieuXuat
 {
-    public int Idctpx { get; set; }
+    public long Id { get; set; }
 
-    public int? Idpx { get; set; }
+    public long? Idbn { get; set; }
 
     public int? Idctpn { get; set; }
 
@@ -17,15 +17,11 @@ public partial class ChiTietPhieuXuat
 
     public double? DonGia { get; set; }
 
-    public double? Cktm { get; set; }
-
-    public double? Thue { get; set; }
+    public DateTime? NgayXuat { get; set; }
 
     public bool? Active { get; set; }
 
     public virtual ChiTietPhieuNhap? IdctpnNavigation { get; set; }
-
-    public virtual PhieuXuat? IdpxNavigation { get; set; }
 
     public virtual DmVaccine? IdvaccineNavigation { get; set; }
 }

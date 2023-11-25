@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using WkHtmlToPdfDotNet;
 using WkHtmlToPdfDotNet.Contracts;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PM_TiemChung.Controllers
 {
@@ -53,7 +54,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdbnNavigation)
                 .Include(x => x.IdvcNavigation)
                 .Where(x => x.NgayThu.Value.Date == d && x.DaThu == true)
-                .OrderByDescending(x => x.DaTiem)
+                .OrderBy(x => x.DaTiem)
                 .ToListAsync();
             return View();
         }
@@ -97,7 +98,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdbnNavigation)
                 .Include(x => x.IdvcNavigation)
                 .Where(x => x.NgayThu.Value.Date == d && x.DaThu == true)
-                .OrderByDescending(x => x.DaTiem)
+                .OrderBy(x => x.DaTiem)
                 .ToListAsync());
         }
         [HttpPost("luuLichTiem")]
@@ -111,10 +112,26 @@ namespace PM_TiemChung.Controllers
                 foreach (var lt in lichTiems)
                 {
                     lt.Idbsk = _userId;
+                    if (lt.Id != 0)
+                    {
+                        var lichTiem = await _context.LichTiemBns.FindAsync(lt.Id);
+                        lichTiem.Idbsk = _userId;
+                        lichTiem.Idvc = lt.Idvc;
+                        lichTiem.SoLanTiem = lt.SoLanTiem;
+                        lichTiem.TgsomNhat = lt.TgsomNhat;
+                        lichTiem.TgtreNhat = lt.TgtreNhat;
+                        lichTiem.IdthoiGian = lt.IdthoiGian;
+                        lichTiem.MuiTienQuyet = lt.MuiTienQuyet;
+                        lichTiem.DaTiem = lt.DaTiem;
+                        lichTiem.NgayTiem = lt.NgayTiem;
+                        lichTiem.DaTiem = lt.DaTiem;
+                        lichTiem.NgayDeNghiTiem = lt.NgayDeNghiTiem;
+                        lichTiem.DeNghiTiem = lt.DeNghiTiem;
+                        lichTiem.NgayHen = lt.NgayHen;
+                    }
                 }
                 var lichTiemsMoi = lichTiems.Where(x => x.Id == 0).ToList();
                 await _context.LichTiemBns.AddRangeAsync(lichTiemsMoi);
-                _context.LichTiemBns.UpdateRange(lichTiems.Where(x => x.Id != 0));
                 await _context.SaveChangesAsync();
 
                 tran.Commit();
@@ -136,13 +153,16 @@ namespace PM_TiemChung.Controllers
             }
         }
         [HttpPost("printThuNgan")]
-        public async Task<IActionResult> printThuNhan(long id)
+        public async Task<IActionResult> printThuNhan([FromBody] ModelInThuNgan model)
         {
-            ViewBag.PhieuThuNgan = await _context.DmBenhNhans
-                .Include(x=>x.IdgtNavigation)
-                .Include(x => x.LichTiemBns)
-                .ThenInclude(x => x.IdvcNavigation)
-                .FirstOrDefaultAsync(x => x.Id == id);
+            var lichTiemBenhNhan = await _context.LichTiemBns
+                .Include(x=>x.IdvcNavigation)
+                .Where(x => model.ListIn.Any(y=>y==x.Id) && x.DaThu == true).ToListAsync();
+            var bn = await _context.DmBenhNhans
+                .Include(x => x.IdgtNavigation)
+                .FirstOrDefaultAsync(x => x.Id == model.IdBn);
+            bn.LichTiemBns = lichTiemBenhNhan;
+            ViewBag.PhieuThuNgan = bn;
             ViewBag.ttDoanhNghiep = await _context.ThongTinDoanhNghieps.FirstOrDefaultAsync();
             ViewBag.logo = CommonServices.ConvertImageToBase64(_hostingEnvironment, "/images/logo.png");
             PartialViewResult partialViewResult = PartialView("ThuNganPDF");
@@ -185,16 +205,37 @@ namespace PM_TiemChung.Controllers
             try
             {
                 long _userId = int.Parse(User.Identity.Name);
-                var lichTiemsMoi = await _context.LichTiemBns
+                var lichTiem = await _context.LichTiemBns
                     .Include(x=>x.IdvcNavigation)
                     .FirstOrDefaultAsync(x => x.Id == id);
-                lichTiemsMoi.DaThu = true;
-                lichTiemsMoi.NgayThu = NgayThu;
-                lichTiemsMoi.SoLuong = 1;
-                lichTiemsMoi.DonGia = lichTiemsMoi.IdvcNavigation.GiaBan;
-                lichTiemsMoi.IdnhanVienThu = _userId;
+                lichTiem.DaThu = true;
+                lichTiem.NgayThu = NgayThu;
+                lichTiem.SoLuong = 1;
+                lichTiem.DonGia = lichTiem.IdvcNavigation.GiaBan;
+                lichTiem.IdnhanVienThu = _userId;
+                _context.LichTiemBns.Update(lichTiem);
+                await _context.SaveChangesAsync();
 
-                _context.LichTiemBns.Update(lichTiemsMoi);
+                var ctPhieuNhap = await _context.ChiTietPhieuNhaps
+                    .FirstOrDefaultAsync(x => (x.Idvaccine == lichTiem.Idvc) && (x.SoLuong > (x.SoLuongXuat ?? 0)));
+
+                if (ctPhieuNhap == null)
+                {
+                    tran.Rollback();
+                    return Ok(new ResponseModel()
+                    {
+                        statusCode = 500,
+                        message = "Đã hết vacine!"
+                    });
+                }
+                if (ctPhieuNhap.SoLuongXuat == null)
+                {
+                    ctPhieuNhap.SoLuongXuat = 1;
+                }
+                else
+                {
+                    ctPhieuNhap.SoLuongXuat += 1;
+                }
                 await _context.SaveChangesAsync();
 
                 tran.Commit();
@@ -252,11 +293,15 @@ namespace PM_TiemChung.Controllers
         [HttpPost("loadTTLichTiem")]
         public async Task<IActionResult> loadTTLichTiem(long idBn)
         {
-            var ttLichTiem = await _context.DmBenhNhans
+            var ttLichTiem = await _context.DmBenhNhans.AsNoTracking()
                 .Include(x => x.LichTiemBns)
                 .ThenInclude(x => x.IdthoiGianNavigation)
+                .Include(x => x.LichTiemBns)
+                .ThenInclude(x => x.IdvcNavigation)
+                .Include(x => x.LichTiemBns)
+                .ThenInclude(x => x.MuiTienQuyetNavigation)
                 .FirstOrDefaultAsync(x => x.Id == idBn);
-            var profile = await _context.DmProfiles
+            var profile = await _context.DmProfiles.AsNoTracking()
                     .Include(x=>x.DmProfileCts)
                     .ThenInclude(x=>x.IdthoiGianNavigation)
                     .Include(x => x.DmProfileCts)
@@ -268,7 +313,7 @@ namespace PM_TiemChung.Controllers
             var listIdVc = profile.DmProfileCts.Select(x => x.Idvaccine).ToList();
             foreach(var ct in profile.DmProfileCts)
             {
-                if (ttLichTiem.LichTiemBns.FirstOrDefault(x=>x.Idvc == ct.Idvaccine) == null)
+                if (ttLichTiem.LichTiemBns.FirstOrDefault(x=>x.Idvc == ct.Idvaccine && x.SoLanTiem == ct.SoLanTiem) == null)
                 {
                     ttLichTiem.LichTiemBns.Add(new LichTiemBn()
                     {
@@ -294,15 +339,79 @@ namespace PM_TiemChung.Controllers
                 tuoi = CommonServices.CalculateAgeString(ttLichTiem.NgaySinh.Value);
                 soNgayTuoi = CommonServices.CalculateAge(ttLichTiem.NgaySinh.Value) * 30;
             }
+            var lichTiems = ttLichTiem.LichTiemBns.ToList();
             return Ok(new
             {
                 tenProFile = profile.TenProfile,
                 idBenhNhan = ttLichTiem.Id,
                 tenBenhNhan = ttLichTiem.TenBn,
                 tuoi,
-                lichTiems = ttLichTiem.LichTiemBns,
+                lichTiems,
                 soNgayTuoi
             });
         }
+        [HttpPost("reloadTTLichTiem")]
+        public async Task<IActionResult> reloadTTLichTiem(long idBn)
+        {
+            using var tran = _context.Database.BeginTransaction();
+            try
+            {
+                var ttLichTiem = await _context.DmBenhNhans
+                    .Include(x=>x.LichTiemBns)
+                .FirstOrDefaultAsync(x => x.Id == idBn);
+                var profileCts = _context.DmProfileCts
+                        .Include(x => x.IdprofileNavigation)
+                        .Where(x => x.IdprofileNavigation.Idgt == ttLichTiem.Idgt);
+                foreach (var ct in profileCts)
+                {
+                    var lichTiemBn = ttLichTiem.LichTiemBns.FirstOrDefault(x => x.Idvc == ct.Idvaccine && x.SoLanTiem == ct.SoLanTiem);
+                    if (lichTiemBn == null)
+                    {
+                        LichTiemBn lichNew = new LichTiemBn()
+                        {
+                            Idbn = idBn,
+                            Idvc = ct.Idvaccine,
+                            SoLanTiem = ct.SoLanTiem,
+                            TgsomNhat = ct.TgsomNhat,
+                            TgtreNhat = ct.TgtreNhat,
+                            IdthoiGian = ct.IdthoiGian,
+                            MuiTienQuyet = ct.MuiTienQuyet
+                        };
+                        await _context.LichTiemBns.AddAsync(lichNew);
+                    }
+                    else
+                    {
+                        lichTiemBn.SoLanTiem = ct.SoLanTiem;
+                        lichTiemBn.TgsomNhat = ct.TgsomNhat;
+                        lichTiemBn.TgtreNhat = ct.TgtreNhat;
+                        lichTiemBn.IdthoiGian = ct.IdthoiGian;
+                        lichTiemBn.MuiTienQuyet = ct.MuiTienQuyet;
+                        _context.LichTiemBns.Update(lichTiemBn);
+                    }
+                }
+                await _context.SaveChangesAsync();
+
+                tran.Commit();
+                return Ok(new ResponseModel()
+                {
+                    statusCode = 200,
+                    message = "Thành công!"
+                });
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                return Ok(new ResponseModel()
+                {
+                    statusCode = 500,
+                    message = "Thất bại!"
+                });
+            }
+        }
+    }
+    public class ModelInThuNgan
+    {
+        public long IdBn { get; set; }
+        public List<long> ListIn { get; set; }
     }
 }
