@@ -66,9 +66,9 @@ function changeActive(id) {
 function getRowTable(data) {
     return `<tr data-id="${data.id}">
     <td class="text-center UserName">${data.userName == null ? "" : data.userName}</td>
-    <td class="text-start Password1">${data.password == null ? "" : data.password}</td>
+    <td class="text-center Password1">${data.password == null ? "" : data.password}</td>
     <td class="text-start IdnhanVien">${data.idnhanVienNavigation == null ? "" : data.idnhanVienNavigation.tenNhanVien}</td>
-    <td class="text-center QuanLy">${data.quanLy == true ? "Quản lý" : "Nhân viên"}</td>
+    <td class="text-start QuanLy">${data.quanLy == true ? "Quản lý" : "Nhân viên"}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <button onclick="showModal(${data.id})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">

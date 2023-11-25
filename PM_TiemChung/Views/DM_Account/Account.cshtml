@@ -89,7 +89,7 @@
                             <td class="text-center UserName">@d.UserName</td>
                             <td class="text-center Password1">@d.Password</td>
                             <td class="text-start IdnhanVien">@(d.IdnhanVienNavigation == null ? "" : d.IdnhanVienNavigation.TenNhanVien)</td>
-                            <td class="text-center QuanLy">@(d.QuanLy == true ? "Quản Lý" : "Nhân viên")</td>
+                            <td class="text-start QuanLy">@(d.QuanLy == true ? "Quản Lý" : "Nhân viên")</td>
                             <td class="text-center last-td-column">
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <button onclick="showModal(@d.Id)" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
