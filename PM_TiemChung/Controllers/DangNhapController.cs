@@ -46,13 +46,14 @@ namespace PM_TiemChung.Controllers
                     message = "Đăng nhập thất bại!"
                 });
             }
-            var taiKhoanAdmin = _context.Accounts.AsEnumerable()
+            var taiKhoanAdmin = _context.Accounts.Include(x => x.IdnhanVienNavigation)
                 .FirstOrDefault(x => x.UserName.ToLower() == UserName.ToLower() && x.Password == PassWord);
             var claims = new List<Claim>();
             if (taiKhoanAdmin != null)
             {
-                claims.Add(new Claim(ClaimTypes.Name, taiKhoanAdmin.IdnhanVien.ToString()));
+                claims.Add(new Claim(ClaimTypes.Name, taiKhoanAdmin.IdnhanVien.ToString(), taiKhoanAdmin.IdnhanVienNavigation.TenNhanVien));
                 claims.Add(new Claim(ClaimTypes.Role, "NhanVien"));
+                claims.Add(new Claim("VaiTro", taiKhoanAdmin.QuanLy.ToString()));
                 await signIn(claims);
                 return Ok(new
                 {

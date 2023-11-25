@@ -66,6 +66,10 @@ namespace PM_TiemChung.Models.Mapper
 
             CreateMap<NhaCungCap, DmNhaCungCapMap>();
             CreateMap<DmNhaCungCapMap, NhaCungCap>();
+
+            CreateMap<Account, DmAccountMap>();
+            CreateMap<DmAccountMap, Account>();
+
             CreateMap<PhieuNhap, PhieuNhapMap>()
             .ForMember(dest => dest.Idncc, opt => opt.MapFrom(src => src.Idncc.ToString()))
             .ForMember(dest => dest.Idnv, opt => opt.MapFrom(src => src.Idnv.ToString()))

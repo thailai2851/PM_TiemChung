@@ -1,5 +1,5 @@
 ﻿@{
-    List<DmVaccine> vaccines = ViewBag.Models.result;
+    List<Account> accounts = ViewBag.Models.result;
 }
 <div class="row d-flex justify-content-between mb-3 mx-3 mt-3">
     <div class="col-4 col-sm-6 mb-1 p-0">
@@ -8,11 +8,11 @@
                 <input type="text" id="txtSearch" class="form-control" placeholder="Tìm kiếm thông tin">
             </div>
             <div class="col-5">
-                <select class="form-select" name="Active" id="TrangThai">
+                <select class="form-select" name="Active">
                     <option value="true">Đang dùng</option>
                     <option value="false">Đã xóa</option>
                 </select>
-            </div>  
+            </div>
             <div class="col-auto">
                 <button onclick="searchWithKeyword()" class="btn btn-icon" aria-label="Button">
 
@@ -53,11 +53,10 @@
                 <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                         <div class="dropdown-menu-column">
-                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="MaVaccine">Mã vaccine</label>
-                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="TenVaccine">Tên vaccine</label>
-                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="DonViTinh">Đơn vị tính</label>
-                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="SoCode">Số code</label>
-                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="GiaBan">Giá bán</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="UserName">Tên tài khoản</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="Password1">Mật khẩu</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="IdnhanVien">Nhân viên</label>
+                            <label class="dropdown-item"><input class="form-check-input m-0 me-2 show-column" type="checkbox" value="QuanLy">Vai trò</label>
                         </div>
                     </div>
                 </div>
@@ -76,23 +75,21 @@
             <table class="table table-vcenter card-table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center MaVaccine">Mã vaccine</th>
-                        <th class="text-center TenVaccine">Tên vaccine</th>
-                        <th class="text-center DonViTinh">Đơn vị tính</th>
-                        <th class="text-center SoCode">Số code</th>
-                        <th class="text-center GiaBan">Giá bán</th>
+                        <th class="text-center UserName">Tên tài khoản</th>
+                        <th class="text-center Password1">Mật khẩu</th>
+                        <th class="text-center IdnhanVien">Nhân viên</th>
+                        <th class="text-center QuanLy">Vai trò</th>
                         <th class="text-center last-th-column" style="z-index:3;">Tùy chọn</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-table">
-                    @foreach (DmVaccine d in vaccines)
+                    @foreach (Account d in accounts)
                     {
                         <tr data-id="@d.Id">
-                            <td class="text-center MaVaccine">@d.MaVaccine</td>
-                            <td class="text-start TenVaccine">@d.TenVaccine</td>
-                            <td class="text-center DonViTinh">@d.DonViTinh</td>
-                            <td class="text-end SoCode">@d.SoCode</td>
-                            <td class="text-end formatted-number-float GiaBan">@d.GiaBan</td>
+                            <td class="text-center UserName">@d.UserName</td>
+                            <td class="text-center Password1">@d.Password</td>
+                            <td class="text-start IdnhanVien">@(d.IdnhanVienNavigation == null ? "" : d.IdnhanVienNavigation.TenNhanVien)</td>
+                            <td class="text-center QuanLy">@(d.QuanLy == true ? "Quản Lý" : "Nhân viên")</td>
                             <td class="text-center last-td-column">
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <button onclick="showModal(@d.Id)" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
@@ -202,5 +199,4 @@
     </div>
 </div>
 
-
-<script src="/js/DmVaccineJs.js" defer></script>
+<script src="/js/DmAccountJs.js" defer></script>

@@ -18,7 +18,7 @@ $(document).ready(function () {
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
 
             $.ajax({
-                url: '/DanhMuc/DM_Vaccine/update', // Đường dẫn đến action xử lý form
+                url: '/DanhMuc/DM_Account/update', // Đường dẫn đến action xử lý form
                 method: 'POST',
                 data: formData,
                 success: function (response) {
@@ -34,7 +34,6 @@ $(document).ready(function () {
                         showColumnFromSesion();
                         $('#modal-largel').modal('hide');
                     }
-                    formatNumber();
                 },
                 error: function (xhr, status, error) {
                     // Xử lý lỗi (nếu có) khi gửi form
@@ -46,7 +45,7 @@ $(document).ready(function () {
     $(document).on('click', '#btnDanger', function () {
         $.ajax({
             type: "post",
-            url: "/DanhMuc/DM_Vaccine/changeActive",
+            url: "/DanhMuc/DM_Account/changeActive",
             data: "id=" + idModel,
             success: function (response) {
                 if (response.statusCode == 200) {
@@ -59,25 +58,17 @@ $(document).ready(function () {
             }
         });
     });
-
-    $('#TrangThai').on('change', function () {
-        searchWithKeyword();
-    })
-
-
 })
 function changeActive(id) {
     idModel = id;
     showModalDanger('Bạn có muốn thao tác?');
 }
-
 function getRowTable(data) {
     return `<tr data-id="${data.id}">
-    <td class="text-center MaVaccine">${data.maVaccine == null ? "" : data.maVaccine}</td>
-    <td class="text-start TenVaccine">${data.tenVaccine == null ? "" : data.tenVaccine}</td>
-    <td class="text-center DonViTinh">${data.donViTinh == null ? "" : data.donViTinh}</td>
-    <td class="text-end SoCode">${data.soCode == null ? "" : data.soCode}</td>
-    <td class="text-end formatted-number-float GiaBan">${data.giaBan == null ? "" : data.giaBan}</td>
+    <td class="text-center UserName">${data.userName == null ? "" : data.userName}</td>
+    <td class="text-start Password1">${data.password == null ? "" : data.password}</td>
+    <td class="text-start IdnhanVien">${data.idnhanVienNavigation == null ? "" : data.idnhanVienNavigation.tenNhanVien}</td>
+    <td class="text-center QuanLy">${data.quanLy == true ? "Quản lý" : "Nhân viên"}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <button onclick="showModal(${data.id})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">
@@ -98,7 +89,6 @@ function getRowTable(data) {
     </td>
     </tr>`;
 }
-
 function updateDataOfTable(datas) {
     $("#tbody-table").empty();
 
@@ -107,7 +97,6 @@ function updateDataOfTable(datas) {
     );
     showColumnFromSesion();
     hideProgress();
-    formatNumber();
 }
 function updatePagi(prePage, nextPage, pageNumber) {
 
@@ -156,11 +145,11 @@ function updatePagi(prePage, nextPage, pageNumber) {
 }
 function changePage(pageNumber) {
     showProgress();
-    var isActive = $('select[name="Active"]').val();
+
     $.ajax({
         type: "post",
-        url: "/DanhMuc/DM_Vaccine/changePage",
-        data: "pageNumber=" + pageNumber + "&active=" + isActive,
+        url: "/DanhMuc/DM_Account/changePage",
+        data: "pageNumber=" + pageNumber,
         success: function (response) {
             hideProgress();
             updateDataOfTable(response.result);
@@ -196,25 +185,22 @@ function getSessionColumnShow() {
         // Tạo mới session với giá trị mặc định
         var defaultValue = [
             {
-                columnName: "MaVaccine",
+                columnName: "UserName",
                 value: true,
             },
             {
-                columnName: "TenVaccine",
+                columnName: "Password1",
+                value: true,
+            },
+
+            {
+                columnName: "IdnhanVien",
                 value: true,
             },
             {
-                columnName: "DonViTinh",
+                columnName: "QuanLy",
                 value: true,
-            },
-            {
-                columnName: "SoCode",
-                value: true,
-            },
-            {
-                columnName: "GiaBan",
-                value: true,
-            },
+            }
         ];
         sessionStorage.setItem(sessionName, JSON.stringify(defaultValue));
 
@@ -259,7 +245,6 @@ function showColumnFromSesion() {
         // Thiết lập thuộc tính "checked" của phần tử input dựa trên giá trị
         $input.prop("checked", element.value);
     });
-    formatNumber();
 }
 function scrollTable() {
     var table = document.getElementById('tableDM');
@@ -287,11 +272,8 @@ function searchWithKeyword() {
     if (key == "") {
         $.ajax({
             type: "post",
-            url: "/DanhMuc/DM_Vaccine/api/getModelsWithNumberPage",
-            data: "active=" + $('select[name="Active"]').val(),
+            url: "/DanhMuc/DM_Account/api/getModelsWithNumberPage",
             success: function (response) {
-                console.log($('select[name="Active"]').val());
-                console.log(response.result);
                 dataResponse = [];
                 hideProgress();
                 updateDataOfTable(response.result);
@@ -306,7 +288,7 @@ function searchWithKeyword() {
     } else {
         $.ajax({
             type: "post",
-            url: "/DanhMuc/DM_Vaccine/api/searchWithKeyword",
+            url: "/DanhMuc/DM_Account/api/searchWithKeyword",
             data: "key=" + key + "&active=" + $('select[name="Active"]').val(),
             success: function (response) {
 
@@ -323,20 +305,19 @@ function searchWithKeyword() {
                 console.log(error);
             }
         });
+
     }
 }
 function showModal(id) {
     $.ajax({
         type: "post",
-        url: "/DanhMuc/DM_Vaccine/showModal",
+        url: "/DanhMuc/DM_Account/showModal",
         data: "id=" + id,
         success: function (response) {
             showModalLargel(response.title, response.view);
-            formatNumber();
         },
         error: function (error) {
             console.log(error);
         }
     });
-   
 }
