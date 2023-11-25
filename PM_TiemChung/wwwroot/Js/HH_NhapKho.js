@@ -34,44 +34,27 @@
             }
         });
     }
-    $(document).on('input', 'input[name="ThanhTienTon"], input[name="ChiecKhau"], input[name="ThueVat"]', function () {
-        console.log(23423);
-        var tongTienHang = 0;
-        var tongTienCK = 0;
-        var tongTienThue = 0;
-        var tongTra = 0;
-        $('input[name="ThanhTien"]').each(function () {
+    //$(document).on('input', 'input[name="DonGiaNhap"], input[name="SoLuongNhap"]', function () {
+    //    console.log(23423);
+    //    var tongTienHang = 0;
+    //    var tongTienCK = 0;
+    //    var tongTienThue = 0;
+    //    var tongTra = 0;
+    //    $('input[name="ThanhTien"]').each(function () {
 
-            var tr = $(this).closest('tr');
-            var SlxGia = parseFloat($(this).inputmask('unmaskedvalue'));
+    //        var tr = $(this).closest('tr');
+    //        var SlxGia = parseFloat($(this).inputmask('unmaskedvalue'));
 
-        if (SlxGia) {
-            console.log("if");
-                tongTienHang += parseFloat(SlxGia);
-            }
+    //        if (SlxGia) {
+    //            tongTienHang += parseFloat(SlxGia);
+    //        } 
+    //    })
 
-            var chiecKhau = parseFloat(tr.find('input[name="ChiecKhau"]').inputmask('unmaskedvalue'));
-            var tienChiecKhau = 0;
-            if (chiecKhau && SlxGia) {
-                tienChiecKhau = ((chiecKhau * SlxGia) / 100);
-                tongTienCK += tienChiecKhau;
-            }
-
-            var thueVat = parseFloat(tr.find('input[name="ThueVat"]').inputmask('unmaskedvalue'));
-            var tienThue = 0;
-            if (thueVat && SlxGia) {
-                tienThue = (((SlxGia - tienChiecKhau) * thueVat) / 100);
-                tongTienThue += tienThue;
-            }   
-        })
-
-        $('#tongTienHang').val(tongTienHang);
-        $('#tongTienCK').val(tongTienCK);
-        $('#tongTienThue').val(tongTienThue);
-        $('#tongTra').val(tongTienHang - tongTienCK + tongTienThue);
-    });
+    //    $('#tongTienHang').val(tongTienHang);
+    //    $('#tongTra').val(tongTienHang - tongTienCK + tongTienThue);
+    //});
     // thay đổi thành tiền khi giá nhập thay đổi
-    $(document).on('keyup', 'input[name="DonGiaNhap"]', function () {
+    $(document).on('input', 'input[name="DonGiaNhap"]', function () {
         var tr = $(this).closest('tr');
         var donGiaNhap = $(this).inputmask('unmaskedvalue');
         var soLuongNhap = tr.find('input[name="SoLuongNhap"]').inputmask('unmaskedvalue');
@@ -79,7 +62,6 @@
         if (soLuongNhap != "") {
             tr.find('input[name="ThanhTien"]').val(soLuongNhap * donGiaNhap);
         }
-        console.log(donGiaNhap);
         updateThongSoQuanLy(tr, donGiaNhap, soLuongNhap);
 
     });
@@ -136,12 +118,23 @@ function updateThongSoQuanLy(tr, donGiaNhap, soLuongNhap) {
 
     // thay đổi số lượng tồn
     if (donGiaNhap != "" && soLuongNhap != "") {
-        var soLuongTon = soLuongNhap;
-        var donGiaTon = (donGiaNhap * soLuongNhap) / soLuongTon;
-        console.log(soLuongTon, donGiaTon,donGiaTon * soLuongTon);
-        tr.find('input[name="SoLuongTon"]').val(soLuongTon);
-        tr.find('input[name="DonGiaTon"]').val(donGiaTon);
-        tr.find('input[name="ThanhTienTon"]').val(donGiaTon * soLuongTon).trigger('input');
+        console.log(23423);
+        var tongTienHang = 0;
+        var tongTienCK = 0;
+        var tongTienThue = 0;
+        var tongTra = 0;
+        $('input[name="ThanhTien"]').each(function () {
+
+            var tr = $(this).closest('tr');
+            var SlxGia = parseFloat($(this).inputmask('unmaskedvalue'));
+
+            if (SlxGia) {
+                tongTienHang += parseFloat(SlxGia);
+            }
+        })
+
+        $('#tongTienHang').val(tongTienHang);
+        $('#tongTra').val(tongTienHang - tongTienCK + tongTienThue);
 
     }
 }
@@ -169,10 +162,10 @@ var newRow = $(`<tr id="moi">
                 <td style="width:100px;">
                     <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ThanhTien" />
                 </td>
-                <td style="width:40px;">
+                <td style="width:40px; display : none">
                     <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ChiecKhau" />
                 </td>
-                <td style="width:40px;">
+                <td style="width:40px; display : none">
                     <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" name="ThueVat" />
                 </td>
                 <td style="width:90px;">
