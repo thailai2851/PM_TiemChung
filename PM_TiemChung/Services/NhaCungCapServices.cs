@@ -187,7 +187,7 @@ namespace PM_TiemChung.Services
             return await _context.NhaCungCaps
                 .Select(x => new
                 {
-                    idncc = x.Idncc,
+                    id = x.Idncc,
                     ma = x.MaNcc,
                     ten = x.TenNcc,
                 })

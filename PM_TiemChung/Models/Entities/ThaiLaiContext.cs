@@ -72,9 +72,10 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.IdnhanVien).HasColumnName("IDNhanVien");
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.UserName).HasMaxLength(50);
+
             entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.IdnhanVien)
-                .HasConstraintName("FK__Account__IDNhanV__0C85DE4D");
+                .HasConstraintName("FK_Account_DM_NhanVien");
         });
 
         modelBuilder.Entity<ChiTietPhieuNhap>(entity =>
@@ -493,14 +494,13 @@ public partial class ThaiLaiContext : DbContext
 
         modelBuilder.Entity<ThongTinDoanhNghiep>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ThongTinDoanhNghiep");
+            entity.ToTable("ThongTinDoanhNghiep");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ChuTk).HasMaxLength(200);
             entity.Property(e => e.DiaChi).HasMaxLength(500);
             entity.Property(e => e.DienThoai).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(50);
-            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Mst)
                 .HasMaxLength(50)
                 .HasColumnName("MST");
