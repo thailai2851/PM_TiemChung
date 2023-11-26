@@ -1,0 +1,103 @@
+﻿@{
+    Layout = "/Views/Shared/_Layoutpdf.cshtml";
+    List<LichTiemBn> datas = ViewBag.Datas;
+}
+<style>
+    th {
+        font-size: 15px;
+    }
+
+    td {
+        font-size: 15px;
+    }
+</style>
+<div class="title card" style="margin-left:0; display:block;">
+    <div style="width:100%">
+        <h1 style="font-size: x-large;font-weight: 700;text-align: center; margin: 0;">
+            BÁO CÁO LỊCH HẸN BỆNH NHÂN
+        </h1>
+    </div>
+</div>
+<div class="info card">
+    <div class="row-info text-center">
+        Từ ngày: @ViewBag.TuNgay, Đến ngày: @ViewBag.DenNgay
+    </div>
+</div>
+<div class="table card">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th class="text-center p-1">#</th>
+                <th class="text-center p-1 col-1">Ngày hẹn</th>
+                <th class="text-center p-1 col-2">Tên bệnh nhân</th>
+                <th class="text-center p-1 col-1">Ngày sinh</th>
+                <th class="text-center p-1 w-1">Giới tính</th>
+                <th class="text-center p-1 col-2">Địa chỉ</th>
+                <th class="text-center p-1 col-1">Điện thoại</th>
+                <th class="text-center p-1 col-1">Email</th>
+                <th class="text-center p-1 col-1">Nghề nghiệp</th>
+                <th class="text-center p-1 col-2">Tên Vaccine</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int tt = 1;
+            }
+            @foreach (var data in datas)
+            {
+                <tr>
+                    <td class="text-center p-1">@tt</td>
+                    <td class="text-center p-1">@data.NgayHen?.ToString("dd-MM-yyyy")</td>
+                    <td class="p-1">@data.IdbnNavigation.TenBn</td>
+                    <td class="text-center p-1">@data.IdbnNavigation.NamSinh</td>
+                    <td class="p-1">@data.IdbnNavigation.IdgtNavigation.TenGioiTinh</td>
+                    <td class="p-1">@data.IdbnNavigation.DiaChi</td>
+                    <td class="p-1">@data.IdbnNavigation.DienThoai</td>
+                    <td class="p-1">@data.IdbnNavigation.Email</td>
+                    <td class="p-1">@data.IdbnNavigation.IdnnNavigation.TenNgheNghiep</td>
+                    <td class="p-1">@data.IdvcNavigation.TenVaccine</td>
+                </tr>
+                tt++;
+            }
+        </tbody>
+    </table>
+</div>
+<div style="page-break-inside:avoid;">
+    <div class="">
+        <div class="flex" style="font-size:16px; font-weight:700">
+            <div class="w-34 text-center">
+            </div>
+            <div class="w-33 text-center">
+            </div>
+            <div class="w-33 text-center">
+                <em>Ngày ... Tháng ... Năm ...</em>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex" style="font-size:16px; font-weight:700">
+            <div class="w-34 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                Người lập phiếu
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="flex" style="font-size:12px;">
+            <div class="w-34 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                (ký, họ tên)
+            </div>
+        </div>
+    </div>
+</div>
