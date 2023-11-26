@@ -1,0 +1,124 @@
+﻿@{
+    Layout = "/Views/Shared/_Layoutpdf.cshtml";
+    DmBenhNhan pn = ViewBag.PhieuThuNgan;
+    var tongTien = pn.LichTiemBns.Sum(x => x.DonGia * x.SoLuong);
+}
+<style>
+    th {
+        font-size: 15px;
+    }
+
+    td {
+        font-size: 15px;
+    }
+
+</style>
+
+<div class="title card" style="margin-left:0; display:block;">
+    <div style="width:100%">
+        <h1 style="font-size: x-large;font-weight: 700;text-align: center; margin: 0;">
+            PHIẾU THU TIỀN
+        </h1>
+    </div>
+</div>
+<div class="info card">
+    <div class="row-info flex">
+        <div class="w-50">
+            Tên bệnh nhân: <b>@pn.TenBn</b>
+        </div>
+        <div class="w-25">
+            Năm sinh: <b>@pn.NamSinh</b>
+        </div>
+        <div class="w-25">
+            Giới tính: <b>@pn.IdgtNavigation.TenGioiTinh</b>
+        </div>
+    </div>
+    <div class="row-info flex">
+        <div class="w-75">
+            Địa chỉ: @pn.DiaChi
+        </div>
+        <div class="w-25">
+            Điện thoại: @pn.DienThoai
+        </div>
+    </div>
+</div>
+<div class="table card">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th class="text-center p-1 text-wrap">STT</th>
+                <th class="text-center p-1 w-25 text-wrap">
+                    Tên vaccine
+                </th>
+                <th class="text-center p-1 text-wrap">Số lượng</th>
+                <th class="text-center p-1 text-wrap">Đơn vị</th>
+                <th class="text-center p-1 text-wrap">Đơn giá</th>
+                <th class="text-center p-1 text-wrap">Thành tiền</th>
+            </tr>
+            <tr>
+                <th style="width:5%">A</th>
+                <th style="width:30%">B</th>
+                <th style="width:10%">1</th>
+                <th style="width:10%">C</th>
+                <th style="width:10%">2</th>
+                <th style="width:15%">3</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+            }
+            @foreach (var ct in pn.LichTiemBns.Where(x=>x.DaThu == true))
+            {
+                <tr>
+                    <td class="px-1 text-center">@i</td>
+                    <td class="px-1">@ct.IdvcNavigation.TenVaccine</td>
+                    <td class="text-end px-1">@CommonServices.FormatOddNumber(ct.SoLuong.Value)</td>
+                    <td class="px-1">@ct.IdvcNavigation.DonViTinh</td>
+                    <td class="text-end px-1">@CommonServices.FormatOddNumber(ct.DonGia.Value)</td>
+                    <td class="text-end px-1">@CommonServices.FormatOddNumber(ct.DonGia.Value * ct.SoLuong.Value)</td>
+                </tr>
+                i++;
+            }
+            <tr>
+                <td colspan="5">
+                    <b>Tổng tiền: </b>
+                </td>
+                <td class="text-end px-1">
+                    <b>@CommonServices.FormatOddNumber(tongTien.Value)</b>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div style="page-break-inside: avoid;">
+    <div class="">
+        <div class="flex" style="font-size:16px; font-weight:700">
+            <div class="w-50 text-center">
+            </div>
+            <div class="w-50 text-center">
+                <em>Ngày ... Tháng ... Năm ...</em>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex" style="font-size:16px; font-weight:700">
+            <div class="w-50 text-center">
+                Bệnh nhân
+            </div>
+            <div class="w-50 text-center">
+                Người lập phiếu
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="flex" style="font-size:12px;">
+            <div class="w-50 text-center">
+                (ký, họ tên)
+            </div>
+            <div class="w-50 text-center">
+                (ký, họ tên)
+            </div>
+        </div>
+    </div>
+</div>
