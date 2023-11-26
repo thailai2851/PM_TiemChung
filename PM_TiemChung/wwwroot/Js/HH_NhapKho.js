@@ -9,6 +9,16 @@
             className: ".cbNhaCungCap",
             placeholder: "-- Nơi cung Cấp --",
             action: "HH_NhapKho/getListNhaCungCap",
+        },
+        {
+            className: ".cbHangHoa1",
+            placeholder: "-- VacXin --",
+            action: "/HangHoa/HH_NhapKho/getListVaccine",
+        },
+        {
+            className: ".cbNhaCungCap1",
+            placeholder: "-- Nơi cung Cấp --",
+            action: "HH_NhapKho/getListNhaCungCap",
         }
 
     ];
@@ -326,5 +336,84 @@ function xoaTrangPhieuNhapKho() {
     $('#tongTienCK').val("0");
     $('#tongTienThue').val("0");
     $('#tongTra').val("0");
+}
+/////////////////////////////////////////// tab xem 
+var _fromDay = null;
+var _toDay = null;
+var _soPhieu = null;
+function getDSXKNL() {
+    //for (var i = 1; i <= 7; i++) {
+    //    addRowTableXKNL(i);
+    //}
+    _fromDay = $('input[name="TuNgay"]').val();
+    _toDay = $('input[name="DenNgay"]').val();
+    _soPhieu = $('input[name="SoPhieu"]').val();
+
+    $.ajax({
+        url: '/NhapKho/LichSuNhap', // Đường dẫn đến action xử lý form
+        method: 'POST',
+        data: {
+            TuNgay: _fromDay,
+            DenNgay: _toDay,
+            maPhieu: _soPhieu,
+            idVC: $('select.cbHangHoa1').val(),
+            inNCC: $('select.cbNhaCungCap1').val(),
+            soHD: $('input[name="SoHD"]').val()
+        },
+        success: function (response) {
+            $('#tBody-DsPhieu').empty();
+            $('#TienThanhToanTabLS').val('');
+            response.forEach(function (data, i) {
+                addRowTableXKNL(data, i);
+            });
+            /*TinhTongTienPhieuNhap();*/
+            //if (response.statusCode == 200) {
+            //    $('#tbodyChiTietPhieuNhap').empty();
+            //    $('#TienThanhToan').val('');
+
+            //}
+            //showToast(response.message, response.statusCode);
+        }
+    });
+}
+function addRowTableXKNL(data, i) {
+    var newRow = ` <tr class="accordion-toggle collapsed" id="c-2474${i}" data-bs-toggle="collapse" data-parent="#c-2474${i}" href="#collap-2474${i}" aria-expanded="false">
+                                    <td>${i+1}</td>
+                                <td>${data.soPx}</td>
+                                <td>${formatDay(data.ngayTao)}</td>
+                                <td>${data.nhaCungCap}</td>
+                                <td>${data.soLuongHH} </td>
+                                <td> <input readonly autocomplete="off" type="text" class="w-100 form-control form-table formatted-number-float" style="width:55px;" value=${data.tongTien} id="tongTienXuat" name="tongTienXuat"/></td>
+                                <td>
+                                    <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="text-muted sr-only">Thao Tác</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">In</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr id="collap-2474${i}" class="in p-3 bg-light collapse" style="">
+                                <td colspan="8">
+                            `;
+    data.chiTietPhieuNhap.forEach(function (data, index) {
+        var i = index + 1;
+        newRow += `<dl class="row mb-0 mt-1">
+                                        <dt class="col-sm-1">${i}</dt>
+                                        <dd class="col-sm-1">${data.idhhNavigation.maVaccine}</dd>
+                                        <dt class="col-sm-3">${data.idhhNavigation.tenVaccine}</dt>
+                                        <dt class="col-sm-1">${data.dvt}</dt>
+                                        <dd class="col-sm-1">${data.soLuong}</dd>
+                                        <dt class="col-sm-2"><input readonly autocomplete="off" type="text" class="w-100 form-control form-table formatted-number-float" style="width:55px;" value=${data.gia}/></dt>
+                                        <dd class="col-sm-2"><input readonly autocomplete="off" type="text" class="w-100 form-control form-table formatted-number-float" style="width:55px;" value=${data.soLuong * data.gia}/></dd>
+                                    </dl>
+                                `;
+    });
+    newRow += `
+    </td>
+    </tr>`;
+    $('#tBody-DsPhieu').append(newRow);
+    formatNumber();
 }
 

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PM_TiemChung.Models.Entities;
 using PM_TiemChung.Models.Mapper;
 using PM_TiemChung.Services;
+using System.Globalization;
 
 namespace PM_TiemChung.Controllers
 {
@@ -92,6 +93,44 @@ namespace PM_TiemChung.Controllers
                     message = "Thất bại",
                 };
             }
+        }
+
+        [HttpPost("/NhapKho/LichSuNhap")]
+        public async Task<dynamic> LichSuNhap(string TuNgay, string DenNgay, string maPhieu, int idVC, int idNCC, string soHD)
+        {
+            DateTime tuNgay = DateTime.ParseExact(TuNgay, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+            DateTime denNgay = DateTime.ParseExact(DenNgay, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+            var PhieuNhaps = await _context.PhieuNhaps
+                .Include(x => x.ChiTietPhieuNhaps)
+                .Where(x => (x.NgayNhap.Value.Date >= tuNgay.Date && x.NgayNhap.Value.Date <= denNgay.Date)
+                && (maPhieu == null || x.SoPn.ToLower() == maPhieu.ToLower().Trim())
+                && (idVC == 0 || x.ChiTietPhieuNhaps.Any(x => x.Idvaccine == idVC))
+                && (idNCC == 0 || x.Idncc == idNCC)
+                && (soHD == null ||x.SoHd != null && x.SoHd.ToLower().Contains(soHD.ToLower())))
+             .Select(x => new
+             {
+                 SoPx = x.SoPn,
+                 NgayTao = x.NgayNhap,
+                 IdnvNavigation = x.IdnvNavigation,
+                 GhiChu = x.GhiChu,
+                 TongTien = x.ChiTietPhieuNhaps.Sum(x => x.SoLuong * x.DonGia),
+                 NhaCungCap = x.IdnccNavigation.TenNcc,
+                 SoLuongHH = x.ChiTietPhieuNhaps.Sum(x => x.SoLuong),
+                 ChiTietPhieuNhap = x.ChiTietPhieuNhaps.Select(x => new
+                 {
+                     IdhhNavigation = x.IdvaccineNavigation,
+                     SoLuong = x.SoLuong,
+                     Gia = x.DonGia,
+                     DVT = x.IdvaccineNavigation.DonViTinh,
+                 }).ToList()
+             })
+            .ToListAsync();
+            //var ketqua = PhieuNhaps.Select(x => new
+            //{
+            //    PhieuNhap = x,
+            //    ChiTietPhieuNhap = GetChiTietPhieuNhaps(x.Idpx),
+            //}).ToList();
+            return Ok(PhieuNhaps);
         }
         public class TTPhieuNhap
         {
