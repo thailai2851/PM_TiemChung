@@ -1,7 +1,7 @@
 ﻿@{
     List<DmVaccine> vaccines = ViewBag.Models.result;
 }
-<div class="row d-flex justify-content-between mb-3 mx-3">
+<div class="row d-flex justify-content-between mb-3 mx-3 mt-3">
     <div class="col-4 col-sm-6 mb-1 p-0">
         <div class="row">
             <div class="col-6">
@@ -12,7 +12,7 @@
                     <option value="true">Đang dùng</option>
                     <option value="false">Đã xóa</option>
                 </select>
-            </div>
+            </div>  
             <div class="col-auto">
                 <button onclick="searchWithKeyword()" class="btn btn-icon" aria-label="Button">
 
@@ -92,7 +92,7 @@
                             <td class="text-start TenVaccine">@d.TenVaccine</td>
                             <td class="text-center DonViTinh">@d.DonViTinh</td>
                             <td class="text-end SoCode">@d.SoCode</td>
-                            <td class="text-end formatted-number GiaBan">@d.GiaBan</td>
+                            <td class="text-end formatted-number-float GiaBan">@d.GiaBan</td>
                             <td class="text-center last-td-column">
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <button onclick="showModal(@d.Id)" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">

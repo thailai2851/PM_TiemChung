@@ -114,13 +114,11 @@
                                                         <th class="text-center p-1 text-wrap">ĐVT</th>
                                                         <th class="text-center p-1 text-wrap">Giá nhập</th>
                                                         <th class="text-center p-1 text-wrap">Thành tiền</th>
-                                                        <th class="text-center p-1 text-wrap">Chiếc khấu</th>
-                                                        <th class="text-center p-1 text-wrap">VAT</th>
                                                         <th class="text-center p-1 text-wrap">Ngày SX</th>
                                                         <th class="text-center p-1 text-wrap">Hạn SD</th>
                                                         <th class="text-center p-1 text-wrap">Ghi Chú</th>
                                                         <th class="text-center last-th-column p-1">
-                                                            <a href="#" class="text-red" id="remove-all-phieuNhapCt">
+                                                            <a class="text-red" id="remove-all-phieuNhapCt">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                                     <path d="M4 7l16 0"></path>
@@ -135,42 +133,36 @@
                                                 </thead>
                                                 <tbody id="tBody-ThemChiTietPhieuNhap">
                                                     <tr>
-                                                        <td class="first-td-column text-center ps-0 td-sticky">
-                                                            <input autocomplete="off" type="text" class="form-control form-table text-center stt" readonly value="1" style="width:32px;z-index:2;" />
+                                                        <td class="first-td-column text-center ps-0 td-sticky" style="width:32px;z-index:2;">
+                                                            <input autocomplete="off" type="text" class="form-control form-table text-center stt" readonly value="1" />
                                                             <input type="hidden" name="Id" value="0" />
                                                         </td>
                                                         <td class="td-sticky md-sticky" style="left: 33px;background-color: #fff !important; z-index:2">
                                                             <select name="IdhangHoa" class="form-select form-table cbHangHoa" style="position:relative;width:400px;">
                                                             </select>
                                                         </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" style="width:55px;" name="SoLuongNhap" />
+                                                        <td style="width:55px;">
+                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float"  name="SoLuongNhap" />
                                                         </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table" style="width:60px;" readonly name="tenDvt" tabindex="-1" />
+                                                        <td style="width:60px;">
+                                                            <input autocomplete="off" type="text" class="form-control form-table" readonly name="tenDvt" tabindex="-1" />
                                                         </td>
-                                                        <td>
-                                                            <input autocomplete="off" t type="text" class="form-control form-table formatted-number-float" style="width:80px;" value="" name="DonGiaNhap" />
+                                                        <td style="width:80px;">
+                                                            <input autocomplete="off" t type="text" class="form-control form-table formatted-number-float" value="" name="DonGiaNhap" />
                                                         </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" style="width:100px;" value="" name="ThanhTien" />
+                                                        <td style="width:100px;">
+                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float"  value="" name="ThanhTien" />
                                                         </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" style="width:40px;" value="" name="ChiecKhau" />
+                                                        <td style="width:90px;">
+                                                            <input autocomplete="off" type="text" class="form-control form-table input-date-long-mask" name="NgaySanXuat" />
                                                         </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table formatted-number-float" value="" style="width:40px;" name="ThueVat" />
-                                                        </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table input-date-short-mask" style="width:90px;" name="NgaySanXuat" />
-                                                        </td>
-                                                        <td>
-                                                            <input autocomplete="off" type="text" class="form-control form-table input-date-short-mask" style="width:90px;" name="HanDung" />
-                                                        <td>
-                                                            <textarea autocomplete="off" rows="1" class="form-control form-table" style="width: 200px" name="GhiChuHangNhap"></textarea>
+                                                        <td style="width:90px;">
+                                                            <input autocomplete="off" type="text" class="form-control form-table input-date-long-mask" name="HanDung" />
+                                                        <td style="width: 200px">
+                                                            <textarea autocomplete="off" rows="1" class="form-control form-table"  name="GhiChuHangNhap"></textarea>
                                                         </td>
                                                         
-                                                        <td class="text-center last-td-column pe-0">
+                                                        <td class="text-center last-td-column pe-0" style="width:40px;">
                                                             <button type="button" class="btn btn-icon btn-sm text-red remove-phieuNhapCt">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -189,21 +181,11 @@
                         </div>
                         <div class="card-footer p-2">
                             <div class="row">
+                                <div class="col-lg-6 col-12 mb-1 ms-6">
+                                </div>
                                 <div class="col-lg-2 col-12 ms-6">
                                     <label class="form-label mb-0">Tổng tiền hàng:</label>
                                     <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTienHang" placeholder="Tổng tiền hàng" readonly>
-                                </div>
-                                <div class="col-lg-2 col-12 mb-1 ms-6">
-                                    <label class="form-label mb-0">Tổng chiếc khấu:</label>
-                                    <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTienCK" placeholder="Tổng chiếc khấu" readonly>
-                                </div>
-                                <div class="col-lg-2 col-12 mb-1 ms-6">
-                                    <label class="form-label mb-0">Tổng thuế:</label>
-                                    <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTienThue" placeholder="Tổng thuế" readonly>
-                                </div>
-                                <div class="col-lg-2 col-12 mb-1 ms-6">
-                                    <label class="form-label mb-0">Tổng cộng:</label>
-                                    <input type="text" autocomplete="off" class="form-control formatted-number-float" id="tongTra" placeholder="Tổng cộng" readonly>
                                 </div>
                                 <div class="col-2 mb-1">
                                     <label class="form-label mb-0 text-white">.</label>
@@ -219,6 +201,8 @@
                                             </button>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-1 ms-6">
                                 </div>
                             </div>
                         </div>

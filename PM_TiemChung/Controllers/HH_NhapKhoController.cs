@@ -77,7 +77,6 @@ namespace PM_TiemChung.Controllers
                 }
                 await _context.ChiTietPhieuNhaps.AddRangeAsync(chiTietPhieuNhaps);
                 await _context.SaveChangesAsync();
-                await _context.SaveChangesAsync();
                 tran.Commit();
                 return new
                 {

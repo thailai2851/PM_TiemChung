@@ -12,6 +12,10 @@ public partial class Account
     public string? Password { get; set; }
 
     public long? IdnhanVien { get; set; }
-  
+
+    public bool? QuanLy { get; set; }
+
+    public bool? Active { get; set; }
+
     public virtual DmNhanVien? IdnhanVienNavigation { get; set; }
 }

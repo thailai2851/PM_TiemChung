@@ -250,7 +250,7 @@ $(document).ready(function () {
         form.find('input[name="NgayCap"]').val('');
         form.find('input[name="NoiCap"]').val('');
         form.find('input[name="NgayDen"]').val(getDateNow());
-        form.find('input[name="GhiChu"]').val('');
+        form.find('textarea[name="GhiChu"]').val('');
 
         form.find('select[name="Idgt"]').val(1);
         form.find('select[name="Idqg"]')[0].tomselect.clear();
@@ -389,7 +389,7 @@ function appendDataBenhNhan(bn) {
     form.find('input[name="NgayCap"]').val(formatDay(bn.ngayCap));
     form.find('input[name="NoiCap"]').val(bn.noiCap);
     form.find('input[name="NgayDen"]').val(formatDay(bn.ngayDen));
-    form.find('input[name="GhiChu"]').val(bn.ghiChu);
+    form.find('textarea[name="GhiChu"]').val(bn.ghiChu);
 
     form.find('select[name="Idgt"]').val(bn.idgt);
     form.find('select[name="Idqg"]')[0].tomselect.setValue(bn.idqg);

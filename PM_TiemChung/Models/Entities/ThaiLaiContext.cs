@@ -72,9 +72,10 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.IdnhanVien).HasColumnName("IDNhanVien");
             entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.UserName).HasMaxLength(50);
+
             entity.HasOne(d => d.IdnhanVienNavigation).WithMany(p => p.Accounts)
                 .HasForeignKey(d => d.IdnhanVien)
-                .HasConstraintName("FK__Account__IDNhanV__0C85DE4D");
+                .HasConstraintName("FK_Account_DM_NhanVien");
         });
 
         modelBuilder.Entity<ChiTietPhieuNhap>(entity =>
@@ -106,23 +107,17 @@ public partial class ThaiLaiContext : DbContext
 
         modelBuilder.Entity<ChiTietPhieuXuat>(entity =>
         {
-            entity.HasKey(e => e.Idctpx);
-
             entity.ToTable("ChiTietPhieuXuat");
 
-            entity.Property(e => e.Idctpx).HasColumnName("IDCTPX");
-            entity.Property(e => e.Cktm).HasColumnName("CKTM");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Idbn).HasColumnName("IDBN");
             entity.Property(e => e.Idctpn).HasColumnName("IDCTPN");
-            entity.Property(e => e.Idpx).HasColumnName("IDPX");
             entity.Property(e => e.Idvaccine).HasColumnName("IDVaccine");
+            entity.Property(e => e.NgayXuat).HasColumnType("datetime");
 
             entity.HasOne(d => d.IdctpnNavigation).WithMany(p => p.ChiTietPhieuXuats)
                 .HasForeignKey(d => d.Idctpn)
                 .HasConstraintName("FK_ChiTietPhieuXuat_ChiTietPhieuNhap");
-
-            entity.HasOne(d => d.IdpxNavigation).WithMany(p => p.ChiTietPhieuXuats)
-                .HasForeignKey(d => d.Idpx)
-                .HasConstraintName("FK_ChiTietPhieuXuat_PhieuXuat");
 
             entity.HasOne(d => d.IdvaccineNavigation).WithMany(p => p.ChiTietPhieuXuats)
                 .HasForeignKey(d => d.Idvaccine)
@@ -363,6 +358,7 @@ public partial class ThaiLaiContext : DbContext
             entity.Property(e => e.Idbsk).HasColumnName("IDBSK");
             entity.Property(e => e.IdnhanVienThu).HasColumnName("IDNhanVienThu");
             entity.Property(e => e.IdnhanVienTiem).HasColumnName("IDNhanVienTiem");
+            entity.Property(e => e.Idpnct).HasColumnName("IDPNCT");
             entity.Property(e => e.IdthoiGian).HasColumnName("IDThoiGian");
             entity.Property(e => e.Idvc).HasColumnName("IDVC");
             entity.Property(e => e.NgayDeNghiTiem).HasColumnType("datetime");
@@ -388,6 +384,10 @@ public partial class ThaiLaiContext : DbContext
             entity.HasOne(d => d.IdnhanVienTiemNavigation).WithMany(p => p.LichTiemBnIdnhanVienTiemNavigations)
                 .HasForeignKey(d => d.IdnhanVienTiem)
                 .HasConstraintName("FK_LichTiemBN_DM_NhanVien2");
+
+            entity.HasOne(d => d.IdpnctNavigation).WithMany(p => p.LichTiemBns)
+                .HasForeignKey(d => d.Idpnct)
+                .HasConstraintName("FK__LichTiemB__IDPNC__1C873BEC");
 
             entity.HasOne(d => d.IdthoiGianNavigation).WithMany(p => p.LichTiemBns)
                 .HasForeignKey(d => d.IdthoiGian)
@@ -493,14 +493,13 @@ public partial class ThaiLaiContext : DbContext
 
         modelBuilder.Entity<ThongTinDoanhNghiep>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ThongTinDoanhNghiep");
+            entity.ToTable("ThongTinDoanhNghiep");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.ChuTk).HasMaxLength(200);
             entity.Property(e => e.DiaChi).HasMaxLength(500);
             entity.Property(e => e.DienThoai).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(50);
-            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Mst)
                 .HasMaxLength(50)
                 .HasColumnName("MST");
