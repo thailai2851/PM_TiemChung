@@ -229,7 +229,6 @@
                         <div class="card-status-top bg-blue"></div>
                         <div class="card-header p-2">
                             <div class="container px-0">
-                                <form class="row" id="formTimKiemPhieuNhapKho">
                                     <div class="col-12 mb-1">
                                         <div class="row">
                                             <div class="col-12 col-lg-3 mb-1">
@@ -258,7 +257,7 @@
                                                         Nơi cung cấp:
                                                     </label>
                                                     <div class="col-9">
-                                                        <select class="form-select cbNhaCungCap" name="IdNhaCungCap">
+                                                    <select class="form-select cbNhaCungCap1" Id="cbNhaCungCap1">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -273,7 +272,7 @@
                                                         Hàng hóa:
                                                     </label>
                                                     <div class="col-9 col-lg-10">
-                                                        <select class="form-select cbHangHoa" name="IdHangHoa">
+                                                    <select class="form-select cbHangHoa1" Id="cbHangHoa1">
                                                         </select>
                                                     </div>
                                                 </div>
@@ -301,7 +300,7 @@
                                             <div class="col-12 col-lg-1 mb-1">
                                                 <div class="row justify-content-end">
                                                     <div class="col-auto">
-                                                        <button class="btn btn-icon" type="submit">
+                                                        <button class="btn btn-icon" onclick="getDSXKNL()">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
                                                         </button>
                                                     </div>
@@ -309,7 +308,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
                             </div>
                         </div>
                         <div class="card-body p-2">
@@ -332,20 +330,6 @@
                                                     <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
                                                 </svg>
                                                 Hàng
-                                            </th>
-                                            <th class="text-center p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sum" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
-                                                </svg>
-                                                CK
-                                            </th>
-                                            <th class="text-center p-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sum" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M18 16v2a1 1 0 0 1 -1 1h-11l6 -7l-6 -7h11a1 1 0 0 1 1 1v2"></path>
-                                                </svg>
-                                                VAT
                                             </th>
                                             <th class="text-center p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sum" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
