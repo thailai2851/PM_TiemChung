@@ -12,7 +12,7 @@
         },
         {
             className: ".cbHangHoa1",
-            placeholder: "-- VacXin --",
+            placeholder: "-- Vaccine --",
             action: "/HangHoa/HH_NhapKho/getListVaccine",
         },
         {
