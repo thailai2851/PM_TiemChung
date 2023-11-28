@@ -357,7 +357,7 @@ function getDSXKNL() {
             DenNgay: _toDay,
             maPhieu: _soPhieu,
             idVC: $('select.cbHangHoa1').val(),
-            inNCC: $('select.cbNhaCungCap1').val(),
+            idNCC: $('select.cbNhaCungCap1').val(),
             soHD: $('input[name="SoHD"]').val()
         },
         success: function (response) {
@@ -378,41 +378,38 @@ function getDSXKNL() {
 }
 function addRowTableXKNL(data, i) {
     var newRow = ` <tr class="accordion-toggle collapsed" id="c-2474${i}" data-bs-toggle="collapse" data-parent="#c-2474${i}" href="#collap-2474${i}" aria-expanded="false">
-                                    <td>${i+1}</td>
-                                <td>${data.soPx}</td>
-                                <td>${formatDay(data.ngayTao)}</td>
-                                <td>${data.nhaCungCap}</td>
-                                <td>${data.soLuongHH} </td>
-                                <td> <input readonly autocomplete="off" type="text" class="w-100 form-control form-table formatted-number-float" style="width:55px;" value=${data.tongTien} id="tongTienXuat" name="tongTienXuat"/></td>
-                                <td>
-                                    <button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="text-muted sr-only">Thao Tác</span>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">In</a>
-                                    </div>
-                                </td>
+                                <td class="text-center">${i+1}</td>
+                                <td class="text-center">${data.soPx}</td>
+                                <td class="text-center">${formatDay(data.ngayTao)}</td>
+                                <td class="text-start ">${data.nhaCungCap}</td>
+                                <td class="text-center">${data.soHoaDon}</td>
+                                <td class="text-start">${data.ghiChu}</td>
+                                <td class="text-end">${data.soLuongHH} </td>
+                                <td class="text-end">${formatOddNumber(data.tongTien)} </td>
                             </tr>
-                            
-                            <tr id="collap-2474${i}" class="in p-3 bg-light collapse" style="">
-                                <td colspan="8">
-                            `;
-    data.chiTietPhieuNhap.forEach(function (data, index) {
-        var i = index + 1;
-        newRow += `<dl class="row mb-0 mt-1">
-                                        <dt class="col-sm-1">${i}</dt>
-                                        <dd class="col-sm-1">${data.idhhNavigation.maVaccine}</dd>
-                                        <dt class="col-sm-3">${data.idhhNavigation.tenVaccine}</dt>
-                                        <dt class="col-sm-1">${data.dvt}</dt>
-                                        <dd class="col-sm-1">${data.soLuong}</dd>
-                                        <dt class="col-sm-2"><input readonly autocomplete="off" type="text" class="w-100 form-control form-table formatted-number-float" style="width:55px;" value=${data.gia}/></dt>
-                                        <dd class="col-sm-2"><input readonly autocomplete="off" type="text" class="w-100 form-control form-table formatted-number-float" style="width:55px;" value=${data.soLuong * data.gia}/></dd>
-                                    </dl>
-                                `;
-    });
-    newRow += `
-    </td>
-    </tr>`;
+                                <tr id="collap-2474${i}" class="in p-3 bg-blue-lt collapse fw-bold">
+                            <td class="text-center p-1"> #</td>
+                            <td class="text-center p-1">Mã vaccine</td>
+                            <td class="text-center p-1 col-3">Tên vaccine</td>
+                            <td class="text-center p-1">ĐVT</td>
+                            <td class="text-center p-1">Số lượng nhập</td>
+                            <td class="text-center p-1">Giá nhập</td>
+                            <td colspan="2" class="text-center p-1">Thành tiền</td>
+                                </tr>`
+                           
+                            data.chiTietPhieuNhap.forEach(function (data, index) {
+                                var j = index + 1;
+                                newRow += `<tr id="collap-2474${i}" class="in p-3 bg-azure-lt collapse">
+                                                <td class=" text-center p-1">${j}</td>
+                                                <td class=" text-center p-1">${data.idhhNavigation.maVaccine}</td>
+                                                <td class=" text-start p-1">${data.idhhNavigation.tenVaccine}</td>
+                                                <td class=" text-center p-1">${data.dvt}</td>
+                                                <td class=" text-end p-1">${data.soLuong}</td>
+                                                <td class=" text-end p-1">${formatOddNumber(data.gia)}</td>
+                                                <td colspan="2" class=" text-end p-1">${formatOddNumber(data.soLuong * data.gia)}</td>
+                                            </tr> `;
+                            });
+   
     $('#tBody-DsPhieu').append(newRow);
     formatNumber();
 }

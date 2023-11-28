@@ -38,7 +38,7 @@ namespace PM_TiemChung.Controllers
         [HttpPost]
         public async Task<IActionResult> DangNhap(string UserName, string PassWord)
         {
-            if (UserName == null && PassWord == null)
+            if (UserName == null || PassWord == null)
             {
                 return Ok(new
                 {
@@ -71,6 +71,7 @@ namespace PM_TiemChung.Controllers
                 });
             }
         }
+       
         [AllowAnonymous]
         [HttpGet("/logout")]
         public async Task<IActionResult> Logout()
@@ -78,6 +79,8 @@ namespace PM_TiemChung.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Redirect("/DangNhap");
         }
+
+        // lưu Cookie
         public async Task signIn(List<Claim> claims)
         {
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

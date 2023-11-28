@@ -113,6 +113,7 @@ namespace PM_TiemChung.Controllers
                  NgayTao = x.NgayNhap,
                  IdnvNavigation = x.IdnvNavigation,
                  GhiChu = x.GhiChu,
+                 SoHoaDon = x.SoHd,
                  TongTien = x.ChiTietPhieuNhaps.Sum(x => x.SoLuong * x.DonGia),
                  NhaCungCap = x.IdnccNavigation.TenNcc,
                  SoLuongHH = x.ChiTietPhieuNhaps.Sum(x => x.SoLuong),

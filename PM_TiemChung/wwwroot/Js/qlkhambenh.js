@@ -342,13 +342,13 @@ function renderTableLichTiem(datas, soNgayTuoi) {
                                                         <input type="hidden" name="Idvc" value="${toEmpty(d.idvcNavigation.id)}"/>
                                                     </td>
                                                     <td class="text-end">
-                                                        <input name="SoLanTiem" readonly class="form-table form-control" type="text" value="${toEmpty(d.soLanTiem)}" style="width: 110px"/>
+                                                        <input name="SoLanTiem" readonly class="form-table form-control text-end" type="text" value="${toEmpty(d.soLanTiem)}" style="width: 110px"/>
                                                     </td>
                                                     <td class="text-end">
-                                                        <input name="TgsomNhat" readonly class="form-table form-control" type="text" value="${toEmpty(d.tgsomNhat)}" style="width: 110px"/>
+                                                        <input name="TgsomNhat" readonly class="form-table form-control text-end" type="text" value="${toEmpty(d.tgsomNhat)}" style="width: 110px"/>
                                                     </td>
                                                     <td class="text-end">
-                                                        <input name="TgtreNhat" readonly class="form-table form-control" type="text" value="${toEmpty(d.tgtreNhat)}" style="width: 110px"/>
+                                                        <input name="TgtreNhat" readonly class="form-table form-control text-end" type="text" value="${toEmpty(d.tgtreNhat)}" style="width: 110px"/>
                                                     </td>
                                                     <td class="">
                                                         <input readonly class="form-table form-control" type="text" value="${toEmpty(d.idthoiGianNavigation.tenTg)}" style="width: 110px"/>

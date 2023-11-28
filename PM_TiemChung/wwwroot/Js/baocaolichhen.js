@@ -10,20 +10,20 @@
             method: 'POST',
             data: formData,
             success: function (response) {
-                console.log(response);
+             //   console.log(response);
                 $('#tBody-BaoCaoLoiNhuan').empty();
                 response.forEach(function (data, index) {
                     $('#tBody-BaoCaoLoiNhuan').append(`<tr>
-                                                <td class="text-center p-1">${index + 1}</td>
-                                                <td class="text-center p-1">${formatDay(data.ngayHen)}</td>
-                                                <td class="p-1">${data.idbnNavigation.tenBn}</td>
-                                                <td class="text-center p-1">${data.idbnNavigation.namSinh}</td>
-                                                <td class="p-1">${data.idbnNavigation.idgtNavigation.tenGioiTinh}</td>
-                                                <td class="p-1">${data.idbnNavigation.diaChi}</td>
-                                                <td class="p-1">${data.idbnNavigation.dienThoai}</td>
-                                                <td class="p-1">${data.idbnNavigation.email}</td>
-                                                <td class="p-1">${data.idbnNavigation.idnnNavigation.tenNgheNghiep}</td>
-                                                <td class="p-1">${data.idvcNavigation.tenVaccine}</td>
+                                                <td class="text-center ">${index + 1}</td>
+                                                <td class="text-center ">${formatDay(data.ngayHen)}</td>
+                                                <td class="text-start">${data.idbnNavigation.tenBn}</td>
+                                                <td class="text-center">${data.idbnNavigation.namSinh}</td>
+                                                <td class="text-center">${data.idbnNavigation.idgtNavigation.tenGioiTinh}</td>
+                                                <td class="text-start">${data.idbnNavigation.diaChi}</td>
+                                                <td class="text-end">${data.idbnNavigation.dienThoai}</td>
+                                                <td class="text-start">${data.idbnNavigation.email}</td>
+                                                <td class="text-start">${data.idbnNavigation.idnnNavigation.tenNgheNghiep}</td>
+                                                <td class="text-start">${data.idvcNavigation.tenVaccine}</td>
                                             </tr>`);
                 })
             },

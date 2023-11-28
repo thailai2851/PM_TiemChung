@@ -26,7 +26,7 @@
 <div class="title card" style="margin-left:0; display:block;">
     <div style="width:100%">
         <h1 style="font-size: x-large;font-weight: 700;text-align: center; margin: 0;">
-            BÁO CÁO VACINE TỒN KHO
+            BÁO CÁO VACCINE TỒN KHO
         </h1>
     </div>
 </div>
@@ -39,22 +39,22 @@
     <table style="width:100%;">
         <thead>
             <tr>
-                <th class="text-center p-1">TT</th>
-                <th class="text-center p-1">Ngày</th>
-                <th class="text-center p-1">Số phiếu</th>
-                <th class="text-center p-1">Mã cung cấp</th>
-                <th class="text-center p-1">Tên nhà cung cấp</th>
-                <th class="text-center p-1">Số HĐ</th>
-                <th class="text-center p-1">Ngày HĐ</th>
-                <th class="text-center p-1">Mã vacine</th>
-                <th class="text-center p-1">Tên vacine</th>
-                <th class="text-center p-1">Hạn dùng</th>
-                <th class="text-center p-1">SL nhập</th>
-                <th class="text-center p-1">ĐVT</th>
-                <th class="text-center p-1">Giá nhập</th>
-                <th class="text-center p-1">Thành tiền</th>
-                <th class="text-center p-1">SL tồn</th>
-                <th class="text-center p-1">Trị giá tồn</th>
+                <th class="text-center">TT</th>
+                <th class="text-center">Ngày</th>
+                <th class="text-center">Số phiếu</th>
+                <th class="text-center">Mã cung cấp</th>
+                <th class="text-center">Tên nhà cung cấp</th>
+                <th class="text-center">Số HĐ</th>
+                <th class="text-center">Ngày HĐ</th>
+                <th class="text-center">Mã vaccine</th>
+                <th class="text-center">Tên vaccine</th>
+                <th class="text-center">Hạn dùng</th>
+                <th class="text-center">SL nhập</th>
+                <th class="text-center">ĐVT</th>
+                <th class="text-center">Giá nhập</th>
+                <th class="text-center">Thành tiền</th>
+                <th class="text-center">SL tồn</th>
+                <th class="text-center">Trị giá tồn</th>
             </tr>
         </thead>
         <tbody>
@@ -64,22 +64,22 @@
             @foreach (var data in datas)
             {
                 <tr>
-                    <td class="text-center p-1">@tt</td>
-                    <td class="text-center p-1">@data.IdpnNavigation.NgayNhap?.ToString("dd-MM-yy HH:mm")</td>
-                    <td class="text-center p-1">@data.IdpnNavigation.SoPn</td>
-                    <td class="text-center p-1">@data.IdpnNavigation.IdnccNavigation.MaNcc</td>
-                    <td class="p-1">@data.IdpnNavigation.IdnccNavigation.TenNcc</td>
-                    <td class="p-1">@data.IdpnNavigation.SoHd</td>
-                    <td class="p-1">@data.IdpnNavigation.NgayHd?.ToString("dd-MM-yy")</td>
-                    <td class="text-center p-1">@data.IdvaccineNavigation.MaVaccine</td>
-                    <td class="p-1">@data.IdvaccineNavigation.TenVaccine</td>
-                    <td class="text-center p-1">@data.Hsd?.ToString("dd-MM-yy")</td>
-                    <td class="text-end p-1">@CommonServices.FormatOddNumber(data.SoLuong.Value)</td>
-                    <td class="p-1">@data.IdvaccineNavigation.DonViTinh</td>
-                    <td class="text-end p-1">@CommonServices.FormatOddNumber(data.DonGia.Value)</td>
-                    <td class="text-end p-1">@CommonServices.FormatOddNumber(data.SoLuong.Value * data.DonGia.Value)</td>
-                    <td class="text-end p-1">@CommonServices.FormatOddNumber(data.SoLuong.Value - (data.SoLuongXuat ?? 0))</td>
-                    <td class="text-end p-1">@CommonServices.FormatOddNumber((data.SoLuong.Value - (data.SoLuongXuat ?? 0)) * data.DonGia.Value)</td>
+                    <td class="text-center">@tt</td>
+                    <td class="text-center">@data.IdpnNavigation.NgayNhap?.ToString("dd-MM-yy HH:mm")</td>
+                    <td class="text-center">@data.IdpnNavigation.SoPn</td>
+                    <td class="text-center">@data.IdpnNavigation.IdnccNavigation.MaNcc</td>
+                    <td class="">@data.IdpnNavigation.IdnccNavigation.TenNcc</td>
+                    <td class="text-center">@data.IdpnNavigation.SoHd</td>
+                    <td class="text-center">@data.IdpnNavigation.NgayHd?.ToString("dd-MM-yy")</td>
+                    <td class="text-center">@data.IdvaccineNavigation.MaVaccine</td>
+                    <td class="">@data.IdvaccineNavigation.TenVaccine</td>
+                    <td class="text-center">@data.Hsd?.ToString("dd-MM-yy")</td>
+                    <td class="text-end">@CommonServices.FormatOddNumber(data.SoLuong.Value)</td>
+                    <td class="text-center">@data.IdvaccineNavigation.DonViTinh</td>
+                    <td class="text-end ">@CommonServices.FormatOddNumber(data.DonGia.Value)</td>
+                    <td class="text-end ">@CommonServices.FormatOddNumber(data.SoLuong.Value * data.DonGia.Value)</td>
+                    <td class="text-end ">@CommonServices.FormatOddNumber(data.SoLuong.Value - (data.SoLuongXuat ?? 0))</td>
+                    <td class="text-end ">@CommonServices.FormatOddNumber((data.SoLuong.Value - (data.SoLuongXuat ?? 0)) * data.DonGia.Value)</td>
                 </tr>
                 tt++;
                 tongGiaTri += (data.SoLuong - (data.SoLuongXuat ?? 0)) * data.DonGia;
