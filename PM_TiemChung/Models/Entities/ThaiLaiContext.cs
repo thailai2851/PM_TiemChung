@@ -19,8 +19,6 @@ public partial class ThaiLaiContext : DbContext
 
     public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
 
-    public virtual DbSet<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; }
-
     public virtual DbSet<DmBenhNhan> DmBenhNhans { get; set; }
 
     public virtual DbSet<DmDanToc> DmDanTocs { get; set; }
@@ -85,7 +83,6 @@ public partial class ThaiLaiContext : DbContext
             entity.ToTable("ChiTietPhieuNhap");
 
             entity.Property(e => e.Idctpn).HasColumnName("IDCTPN");
-            entity.Property(e => e.Cktm).HasColumnName("CKTM");
             entity.Property(e => e.GhiChu).HasMaxLength(500);
             entity.Property(e => e.Hsd)
                 .HasColumnType("datetime")
@@ -103,25 +100,6 @@ public partial class ThaiLaiContext : DbContext
             entity.HasOne(d => d.IdvaccineNavigation).WithMany(p => p.ChiTietPhieuNhaps)
                 .HasForeignKey(d => d.Idvaccine)
                 .HasConstraintName("FK_ChiTietPhieuNhap_DM_Vaccine");
-        });
-
-        modelBuilder.Entity<ChiTietPhieuXuat>(entity =>
-        {
-            entity.ToTable("ChiTietPhieuXuat");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Idbn).HasColumnName("IDBN");
-            entity.Property(e => e.Idctpn).HasColumnName("IDCTPN");
-            entity.Property(e => e.Idvaccine).HasColumnName("IDVaccine");
-            entity.Property(e => e.NgayXuat).HasColumnType("datetime");
-
-            entity.HasOne(d => d.IdctpnNavigation).WithMany(p => p.ChiTietPhieuXuats)
-                .HasForeignKey(d => d.Idctpn)
-                .HasConstraintName("FK_ChiTietPhieuXuat_ChiTietPhieuNhap");
-
-            entity.HasOne(d => d.IdvaccineNavigation).WithMany(p => p.ChiTietPhieuXuats)
-                .HasForeignKey(d => d.Idvaccine)
-                .HasConstraintName("FK_ChiTietPhieuXuat_DM_Vaccine");
         });
 
         modelBuilder.Entity<DmBenhNhan>(entity =>

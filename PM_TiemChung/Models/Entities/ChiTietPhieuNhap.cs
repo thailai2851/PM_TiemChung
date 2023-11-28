@@ -15,10 +15,6 @@ public partial class ChiTietPhieuNhap
 
     public double? DonGia { get; set; }
 
-    public double? Cktm { get; set; }
-
-    public double? Thue { get; set; }
-
     public DateTime? Nsx { get; set; }
 
     public DateTime? Hsd { get; set; }
@@ -28,8 +24,6 @@ public partial class ChiTietPhieuNhap
     public int? SoLuongXuat { get; set; }
 
     public bool? Active { get; set; }
-
-    public virtual ICollection<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; } = new List<ChiTietPhieuXuat>();
 
     public virtual PhieuNhap? IdpnNavigation { get; set; }
 

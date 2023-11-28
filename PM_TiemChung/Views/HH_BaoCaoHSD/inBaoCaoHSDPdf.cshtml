@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "/Views/Shared/_Layoutpdf.cshtml";
+    string toDecimal(double? d)
+    {
+        if (d == null)
+        {
+            return "";
+        }
+        else
+        {
+            return d.Value.ToString("#,##0.##");
+        }
+    }
+    List<ChiTietPhieuNhap> datas = ViewBag.Datas;
+}
+<style>
+    th {
+        font-size: 15px;
+    }
+
+    td {
+        font-size: 15px;
+    }
+</style>
+<div class="title card" style="margin-left:0; display:block;">
+    <div style="width:100%">
+        <h1 style="font-size: x-large;font-weight: 700;text-align: center; margin: 0;">
+            BÁO CÁO HẠN SỬ DỤNG VACCINE
+        </h1>
+    </div>
+</div>
+<div class="info card">
+    <div class="row-info text-center">
+        Từ ngày: @ViewBag.TuNgay, Đến ngày: @ViewBag.DenNgay
+    </div>
+</div>
+<div class="table card">
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th class="text-center p-1 w-1">STT</th>
+                <th class="text-center col-1">Ngày sản xuất</th>
+                <th class="text-center col-1">Hạn sử dụng</th>
+                <th class="text-center col-1">Mã vaccine</th>
+                <th class="text-center col-3">Tên vaccine</th>
+                <th class="text-center w-1">DVT</th>
+                <th class="text-center w-1">SL nhập</th>
+                <th class="text-center w-1">SL xuất</th>
+                <th class="text-center w-1">SL tồn</th>
+                <th class="text-center col-2">Nơi cung cấp</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int tt = 1;
+            }
+            @foreach (var data in datas)
+            {
+                <tr>
+                    <td class="text-center">@tt</td>
+                    <td class="text-center">@data.Nsx?.ToString("dd-MM-yy")</td>
+                    <td class="text-center">@data.Hsd?.ToString("dd-MM-yy")</td>
+                    <td class="text-center">@data.IdvaccineNavigation.MaVaccine</td>
+                    <td class="">@data.IdvaccineNavigation.TenVaccine</td>
+                    <td class="">@data.IdvaccineNavigation.DonViTinh</td>
+                    <td class="text-end">@toDecimal(data.SoLuong)</td>
+                    <td class="text-end">@toDecimal(data.SoLuongXuat)</td>
+                    <td class="text-end">@toDecimal(data.SoLuong - data.SoLuongXuat ?? 0)</td>
+                    <td class="">@data.IdpnNavigation.IdnccNavigation.TenNcc</td>
+                </tr>
+                tt++;
+            }
+        </tbody>
+    </table>
+</div>
+<div style="page-break-inside:avoid;">
+    <div class="">
+        <div class="flex" style="font-size:16px; font-weight:700">
+            <div class="w-34 text-center">
+            </div>
+            <div class="w-33 text-center">
+            </div>
+            <div class="w-33 text-center">
+                <em>Ngày ... Tháng ... Năm ...</em>
+            </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="flex" style="font-size:16px; font-weight:700">
+            <div class="w-34 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                Người lập phiếu
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="flex" style="font-size:12px;">
+            <div class="w-34 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                
+            </div>
+            <div class="w-33 text-center">
+                (ký, họ tên)
+            </div>
+        </div>
+    </div>
+</div>
