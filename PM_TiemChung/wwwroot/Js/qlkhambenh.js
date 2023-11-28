@@ -331,7 +331,7 @@ function renderTableLichTiem(datas, soNgayTuoi) {
         }
         var checkDuDk = (soNgayTuoi >= (d.tgsomNhat * d.idthoiGianNavigation.soNgay)) && (soNgayTuoi <= (d.tgtreNhat * d.idthoiGianNavigation.soNgay)) && checkMuiTienQuyet && !d.daThu;
 
-        $('#tbody-lichTiem').append(`<tr data-id="${d.id}" class="${checkDuDk && !d.daTiem ? "text-azure" : ""}">
+        $('#tbody-lichTiem').append(`<tr data-id="${d.id}" class="${checkDuDk ? "row-info" : (d.daTiem ? "row-warning" : "row-disabled")}">
                                                     <td class="p-0 text-center">
                                                         ${index + 1}
                                                     </td>

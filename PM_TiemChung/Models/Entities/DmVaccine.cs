@@ -21,8 +21,6 @@ public partial class DmVaccine
 
     public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; } = new List<ChiTietPhieuNhap>();
 
-    public virtual ICollection<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; } = new List<ChiTietPhieuXuat>();
-
     public virtual ICollection<DmProfileCt> DmProfileCtIdvaccineNavigations { get; set; } = new List<DmProfileCt>();
 
     public virtual ICollection<DmProfileCt> DmProfileCtMuiTienQuyetNavigations { get; set; } = new List<DmProfileCt>();

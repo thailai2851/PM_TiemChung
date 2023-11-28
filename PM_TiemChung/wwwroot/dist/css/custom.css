@@ -1,4 +1,31 @@
-﻿.form-table {
+﻿#tbody-lichTiem .form-table{
+    background-color: #fff;
+}
+
+.row-disabled .form-table {
+    background-color: #f0f2f4 !important;
+}
+.row-disabled td {
+    background-color: #f0f2f4 !important;
+}
+
+.row-warning .form-table {
+    background-color: #fbebeb !important;
+}
+
+.row-warning td {
+    background-color: #fbebeb !important;
+}
+
+.row-info .form-table {
+    background-color: #e9f0f9 !important;
+}
+
+.row-info td {
+    background-color: #e9f0f9 !important;
+}
+
+.form-table {
     border-radius: 0 !important;
     box-shadow: none !important;
     border: none;
