@@ -39,13 +39,14 @@
     <table style="width:100%;">
         <thead>
             <tr>
-                <th class="text-center p-1">TT</th>
-                <th class="text-center p-1">Ngày thu</th>
-                <th class="text-center p-1">Mã bệnh nhân</th>
-                <th class="text-center p-1">Tên bệnh nhân</th>
-                <th class="text-center p-1">Giá nhập</th>
-                <th class="text-center p-1">Giá bán</th>
-                <th class="text-center p-1">Lợi nhuận</th>
+                <th class="text-center ">TT</th>
+                <th class="text-center">Ngày thu</th>
+                <th class="text-center">Mã bệnh nhân</th>
+                <th class="text-center">Tên bệnh nhân</th>
+                <th class="text-center">Tên vaccine</th>
+                <th class="text-center">Giá nhập</th>
+                <th class="text-center">Giá bán</th>
+                <th class="text-center">Lợi nhuận</th>
             </tr>
         </thead>
         <tbody>
@@ -55,19 +56,20 @@
             @foreach (var data in datas)
             {
                 <tr>
-                    <td class="text-center p-1">@tt</td>
-                    <td class="text-center p-1">@data.NgayThu?.ToString("dd-MM-yyyy HH:mm")</td>
-                    <td class="text-center p-1">@data.IdbnNavigation.MaBn</td>
-                    <td class="p-1">@data.IdbnNavigation.TenBn</td>
-                    <td class="text-end p-1">@toDecimal(data.IdpnctNavigation.DonGia)</td>
-                    <td class="text-end p-1">@toDecimal(data.DonGia)</td>
-                    <td class="text-end p-1">@toDecimal(data.DonGia - data.IdpnctNavigation.DonGia)</td>
+                    <td class="text-center">@tt</td>
+                    <td class="text-center">@data.NgayThu?.ToString("dd-MM-yyyy HH:mm")</td>
+                    <td class="text-center">@data.IdbnNavigation.MaBn</td>
+                    <td class="">@data.IdbnNavigation.TenBn</td>
+                    <td class="">@data.IdvcNavigation.TenVaccine</td>
+                    <td class="text-end ">@toDecimal(data.IdpnctNavigation.DonGia)</td>
+                    <td class="text-end ">@toDecimal(data.DonGia)</td>
+                    <td class="text-end ">@toDecimal(data.DonGia - data.IdpnctNavigation.DonGia)</td>
                 </tr>
                 tt++;
                 tongGiaTri += data.DonGia - data.IdpnctNavigation.DonGia;
             }
             <tr>
-                <td colspan="6" style="background-color: lightgray !important;
+                <td colspan="7" style="background-color: lightgray !important;
                                position: sticky;padding: 10px 5px;
                                bottom:0; text-align:start!important;
 							   font-weight:700">

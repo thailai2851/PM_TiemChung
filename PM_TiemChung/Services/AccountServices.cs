@@ -132,11 +132,16 @@ namespace PM_TiemChung.Services
                         modelNew.IdnhanVien = model.IdnhanVien;
                         modelNew.QuanLy = model.QuanLy;
                         _context.Accounts.Update(modelNew);
-                        modelNew = await _context.Accounts.Include(x => x.IdnhanVienNavigation).FirstOrDefaultAsync(x => x.Id == model.Id);
+                       
                     }
                 }
 
+
                 await _context.SaveChangesAsync();
+
+                modelNew = await _context.Accounts
+                           .Include(x => x.IdnhanVienNavigation)
+                           .FirstOrDefaultAsync(x => x.Id == model.Id);
 
                 tran.Commit();
                 return new ResponseModel()

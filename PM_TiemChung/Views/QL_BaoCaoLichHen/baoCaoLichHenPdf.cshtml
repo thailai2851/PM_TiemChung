@@ -27,16 +27,16 @@
     <table style="width:100%;">
         <thead>
             <tr>
-                <th class="text-center p-1">#</th>
-                <th class="text-center p-1 col-1">Ngày hẹn</th>
-                <th class="text-center p-1 col-2">Tên bệnh nhân</th>
-                <th class="text-center p-1 col-1">Ngày sinh</th>
-                <th class="text-center p-1 w-1">Giới tính</th>
-                <th class="text-center p-1 col-2">Địa chỉ</th>
-                <th class="text-center p-1 col-1">Điện thoại</th>
-                <th class="text-center p-1 col-1">Email</th>
-                <th class="text-center p-1 col-1">Nghề nghiệp</th>
-                <th class="text-center p-1 col-2">Tên Vaccine</th>
+                <th class="text-center ">#</th>
+                <th class="text-center col-1">Ngày hẹn</th>
+                <th class="text-center col-2">Tên bệnh nhân</th>
+                <th class="text-center col-1">Ngày sinh</th>
+                <th class="text-center w-1">Giới tính</th>
+                <th class="text-center col-2">Địa chỉ</th>
+                <th class="text-center col-1">Điện thoại</th>
+                <th class="text-center col-1">Email</th>
+                <th class="text-center col-1">Nghề nghiệp</th>
+                <th class="text-center col-2">Tên Vaccine</th>
             </tr>
         </thead>
         <tbody>
@@ -46,16 +46,16 @@
             @foreach (var data in datas)
             {
                 <tr>
-                    <td class="text-center p-1">@tt</td>
-                    <td class="text-center p-1">@data.NgayHen?.ToString("dd-MM-yyyy")</td>
-                    <td class="p-1">@data.IdbnNavigation.TenBn</td>
-                    <td class="text-center p-1">@data.IdbnNavigation.NamSinh</td>
-                    <td class="p-1">@data.IdbnNavigation.IdgtNavigation.TenGioiTinh</td>
-                    <td class="p-1">@data.IdbnNavigation.DiaChi</td>
-                    <td class="p-1">@data.IdbnNavigation.DienThoai</td>
-                    <td class="p-1">@data.IdbnNavigation.Email</td>
-                    <td class="p-1">@data.IdbnNavigation.IdnnNavigation.TenNgheNghiep</td>
-                    <td class="p-1">@data.IdvcNavigation.TenVaccine</td>
+                    <td class="text-center">@tt</td>
+                    <td class="text-center">@data.NgayHen?.ToString("dd-MM-yyyy")</td>
+                    <td class="text-start">@data.IdbnNavigation.TenBn</td>
+                    <td class="text-center">@data.IdbnNavigation.NamSinh</td>
+                    <td class="text-start">@data.IdbnNavigation.IdgtNavigation.TenGioiTinh</td>
+                    <td class="text-start">@data.IdbnNavigation.DiaChi</td>
+                    <td class="text-end">@data.IdbnNavigation.DienThoai</td>
+                    <td class="text-start">@data.IdbnNavigation.Email</td>
+                    <td class="text-start">@data.IdbnNavigation.IdnnNavigation.TenNgheNghiep</td>
+                    <td class="text-start">@data.IdvcNavigation.TenVaccine</td>
                 </tr>
                 tt++;
             }

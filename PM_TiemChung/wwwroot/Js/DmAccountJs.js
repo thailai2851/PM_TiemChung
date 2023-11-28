@@ -16,6 +16,8 @@ $(document).ready(function () {
             form.classList.add('was-validated');
         } else {
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
+            var quanLy = $('input.isQuanLy').prop("checked");
+            formData = formData + "&QuanLy=" + quanLy
 
             $.ajax({
                 url: '/DanhMuc/DM_Account/update', // Đường dẫn đến action xử lý form
@@ -26,6 +28,7 @@ $(document).ready(function () {
                     if (response.statusCode == 200) {
                         var data = response.data;
                         var tr = getRowTable(data);
+
                         if ($("tr[data-id=" + data.id + "]").length) {
                             $("tr[data-id=" + data.id + "]").replaceWith(tr);
                         } else {

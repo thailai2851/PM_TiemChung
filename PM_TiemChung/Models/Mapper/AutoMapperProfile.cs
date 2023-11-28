@@ -85,8 +85,6 @@ namespace PM_TiemChung.Models.Mapper
             .ForMember(dest => dest.Idvaccine, opt => opt.MapFrom(src => src.Idvaccine.ToString()))
             .ForMember(dest => dest.SoLuong, opt => opt.MapFrom(src => src.SoLuong.ToString()))
             .ForMember(dest => dest.DonGia, opt => opt.MapFrom(src => src.DonGia.ToString()))
-            .ForMember(dest => dest.Cktm, opt => opt.MapFrom(src => src.Cktm.ToString()))
-            .ForMember(dest => dest.Thue, opt => opt.MapFrom(src => src.Thue.ToString()))
             .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx.ToString()))
             .ForMember(dest => dest.Hsd, opt => opt.MapFrom(src => src.Hsd.ToString()));
             CreateMap<ChiTietPhieuNhapMap, ChiTietPhieuNhap>()
@@ -94,9 +92,7 @@ namespace PM_TiemChung.Models.Mapper
             .ForMember(dest => dest.Idvaccine, opt => opt.MapFrom(src => src.Idvaccine != null ? long.Parse(src.Idvaccine) : (long?)null))
              .ForMember(dest => dest.SoLuong, opt => opt.MapFrom(src => src.SoLuong != "" ? double.Parse(src.SoLuong.Replace(",", "")) : (double?)null))
              .ForMember(dest => dest.DonGia, opt => opt.MapFrom(src => src.DonGia != "" ? double.Parse(src.DonGia.Replace(",", "")) : (double?)null))
-            .ForMember(dest => dest.Cktm, opt => opt.MapFrom(src => src.Cktm != "" ? double.Parse(src.Cktm.Replace(",", "")) : (double?)null))
-            .ForMember(dest => dest.Thue, opt => opt.MapFrom(src => src.Thue != "" ? double.Parse(src.Thue.Replace(",", "")) : (double?)null))
-            .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx != "" ? DateTime.ParseExact(src.Nsx, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
+             .ForMember(dest => dest.Nsx, opt => opt.MapFrom(src => src.Nsx != "" ? DateTime.ParseExact(src.Nsx, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null))
             .ForMember(dest => dest.Hsd, opt => opt.MapFrom(src => src.Hsd != "" ? DateTime.ParseExact(src.Hsd, "dd-MM-yyyy", CultureInfo.InvariantCulture) : (DateTime?)null));
 
         }

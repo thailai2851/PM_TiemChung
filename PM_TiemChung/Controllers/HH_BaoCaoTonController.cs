@@ -75,6 +75,7 @@ namespace PM_TiemChung.Controllers
             return Ok(await _context.LichTiemBns
                 .AsNoTracking()
                 .Include(x => x.IdbnNavigation)
+                .Include(x => x.IdvcNavigation)
                 .Include(x => x.IdpnctNavigation)
                 .Where(x => x.NgayThu.Value.Date <= denNgay
                                                         && x.NgayThu.Value.Date >= tuNgay
@@ -139,10 +140,10 @@ namespace PM_TiemChung.Controllers
             DateTime tuNgay = DateTime.ParseExact(TuNgay, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             DateTime denNgay = DateTime.ParseExact(DenNgay, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
-
             ViewBag.Datas = await _context.LichTiemBns
                 .AsNoTracking()
                 .Include(x => x.IdbnNavigation)
+                .Include(x => x.IdvcNavigation)
                 .Include(x => x.IdpnctNavigation)
                 .Where(x => x.NgayThu.Value.Date <= denNgay
                                                         && x.NgayThu.Value.Date >= tuNgay

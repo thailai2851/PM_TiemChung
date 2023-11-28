@@ -46,9 +46,9 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdbnNavigation)
                 .ThenInclude(x => x.IdgtNavigation)
                 .Include(x => x.IdvcNavigation)
-                .Where(x => x.NgayThu.Value.Date <= denNgay
-                                                        && x.NgayThu.Value.Date >= tuNgay
-                                                        ).OrderByDescending(x => x.NgayThu).ToListAsync());
+                .Where(x => x.NgayHen.Value.Date <= denNgay
+                                                        && x.NgayHen.Value.Date >= tuNgay
+                                                        ).OrderByDescending(x => x.NgayHen).ToListAsync());
         }
         [HttpPost("inBaoCaoLichHen")]
         public async Task<IActionResult> inBaoCaoLichHen(string TuNgay, string DenNgay)
@@ -64,9 +64,9 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdbnNavigation)
                 .ThenInclude(x => x.IdgtNavigation)
                 .Include(x => x.IdvcNavigation)
-                .Where(x => x.NgayThu.Value.Date <= denNgay
-                                                        && x.NgayThu.Value.Date >= tuNgay
-                                                        ).OrderByDescending(x => x.NgayThu).ToListAsync();
+                .Where(x => x.NgayHen.Value.Date <= denNgay
+                                                        && x.NgayHen.Value.Date >= tuNgay
+                                                        ).OrderByDescending(x => x.NgayHen).ToListAsync();
             ViewBag.TuNgay = tuNgay.ToString("dd-MM-yyyy");
             ViewBag.DenNgay = denNgay.ToString("dd-MM-yyyy");
             ViewBag.ttDoanhNghiep = await _context.ThongTinDoanhNghieps.FirstOrDefaultAsync();
