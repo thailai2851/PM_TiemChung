@@ -305,7 +305,7 @@ function renderTableDs(datas) {
                                                     <td class="text-start NgayCap">${formatDay(d.ngayCap)}</td>
                                                     <td class="text-start GhiChu">${(d.ghiChu == null ? "" : d.ghiChu)}</td>
                                                     <td class="text-start NgayDen">${(formatDay(d.ngayDen == null ? null : d.ngayDen))}</td>
-                                                    <td class="text-center last-td-column">
+                                                    <td class="text-center">
                                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                             <button class="btn btn-icon bg-green-lt btn-active" value="${d.id}" data-bs-toggle="tooltip" data-bs-placement="left" title="Kích hoạt">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-supabase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -358,7 +358,7 @@ function renderTableDstn(datas) {
                                                     <td class="text-start NgayCap">${formatDay(d.ngayCap)}</td>
                                                     <td class="text-start GhiChu">${(d.ghiChu == null ? "" : d.ghiChu)}</td>
                                                     <td class="text-start NgayDen">${(formatDay(d.ngayDen == null ? null : d.ngayDen))}</td>
-                                                    <td class="text-center last-td-column">
+                                                    <td class="text-center">
                                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                             <button class="btn btn-icon bg-red-lt btn-unactive" value="${d.id}" data-bs-toggle="tooltip" data-bs-placement="left" title="Huỷ kích hoạt">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circuit-switch-open" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

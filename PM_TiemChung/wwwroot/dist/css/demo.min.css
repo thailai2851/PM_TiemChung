@@ -38,10 +38,6 @@ table .form-control[readonly]:focus {
     padding: 0.25rem 0.5rem !important;
     min-height: 0 !important;
 }
-.form-table:focus {
-        border: 1px solid #206BC4 !important;
-        background-color: white !important;
-    }
 .table-input td {
     padding: 0;
 }
@@ -166,18 +162,6 @@ table td:first-child {
 }
 #divDropdownSearch .list-group-item.active {
     background-color: lightgray;
-}
-.last-td-column .btn-icon {
-  min-width: calc(
-    var(--tblr-btn-line-height) * var(--tblr-btn-font-size) +
-      var(--tblr-btn-padding-y) * 1 + var(--tblr-btn-border-width) * 2
-  );
-  min-height: calc(
-    var(--tblr-btn-line-height) * var(--tblr-btn-font-size) +
-      var(--tblr-btn-padding-y) + var(--tblr-btn-border-width)
-  );
-  padding-left: 0;
-  padding-right: 0;
 }
 .table-text td {
   padding: 0.2rem !important; 
@@ -1439,12 +1423,6 @@ tfoot {
   z-index: 10;
 }
 
-.last-td-column {
-  position: sticky;
-  right: 0;
-  background-color: #fff !important;
-  z-index: 2 !important;
-}
 .second-td-column {
   position: sticky;
   right: 32.775px;
@@ -1518,14 +1496,6 @@ tfoot {
   right: 151.1px;
   z-index: 4 !important;
 }
-.last-th-column {
-  position: sticky;
-  right: 0;
-  z-index: 4 !important;
-}
-.last-td-column .dropdown-menu {
-  z-index: 3 !important; /* Increase the z-index */
-}
 .table-pointer tbody tr:hover {
   cursor: pointer;
 }
@@ -1535,25 +1505,6 @@ tfoot {
 #CheckBHYTMau.form-check-input:checked,
 #CheckBHYTTT.form-check-input:checked {
   background-color: #47b91e;
-}
-
-tfoot .last-td-column {
-  position: sticky;
-  right: 0;
-  background-color: #667382;
-}
-
-.first-td-column {
-  position: sticky;
-  left: 0;
-  background-color: #fff !important;
-  z-index: 2 !important;
-}
-
-.first-th-column {
-  position: sticky;
-  left: 0;
-  z-index: 4 !important;
 }
 
 .show-column {

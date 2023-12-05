@@ -33,13 +33,8 @@
     min-height: 0 !important;
 }
 
-    .form-table:not([readonly]):not([disabled]):focus {
-        border: 1px solid #206BC4 !important;
-        background-color: white !important;
-    }
-
 .table-input td {
-    padding: 0;
+    padding: 5px;
 }
 
 .table-input .btn-icon {
@@ -56,14 +51,6 @@
     background-color: whitesmoke;
     color: var(--tblr-table-active-color);
 }
-.table-input td {
-    padding: 0;
-}
-
 .table-input .btn-icon {
     --tblr-btn-icon-size: 1.15rem;
-}
-
-input:read-only{
-    background-color: whitesmoke;
 }
