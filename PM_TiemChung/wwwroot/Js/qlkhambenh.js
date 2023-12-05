@@ -2,6 +2,22 @@
 $(document).ready(function () {
     configDateDefault();
     configDateLongMaskWithElement($('tr .input-date-long-mask'));
+    document.addEventListener('shown.bs.tab', function (event) {
+        var a = event.target; // Phần tử đang được show
+        _activeTab = a.getAttribute('href');
+        if (_activeTab == '#tabs-DanhSach') {
+            $('#btnReloadDSTN').click();
+        }
+        if (_activeTab == '#tabs-KhamBenh') {
+            $('#btnReloadBn').click();
+        }
+        if (_activeTab == '#tabs-ThuNgan') {
+            $('#btnReloadDSThuNgan').click();
+        }
+        if (_activeTab == '#tabs-TiemChung') {
+            $('#btnReloadDSTiemChung').click();
+        }
+    });
     $('#btnReloadDSTN').on('click', function () {
         $.ajax({
             url: '/QuanLy/QL_KhamBenh/reloadTableDSTN',
