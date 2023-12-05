@@ -1,34 +1,28 @@
 ﻿
 <div id="TTBenhNhan">
-    <form id="formTTHC" class="border border-dark p-2 rounded mb-1">
+    <form id="formTTHC" class="p-2 rounded mb-1">
         <input type="hidden" name="Id" value="0">
         <div class="row">
             <div class="col-lg-2 col-12">
-                <label class="form-label mb-1 mt-2 required">Mã BN</label>
+                <label class="form-label mb-1 mt-2">Mã BN</label>
                 <input type="text" autocomplete="off" class="form-control" name="MaBn" placeholder="Auto" required readonly>
             </div>
             <div class="col-lg-4 col-12">
-                <label class="form-label mb-1 mt-2 required">Tên bệnh nhân</label>
+                <label class="form-label mb-1 mt-2">Tên bệnh nhân</label>
                 <input type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tên bệnh nhân" required>
             </div>
             <div class="col-lg-3 col-12">
                 <label class="form-label mb-1 mt-2">Ngày sinh</label>
-                <div class="input-icon">
-                    <input type="text" autocomplete="off" class="form-control input-date-long-mask" name="NgaySinh" placeholder="Ngày Sinh">
-                    <span class="input-icon-addon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
-                    </span>
-                </div>
+                <input type="text" autocomplete="off" class="form-control input-date-long-mask" name="NgaySinh" placeholder="Ngày Sinh">
             </div>
             <div class="col-lg-3 col-12">
-                <label class="form-label mb-1 mt-2 required">Năm sinh</label>
+                <label class="form-label mb-1 mt-2">Năm sinh</label>
                 <input type="text" autocomplete="off" class="form-control" name="NamSinh" placeholder="Năm sinh" required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-12">
-                <label class="form-label mb-1 mt-2 required">Giới tính</label>
+                <label class="form-label mb-1 mt-2">Giới tính</label>
                 <select class="form-select" name="Idgt" required>
                     @foreach (DmGioiTinh gt in ViewBag.GioiTinhs)
                     {
@@ -37,7 +31,7 @@
                 </select>
             </div>
             <div class="col-lg-10 col-12">
-                <label class="form-label mb-1 mt-2 required">Địa chỉ</label>
+                <label class="form-label mb-1 mt-2">Địa chỉ</label>
                 <input type="text" autocomplete="off" class="form-control " name="DiaChi" placeholder="Địa chỉ" required>
             </div>
         </div>
@@ -65,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 col-12">
-                <label class="form-label mb-1 mt-2 required">Số ĐT</label>
+                <label class="form-label mb-1 mt-2">Số ĐT</label>
                 <input type="text" autocomplete="off" class="form-control" name="DienThoai" placeholder="Số điện thoại" required>
             </div>
             <div class="col-lg-3 col-12">
@@ -73,7 +67,7 @@
                 <input autocomplete="off" type="email" class="form-control" name="Email" placeholder="Email">
             </div>
             <div class="col-lg-3 col-12">
-                <label class="form-label mb-1 mt-2 required">Dân tộc</label>
+                <label class="form-label mb-1 mt-2">Dân tộc</label>
                 <select class="form-select cbDanToc" name="Iddt" required>
                 </select>
             </div>
@@ -91,13 +85,7 @@
             </div>
             <div class="col-lg-3 col-12">
                 <label class="form-label mb-1 mt-2">Ngày cấp</label>
-                <div class="input-icon">
-                    <input type="text" autocomplete="off" class="form-control input-date" name="NgayCap" placeholder="Ngày cấp CCCD">
-                    <span class="input-icon-addon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
-                    </span>
-                </div>
+                <input type="text" autocomplete="off" class="form-control input-date" name="NgayCap" placeholder="Ngày cấp CCCD">
             </div>
             <div class="col-lg-3 col-12">
                 <label class="form-label mb-1 mt-2">Nơi cấp</label>
@@ -105,19 +93,13 @@
             </div>
             <div class="col-lg-3 col-12">
                 <label class="form-label mb-1 mt-2">Ngày lưu hồ sơ</label>
-                <div class="input-icon">
-                    <input type="text" autocomplete="off" class="form-control input-date-default" name="NgayDen" placeholder="Ngày đến">
-                    <span class="input-icon-addon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/calendar -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path><path d="M16 3v4"></path><path d="M8 3v4"></path><path d="M4 11h16"></path><path d="M11 15h1"></path><path d="M12 15v3"></path></svg>
-                    </span>
-                </div>
+                <input type="text" autocomplete="off" class="form-control input-date-default" name="NgayDen" placeholder="Ngày đến">
             </div>
         </div>
         <div class="row">
             <div class="mb-2 col-lg-12 col-12">
                 <label class="form-label mb-1 mt-2">Ghi chú</label>
-                <textarea type="text" rows="6" style="max-height:150px" autocomplete="off" class="form-control" name="GhiChu" placeholder="Ghi chú"></textarea>
+                <textarea type="text" rows="3" style="max-height:150px" autocomplete="off" class="form-control" name="GhiChu" placeholder="Ghi chú"></textarea>
             </div>
         </div>
     </form>

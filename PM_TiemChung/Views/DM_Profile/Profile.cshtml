@@ -9,12 +9,12 @@
                         <div class="row p-2">
                             <div class="col-md-3 mb-2">
                                 <div class="card">
-                                    <div class="card-body p-2 bg-azure-lt">
+                                    <div class="card-body p-2">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card">
                                                     <div class="table-responsive vh-lg-67">
-                                                        <table class="table table-vcenter card-table table-bordered table-hover table-text">
+                                                        <table class="table table-vcenter card-table table-bordered table-text">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="text-center p-2">TT</th>
@@ -27,7 +27,7 @@
                                                                 }
                                                                 @foreach (DmProfile pr in ViewBag.Profiles)
                                                                 {
-                                                                    <tr data-id="@pr.Id" style="cursor: pointer;">
+                                                                    <tr data-id="@pr.Id">
                                                                         <td class="text-center">@i</td>
                                                                         <td class="text-start ten">@pr.TenProfile</td>
                                                                     </tr>
@@ -77,7 +77,7 @@
                                             <div class="col-12">
                                                 <div class="card">
                                                     <div class="table-responsive" style="height:63vh;" id="tableDM">
-                                                        <table class="table table-vcenter card-table table-bordered table-hover text-nowrap table-input">
+                                                        <table class="table table-vcenter card-table table-bordered text-nowrap table-input">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="text-center p-2">STT</th>
@@ -87,7 +87,7 @@
                                                                     <th class="text-center">TG trễ nhất</th>
                                                                     <th class="text-center">Thời gian</th>
                                                                     <th class="text-center">Mũi tiên quyết</th>
-                                                                    <th class="text-center last-th-column" style="z-index:3;">Tùy chọn</th>
+                                                                    <th class="text-center" style="z-index:3;">Tùy chọn</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="tbody-tableCt">

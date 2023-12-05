@@ -152,11 +152,11 @@ function addRowChiTietNhapKho() {
 
 
 var newRow = $(`<tr id="moi">
-                <td class="first-td-column text-center ps-0 td-sticky" style="width:32px;z-index:2;">
+                <td class="first-td-column text-center ps-0">
                     <input autocomplete="off" type="text" class="form-control form-table text-center stt" readonly value="${GanSTT()}" />
                     <input type="hidden" name="Id" value="0" />
                 </td>
-                <td class="td-sticky md-sticky" style="left: 33px;background-color: #fff !important; z-index:2">
+                <td class="td-sticky">
                     <select name="IdhangHoa" class="form-select form-table cbHangHoa" style="position:relative;width:400px;">
                     </select>
                 </td>
