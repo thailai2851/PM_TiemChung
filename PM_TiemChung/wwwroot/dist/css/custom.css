@@ -3,26 +3,26 @@
 }
 
 .row-disabled .form-table {
-    background-color: #f0f2f4 !important;
+    background-color: #d8d8d8 !important;
 }
 .row-disabled td {
-    background-color: #f0f2f4 !important;
+    background-color: #d8d8d8 !important;
 }
 
 .row-warning .form-table {
-    background-color: #fbebeb !important;
+    background-color: #ffeb9c !important;
 }
 
 .row-warning td {
-    background-color: #fbebeb !important;
+    background-color: #ffeb9c !important;
 }
 
 .row-info .form-table {
-    background-color: #e9f0f9 !important;
+    background-color: #b4c6e7 !important;
 }
 
 .row-info td {
-    background-color: #e9f0f9 !important;
+    background-color: #b4c6e7 !important;
 }
 
 .form-table {
