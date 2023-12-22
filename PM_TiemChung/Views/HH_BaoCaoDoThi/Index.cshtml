@@ -1,0 +1,72 @@
+﻿@* <head>
+    <title>Biểu đồ Bar Chart với nhiều dataset</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head> *@
+<body>
+    <div class="row">
+        <label class="col-sm-1 col-lg-1 col-form-label">Từ ngày</label>
+        <div class="col-sm-2 col-lg-2">
+            <input type="text" name="tuNgay" class="form-control input-date-default" placeholder="dd-MM-yyyy" id="tuNgay">
+        </div>
+        <label class="col-sm-1 col-lg-1 col-form-label">Đến ngày</label>
+        <div class="col-sm-2 col-lg-2">
+            <input type="text" name="denNgay" class="form-control input-date-default"  placeholder="dd-MM-yyyy" id="denNgay">
+        </div>
+        <div class="col-md-1 mb-2 col-lg-1 d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" onclick="baoCaoChiTieu()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs nav-fill p-0" id="myTab" data-bs-toggle="tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a href="#tabs-lapPhieu" id="tab-lapphieu" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                        Lập phiếu nhập
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#tabs-dsPhieu" class="nav-link text-dark active" data-bs-toggle="tab" aria-selected="true" role="tab">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                        Lịch sử phiếu nhập
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body p-2">
+            <div class="tab-content">
+                <div class="tab-pane" id="tabs-lapPhieu" role="tabpanel" aria-labelledby="tab-lapphieu">
+                    <div style="width: 70%; margin: auto;">
+                    <canvas id="doThiThucDon"></canvas>
+                    </div>
+                </div>
+                <div class="tab-pane active show" id="tabs-dsPhieu" role="tabpanel">
+                    <table class="table table-bordered table-hover table-striped text-center" id="tableChiTietPhieuNhap">
+                        <thead style="position: sticky; top: 0;">
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên món</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyTD">
+                        </tbody>
+                        <tfoot>
+                            <tr id="tongTien">
+                                <td></td>
+                                <td>Tổng</td>
+                                <td><input type="text" readonly class="form-control formatted-number" id="tongTD" value="" /></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="~/js/common.js"></script>
+<script src="~/js/baocaochitieu.js"></script>
