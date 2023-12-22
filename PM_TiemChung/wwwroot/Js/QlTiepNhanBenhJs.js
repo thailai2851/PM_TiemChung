@@ -1,6 +1,6 @@
 ﻿var _benhNhan = null;
 $(document).ready(function () {
-        
+    
     configDateLongMask();
     configDateDefault();
     configDate();
@@ -21,7 +21,16 @@ $(document).ready(function () {
             $('input[name="NgaySinh"]').val(strDate + $(this).val());
         }
     });
-
+    document.addEventListener('shown.bs.tab', function (event) {
+        var a = event.target; // Phần tử đang được show
+        _activeTab = a.getAttribute('href');
+        if (_activeTab == '#tabs-DSBenhNhan') {
+            $('#btnSearch').click();
+        }
+        if (_activeTab == '#tabs-DSBenhNhanTrongNgay') {
+            $('#btnReloadDSTN').click();
+        }
+    });
     var das = [{
         className: 'select.cbTinhCuTru',
         placeholder: "-- Tỉnh cư trú --",

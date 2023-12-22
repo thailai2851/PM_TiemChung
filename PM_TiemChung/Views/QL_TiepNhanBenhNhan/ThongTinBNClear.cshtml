@@ -4,11 +4,11 @@
         <input type="hidden" name="Id" value="0">
         <div class="row">
             <div class="col-lg-2 col-12">
-                <label class="form-label mb-1 mt-2">Mã BN</label>
+                <label class="form-label mb-1 mt-2 required">Mã BN</label>
                 <input type="text" autocomplete="off" class="form-control" name="MaBn" placeholder="Auto" required readonly>
             </div>
             <div class="col-lg-4 col-12">
-                <label class="form-label mb-1 mt-2">Tên bệnh nhân</label>
+                <label class="form-label mb-1 mt-2 required">Tên bệnh nhân</label>
                 <input type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tên bệnh nhân" required>
             </div>
             <div class="col-lg-3 col-12">
@@ -16,13 +16,13 @@
                 <input type="text" autocomplete="off" class="form-control input-date-long-mask" name="NgaySinh" placeholder="Ngày Sinh">
             </div>
             <div class="col-lg-3 col-12">
-                <label class="form-label mb-1 mt-2">Năm sinh</label>
+                <label class="form-label mb-1 mt-2 required">Năm sinh</label>
                 <input type="text" autocomplete="off" class="form-control" name="NamSinh" placeholder="Năm sinh" required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-12">
-                <label class="form-label mb-1 mt-2">Giới tính</label>
+                <label class="form-label mb-1 mt-2 required">Giới tính</label>
                 <select class="form-select" name="Idgt" required>
                     @foreach (DmGioiTinh gt in ViewBag.GioiTinhs)
                     {
@@ -31,7 +31,7 @@
                 </select>
             </div>
             <div class="col-lg-10 col-12">
-                <label class="form-label mb-1 mt-2">Địa chỉ</label>
+                <label class="form-label mb-1 mt-2 required">Địa chỉ</label>
                 <input type="text" autocomplete="off" class="form-control " name="DiaChi" placeholder="Địa chỉ" required>
             </div>
         </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 col-12">
-                <label class="form-label mb-1 mt-2">Số ĐT</label>
+                <label class="form-label mb-1 mt-2 required">Số ĐT</label>
                 <input type="text" autocomplete="off" class="form-control" name="DienThoai" placeholder="Số điện thoại" required>
             </div>
             <div class="col-lg-3 col-12">
@@ -67,7 +67,7 @@
                 <input autocomplete="off" type="email" class="form-control" name="Email" placeholder="Email">
             </div>
             <div class="col-lg-3 col-12">
-                <label class="form-label mb-1 mt-2">Dân tộc</label>
+                <label class="form-label mb-1 mt-2" required>Dân tộc</label>
                 <select class="form-select cbDanToc" name="Iddt" required>
                 </select>
             </div>

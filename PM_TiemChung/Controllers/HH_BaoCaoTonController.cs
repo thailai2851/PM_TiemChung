@@ -141,7 +141,7 @@ namespace PM_TiemChung.Controllers
             DateTime denNgay = DateTime.ParseExact(DenNgay, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
             ViewBag.Datas = await _context.LichTiemBns
-                .AsNoTracking()
+                .AsNoTracking() 
                 .Include(x => x.IdbnNavigation)
                 .Include(x => x.IdvcNavigation)
                 .Include(x => x.IdpnctNavigation)
