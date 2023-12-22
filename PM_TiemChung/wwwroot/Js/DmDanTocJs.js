@@ -200,7 +200,7 @@ function getSessionColumnShow() {
             },
             {
                 columnName: "DiaBanCuTru",
-                value: false,
+                value: true,
             },
         ];
         sessionStorage.setItem(sessionName, JSON.stringify(defaultValue));

@@ -214,28 +214,28 @@ function getSessionColumnShow() {
             },
             {
                 columnName: "QueQuan",
-                value: false,
+                value: true,
             },
             {
                 columnName: "DienThoai",
-                value: false,
+                value: true,
             },
             {
                 columnName: "Mabhxh",
-                value: false,
+                value: true,
             },
             {
                 columnName: "Macchn",
-                value: false,
+                value: true,
             },
 
             {
                 columnName: "Ngaycapcchn",
-                value: false,
+                value: true,
             },
             {
                 columnName: "Noicapcchn",
-                value: false,
+                value: true,
             }
         ];
         sessionStorage.setItem(sessionName, JSON.stringify(defaultValue));
