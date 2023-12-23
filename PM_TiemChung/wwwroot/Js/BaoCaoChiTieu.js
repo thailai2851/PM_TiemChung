@@ -2,8 +2,8 @@
 var _valuesTD = [];
 var _myChartTD = null;
 $(document).ready(function () {
+    configDateDefault();
     baoCaoChiTieu();
-
 });
 function baoCaoChiTieu() {
     $.ajax({

@@ -44,7 +44,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IddtNavigation)
                 .Include(x => x.IdnnNavigation)
                 .Include(x => x.IdqgNavigation)
-                .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date).ToListAsync();
+                .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date).OrderByDescending(x => x.NgayKham).ToListAsync();
             DateTime d = DateTime.Now.Date;
             ViewBag.DanhSachDeNghi = await _context.LichTiemBns
                 .Include(x=>x.IdbnNavigation)
@@ -70,7 +70,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdnnNavigation)
                 .Include(x => x.IdqgNavigation)
                 .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date
-                ).ToListAsync());
+                ).OrderByDescending(x => x.NgayKham).ToListAsync());
         }
         [HttpPost("reloadDSThuNgan")]
         public async Task<IActionResult> reloadDSThuNgan(string ngay)
@@ -209,6 +209,7 @@ namespace PM_TiemChung.Controllers
                     .Include(x=>x.IdvcNavigation)
                     .FirstOrDefaultAsync(x => x.Id == id);
                 var ctPhieuNhap = await _context.ChiTietPhieuNhaps
+                    .OrderBy(x => x.Hsd)
                     .FirstOrDefaultAsync(x => (x.Idvaccine == lichTiem.Idvc) && (x.SoLuong > (x.SoLuongXuat ?? 0)));
                 if (ctPhieuNhap == null)
                 {
