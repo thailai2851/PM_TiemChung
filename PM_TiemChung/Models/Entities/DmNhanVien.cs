@@ -42,6 +42,4 @@ public partial class DmNhanVien
     public virtual ICollection<LichTiemBn> LichTiemBnIdnhanVienTiemNavigations { get; set; } = new List<LichTiemBn>();
 
     public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; } = new List<PhieuNhap>();
-
-    public virtual ICollection<PhieuXuat> PhieuXuats { get; set; } = new List<PhieuXuat>();
 }

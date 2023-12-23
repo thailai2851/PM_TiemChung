@@ -131,6 +131,7 @@ namespace PM_TiemChung.Services
                         modelNew.Password = model.Password;
                         modelNew.IdnhanVien = model.IdnhanVien;
                         modelNew.QuanLy = model.QuanLy;
+                        modelNew.Bsyte = model.Bsyte;
                         _context.Accounts.Update(modelNew);
                        
                     }

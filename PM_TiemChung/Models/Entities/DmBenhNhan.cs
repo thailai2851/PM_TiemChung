@@ -64,6 +64,4 @@ public partial class DmBenhNhan
     public virtual DmTinhCuTru? IdtinhNavigation { get; set; }
 
     public virtual ICollection<LichTiemBn> LichTiemBns { get; set; } = new List<LichTiemBn>();
-
-    public virtual ICollection<PhieuXuat> PhieuXuats { get; set; } = new List<PhieuXuat>();
 }

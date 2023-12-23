@@ -17,7 +17,8 @@ $(document).ready(function () {
         } else {
             var formData = $(this).serialize(); // Lấy dữ liệu từ form
             var quanLy = $('input.isQuanLy').prop("checked");
-            formData = formData + "&QuanLy=" + quanLy
+            var bacSiYTe = $('input.isBSYTe').prop("checked");
+            formData = formData + "&QuanLy=" + quanLy + "&Bsyte=" + bacSiYTe 
 
             $.ajax({
                 url: '/DanhMuc/DM_Account/update', // Đường dẫn đến action xử lý form

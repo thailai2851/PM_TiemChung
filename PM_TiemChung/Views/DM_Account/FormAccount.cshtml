@@ -34,10 +34,16 @@
             </div>
         </div>
         <div class="col-sm-6 col-md-6 pr-0 mt-2">
-            <div class="mb-2 mt-4">
+            <div class="mb-2 mt-4 col-6">
                 <label class="form-check">
                     <input class="form-check-input border-dark single-checkbox isQuanLy" style="height:20px; width:20px;" type="checkbox" @(Model.QuanLy.HasValue ? (Model.QuanLy.Value ? "checked" : "") : "")>
                     <span for="txtQuanLy" class="form-check-label p-1 required-checkbox ms-2">Quản lý</span>
+                </label>
+            </div>
+            <div class="mb-2 mt-4 col-6">
+                <label class="form-check">
+                    <input class="form-check-input border-dark single-checkbox isBSYTe" style="height:20px; width:20px;" type="checkbox" @(Model.Bsyte.HasValue ? (Model.Bsyte.Value ? "checked" : "") : "")>
+                    <span for="txtBSYte" class="form-check-label p-1 required-checkbox ms-2">Bác sĩ/Y tế</span>
                 </label>
             </div>
         </div>

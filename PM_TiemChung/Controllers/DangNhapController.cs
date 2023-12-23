@@ -53,7 +53,7 @@ namespace PM_TiemChung.Controllers
             {
                 claims.Add(new Claim(ClaimTypes.Name, taiKhoanAdmin.IdnhanVien.ToString(), taiKhoanAdmin.IdnhanVienNavigation.TenNhanVien));
                 claims.Add(new Claim(ClaimTypes.Role, "NhanVien"));
-                claims.Add(new Claim("VaiTro", taiKhoanAdmin.QuanLy.ToString()));
+                claims.Add(new Claim("VaiTro", taiKhoanAdmin.QuanLy.ToString(), taiKhoanAdmin.Bsyte.ToString()));
                 await signIn(claims);
                 return Ok(new
                 {

@@ -10,6 +10,9 @@
             return null;
         }
     }
+
+    var vaiTro = User.Claims.ElementAtOrDefault(2);
+    bool bSYT = bool.Parse(vaiTro?.ValueType);
 }
 <div class="page-body mb-1">
     <div class="card">
@@ -32,33 +35,43 @@
         </div>
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs nav-fill" id="myTab" data-bs-toggle="tabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a href="#tabs-DanhSach" id="tabsdanhsach" class="nav-link text-dark active" data-bs-toggle="tab" aria-selected="true" role="tab">
-                        Danh sách bệnh nhân
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#tabs-KhamBenh" class="nav-link text-dark" id="tabsKhamBenh" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
-                        Khám bệnh
-                    </a>
-                </li>
+                @{
+                    if (bSYT == true)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <a href="#tabs-DanhSach" id="tabsdanhsach" class="nav-link text-dark active" data-bs-toggle="tab" aria-selected="true" role="tab">
+                                Danh sách bệnh nhân
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a href="#tabs-KhamBenh" class="nav-link text-dark" id="tabsKhamBenh" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+                                Khám bệnh
+                            </a>
+                        </li>
+                    }
+                    
+                }
+               
                 <li class="nav-item" role="presentation">
                     <a href="#tabs-ThuNgan" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/user -->
                         Thu Ngân
                     </a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <a href="#tabs-TiemChung" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/activity -->
-                        Tiêm chủng
-                    </a>
-                </li>
+
+                @{
+                    if (bSYT == true)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <a href="#tabs-TiemChung" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+                                Tiêm chủng
+                            </a>
+                        </li>
+                    }
+                }
             </ul>
         </div>
         <div class="card-body p-2">
             <div class="tab-content">
-
                 <div class="tab-pane active show" id="tabs-DanhSach" role="tabpanel">
                     <div>
                         <div class="w-100">

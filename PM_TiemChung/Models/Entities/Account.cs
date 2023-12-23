@@ -15,6 +15,8 @@ public partial class Account
 
     public bool? QuanLy { get; set; }
 
+    public bool? Bsyte { get; set; }
+
     public bool? Active { get; set; }
 
     public virtual DmNhanVien? IdnhanVienNavigation { get; set; }
