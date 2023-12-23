@@ -62,7 +62,7 @@ function renderDoThiThucDon(labels, values) {
         datasets: [{
             label: 'Số Lượng',
             data: values,
-            backgroundColor: 'rgba(230, 126, 34, 0.8)',
+            backgroundColor: 'rgba(255, 169, 41, 1)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }]
