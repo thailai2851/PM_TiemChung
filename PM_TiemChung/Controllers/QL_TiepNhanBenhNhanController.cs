@@ -106,7 +106,7 @@ namespace PM_TiemChung.Controllers
                 .Include(x => x.IdnnNavigation)
                 .Include(x => x.IdqgNavigation)
                 .Where(x => x.Active == true && x.NgayKham.Value.Date == DateTime.Now.Date
-                ).ToListAsync());
+                ).OrderByDescending(x => x.NgayKham).ToListAsync());
         }
         [HttpPost("getBenhNhan")]
         public async Task<IActionResult> getBenhNhan(long id)
