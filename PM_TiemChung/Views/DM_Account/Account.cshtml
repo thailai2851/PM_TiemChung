@@ -60,6 +60,7 @@
                         <th class="text-center Password1">Mật khẩu</th>
                         <th class="text-center IdnhanVien">Nhân viên</th>
                         <th class="text-center QuanLy">Vai trò</th>
+                        <th class="text-center Bsyte">Nhóm Bác sĩ/Y tá</th>
                         <th class="text-center last-th-column" style="z-index:3;">Tùy chọn</th>
                     </tr>
                 </thead>
@@ -71,6 +72,7 @@
                             <td class="text-center Password1">@d.Password</td>
                             <td class="text-start IdnhanVien">@(d.IdnhanVienNavigation == null ? "" : d.IdnhanVienNavigation.TenNhanVien)</td>
                             <td class="text-start QuanLy">@(d.QuanLy == true ? "Quản Lý" : "Nhân viên")</td>
+                            <td class="text-start Bsyte">@(d.Bsyte == true ? "Có" : "Không")</td>
                             <td class="text-center last-td-column">
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <button onclick="showModal(@d.Id)" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">

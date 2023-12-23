@@ -90,5 +90,15 @@ namespace PM_TiemChung.Controllers
                 return writer.GetStringBuilder().ToString();
             }
         }
+
+
+        [HttpPost("checkUserName")]
+        // thêm và cập nhập
+        public async Task<IActionResult> checkUserName(string userName)
+        {
+            var account = await _context.Accounts.Where(x => x.UserName.ToLower() == userName.ToLower()).FirstOrDefaultAsync();
+            return Ok(account);
+        }
+
     }
 }

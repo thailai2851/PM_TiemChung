@@ -7,45 +7,63 @@ $(document).ready(function () {
             searchWithKeyword();
         }
     });
-    $('#formUpdate').submit(function (event) {
-        event.preventDefault(); // Ngăn chặn hành vi mặc định của form submit
-        var form = document.getElementById('formUpdate');
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-            form.classList.add('was-validated');
-        } else {
-            var formData = $(this).serialize(); // Lấy dữ liệu từ form
-            var quanLy = $('input.isQuanLy').prop("checked");
-            var bacSiYTe = $('input.isBSYTe').prop("checked");
-            formData = formData + "&QuanLy=" + quanLy + "&Bsyte=" + bacSiYTe 
-
-            $.ajax({
+  $('#formUpdate').submit(function (event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của form submit
+    var form = document.getElementById('formUpdate');
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
+      form.classList.add('was-validated');
+    } else {
+      var userName = $('#txtUserName').val();
+      var formData = $(this).serialize(); // Lấy dữ liệu từ form
+      if (userName != "") {
+        $.ajax({
+          type: "post",
+          url: "/DanhMuc/DM_Account/checkUserName",
+          data: "userName=" + userName,
+          success: function (response) {
+            if (response != null) {
+              form.classList.add('was-validated');
+              showToast("Tên tài khoản đã tồn tại!");
+            } else {
+              var quanLy = $('input.isQuanLy').prop("checked");
+              var bacSiYTe = $('input.isBSYTe').prop("checked");
+              formData = formData + "&QuanLy=" + quanLy + "&Bsyte=" + bacSiYTe
+              console.log(formData);
+              $.ajax({
                 url: '/DanhMuc/DM_Account/update', // Đường dẫn đến action xử lý form
                 method: 'POST',
                 data: formData,
                 success: function (response) {
-                    showToast(response.message, response.statusCode);
-                    if (response.statusCode == 200) {
-                        var data = response.data;
-                        var tr = getRowTable(data);
+                  showToast(response.message, response.statusCode);
+                  if (response.statusCode == 200) {
+                    var data = response.data;
+                    var tr = getRowTable(data);
 
-                        if ($("tr[data-id=" + data.id + "]").length) {
-                            $("tr[data-id=" + data.id + "]").replaceWith(tr);
-                        } else {
-                            $("tr[data-id=" + data.id + "]").append(tr);
-                        }
-                        showColumnFromSesion();
-                        $('#modal-largel').modal('hide');
+                    if ($("tr[data-id=" + data.id + "]").length) {
+                      $("tr[data-id=" + data.id + "]").replaceWith(tr);
+                    } else {
+                      $("tr[data-id=" + data.id + "]").append(tr);
                     }
+                    showColumnFromSesion();
+                    $('#modal-largel').modal('hide');
+                  }
                 },
                 error: function (xhr, status, error) {
-                    // Xử lý lỗi (nếu có) khi gửi form
-                    console.error(error);
+                  // Xử lý lỗi (nếu có) khi gửi form
+                  console.error(error);
                 }
-            });
-        }
-    });
+              });
+            }
+          },
+          error: function (error) {
+            console.log(error);
+          }
+        });
+      }
+    }
+  });
     $(document).on('click', '#btnDanger', function () {
         $.ajax({
             type: "post",
@@ -62,6 +80,35 @@ $(document).ready(function () {
             }
         });
     });
+
+
+  $(document).on('input', '#txtUserName', function (event) {
+    var userName = $(this).val();
+    event.preventDefault();
+
+    if (userName != "") {
+      var form = document.getElementById('formUpdate');
+      $.ajax({
+        type: "post",
+        url: "/DanhMuc/DM_Account/checkUserName",
+        data: "userName=" + userName,
+        success: function (response) {
+          if (response != null) {
+            event.preventDefault();
+            event.stopPropagation();
+           // $('#txtUserName').val("");
+            form.classList.add('was-validated');
+            showToast("Tên tài khoản đã tồn tại!");
+          } 
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
+
+  })
+
 })
 function changeActive(id) {
     idModel = id;
@@ -73,6 +120,7 @@ function getRowTable(data) {
     <td class="text-center Password1">${data.password == null ? "" : data.password}</td>
     <td class="text-start IdnhanVien">${data.idnhanVienNavigation == null ? "" : data.idnhanVienNavigation.tenNhanVien}</td>
     <td class="text-start QuanLy">${data.quanLy == true ? "Quản lý" : "Nhân viên"}</td>
+    <td class="text-start Bsyte">${data.bsyte == true ? "Có" : "Không"}</td>
     <td class="text-center last-td-column">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <button onclick="showModal(${data.id})" class="btn btn-icon bg-azure-lt" data-bs-toggle="tooltip" data-bs-placement="left" title="Sửa">

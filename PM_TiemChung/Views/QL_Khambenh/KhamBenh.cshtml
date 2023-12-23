@@ -12,7 +12,12 @@
     }
 
     var vaiTro = User.Claims.ElementAtOrDefault(2);
+    bool quanLy = bool.Parse(vaiTro?.Value);
     bool bSYT = bool.Parse(vaiTro?.ValueType);
+
+    bool isBacSi = quanLy == false && bSYT == true;
+    bool isNVBT = quanLy == false && bSYT == false;
+
 }
 <div class="page-body mb-1">
     <div class="card">
@@ -36,7 +41,7 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs nav-fill" id="myTab" data-bs-toggle="tabs" role="tablist">
                 @{
-                    if (bSYT == true)
+                    if (quanLy || isBacSi)
                     {
                         <li class="nav-item" role="presentation">
                             <a href="#tabs-DanhSach" id="tabsdanhsach" class="nav-link text-dark active" data-bs-toggle="tab" aria-selected="true" role="tab">
@@ -49,17 +54,17 @@
                             </a>
                         </li>
                     }
-                    
-                }
-               
-                <li class="nav-item" role="presentation">
-                    <a href="#tabs-ThuNgan" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
-                        Thu Ngân
-                    </a>
-                </li>
 
-                @{
-                    if (bSYT == true)
+                    if (quanLy || isNVBT)
+                    {
+                        <li class="nav-item" role="presentation">
+                            <a href="#tabs-ThuNgan" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+                                Thu Ngân
+                            </a>
+                        </li>
+                    }
+
+                    if (quanLy || isBacSi)
                     {
                         <li class="nav-item" role="presentation">
                             <a href="#tabs-TiemChung" class="nav-link text-dark" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
@@ -72,139 +77,178 @@
         </div>
         <div class="card-body p-2">
             <div class="tab-content">
-                <div class="tab-pane active show" id="tabs-DanhSach" role="tabpanel">
-                    <div>
-                        <div class="w-100">
-                            <div class="row d-flex justify-content-between">
-                                <div class="row col-9 col-lg-6 mb-2 p-0">
-                                    <div class="row">
-                                        <div class="col-3 ms-2">
-                                            <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" disabled>
+                @{
+                    if (quanLy || isBacSi)
+                    {
+                        <div class="tab-pane active show" id="tabs-DanhSach" role="tabpanel">
+                            <div>
+                                <div class="w-100">
+                                    <div class="row d-flex justify-content-between">
+                                        <div class="row col-9 col-lg-6 mb-2 p-0">
+                                            <div class="row">
+                                                <div class="col-3 ms-2">
+                                                    <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày khám" value="" disabled>
+                                                </div>
+                                                <div class="col-auto p-0">
+                                                    <button id="btnReloadDSTN" class="btn btn-icon" aria-label="Button">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                                            <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-auto p-0">
-                                            <button id="btnReloadDSTN" class="btn btn-icon" aria-label="Button">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
-                                                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
-                                                </svg>
-                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="w-100">
+                                    <div class="card">
+                                        <div style="display: none;" id="progress">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive" style="max-height:73vh;" id="tableDM">
+                                            <table class="table table-vcenter card-table table-bordered  table-nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center MaBn">Mã bệnh nhân</th>
+                                                        <th class="text-center TenBn">Tên bệnh nhân</th>
+                                                        <th class="text-center NgaySinh">Ngày sinh</th>
+                                                        <th class="text-center NamSinh">Năm sinh</th>
+                                                        <th class="text-center NamSinh">Giới tính</th>
+                                                        <th class="text-center DiaChi">Địa chỉ</th>
+                                                        <th class="text-center Idtinh">Tỉnh/TP</th>
+                                                        <th class="text-center Idquan">Quận, huyện</th>
+                                                        <th class="text-center Idpx">Phường, xã</th>
+                                                        <th class="text-center DienThoai">Điện thoại</th>
+                                                        <th class="text-center Email">Email</th>
+                                                        <th class="text-center Iddt">Dân tộc</th>
+                                                        <th class="text-center Idnn">Nghề nghiệp</th>
+                                                        <th class="text-center Idqg">Quốc tịch</th>
+                                                        <th class="text-center SoCccd">CCCD</th>
+                                                        <th class="text-center NgayCap">Ngày cấp</th>
+                                                        <th class="text-center GhiChu">Ghi chú</th>
+                                                        <th class="text-center NgayDen">Ngày lưu hồ sơ</th>
+                                                        <th class="text-center" style="z-index:3;">Tùy chọn</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody-table">
+                                                    @foreach (DmBenhNhan d in ViewBag.BenhNhans)
+                                                    {
+                                                        <tr data-id="@d.Id">
+                                                            <td class="text-center MaBn">@d.MaBn</td>
+                                                            <td class="text-start TenBn">@d.TenBn</td>
+                                                            <td class="text-start NgaySinh">@formatDay(d.NgaySinh)</td>
+                                                            <td class="text-center NamSinh">@d.NamSinh</td>
+                                                            <td class="text-center Idgt">
+                                                                @(
+                                                                d.IdgtNavigation == null ? "" : d.IdgtNavigation.TenGioiTinh
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start DiaChi">@d.DiaChi</td>
+                                                            <td class="text-center Idtinh">
+                                                                @(
+                                                                d.IdtinhNavigation == null ? "" : d.IdtinhNavigation.TenTinh
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start Idquan">
+                                                                @(
+                                                                d.IdquanNavigation == null ? "" : d.IdquanNavigation.TenQuan
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start Idpx">
+                                                                @(
+                                                                d.IdpxNavigation == null ? "" : d.IdpxNavigation.TenXa
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start DienThoai">@d.DienThoai</td>
+                                                            <td class="text-start Email">@d.Email</td>
+                                                            <td class="text-start Iddt">
+                                                                @(
+                                                                d.IddtNavigation == null ? "" : d.IddtNavigation.TenDanToc
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start Idnn">
+                                                                @(
+                                                                d.IdnnNavigation == null ? "" : d.IdnnNavigation.TenNgheNghiep
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start Idqg">
+                                                                @(
+                                                                d.IdqgNavigation == null ? "" : d.IdqgNavigation.TenQuocGia
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start SoCccd">@d.SoCccd</td>
+                                                            <td class="text-start NgayCap">@formatDay(@d.NgayCap)</td>
+                                                            <td class="text-start GhiChu">
+                                                                @(
+                                                                d.GhiChu == null ? "" : d.GhiChu
+                                                                    )
+                                                            </td>
+                                                            <td class="text-start NgayDen">
+                                                                @(
+                                                                formatDay(d.NgayDen == null ? null : d.NgayDen)
+                                                                    )
+                                                            </td>
+                                                            <td class="text-center px-2">
+                                                                <button class="status status-purple border-0 btn-kham" value="@d.Id">Khám</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="w-100">
-                            <div class="card">
-                                <div style="display: none;" id="progress">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive" style="max-height:73vh;" id="tableDM">
-                                    <table class="table table-vcenter card-table table-bordered  table-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center MaBn">Mã bệnh nhân</th>
-                                                <th class="text-center TenBn">Tên bệnh nhân</th>
-                                                <th class="text-center NgaySinh">Ngày sinh</th>
-                                                <th class="text-center NamSinh">Năm sinh</th>
-                                                <th class="text-center NamSinh">Giới tính</th>
-                                                <th class="text-center DiaChi">Địa chỉ</th>
-                                                <th class="text-center Idtinh">Tỉnh/TP</th>
-                                                <th class="text-center Idquan">Quận, huyện</th>
-                                                <th class="text-center Idpx">Phường, xã</th>
-                                                <th class="text-center DienThoai">Điện thoại</th>
-                                                <th class="text-center Email">Email</th>
-                                                <th class="text-center Iddt">Dân tộc</th>
-                                                <th class="text-center Idnn">Nghề nghiệp</th>
-                                                <th class="text-center Idqg">Quốc tịch</th>
-                                                <th class="text-center SoCccd">CCCD</th>
-                                                <th class="text-center NgayCap">Ngày cấp</th>
-                                                <th class="text-center GhiChu">Ghi chú</th>
-                                                <th class="text-center NgayDen">Ngày lưu hồ sơ</th>
-                                                <th class="text-center" style="z-index:3;">Tùy chọn</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody-table">
-                                            @foreach (DmBenhNhan d in ViewBag.BenhNhans)
-                                            {
-                                                <tr data-id="@d.Id">
-                                                    <td class="text-center MaBn">@d.MaBn</td>
-                                                    <td class="text-start TenBn">@d.TenBn</td>
-                                                    <td class="text-start NgaySinh">@formatDay(d.NgaySinh)</td>
-                                                    <td class="text-center NamSinh">@d.NamSinh</td>
-                                                    <td class="text-center Idgt">@(d.IdgtNavigation == null ? "" : d.IdgtNavigation.TenGioiTinh)</td>
-                                                    <td class="text-start DiaChi">@d.DiaChi</td>
-                                                    <td class="text-center Idtinh">@(d.IdtinhNavigation == null ? "" : d.IdtinhNavigation.TenTinh)</td>
-                                                    <td class="text-start Idquan">@(d.IdquanNavigation == null ? "" : d.IdquanNavigation.TenQuan)</td>
-                                                    <td class="text-start Idpx">@(d.IdpxNavigation == null ? "" : d.IdpxNavigation.TenXa)</td>
-                                                    <td class="text-start DienThoai">@d.DienThoai</td>
-                                                    <td class="text-start Email">@d.Email</td>
-                                                    <td class="text-start Iddt">@(d.IddtNavigation == null ? "" : d.IddtNavigation.TenDanToc)</td>
-                                                    <td class="text-start Idnn">@(d.IdnnNavigation == null ? "" : d.IdnnNavigation.TenNgheNghiep)</td>
-                                                    <td class="text-start Idqg">@(d.IdqgNavigation == null ? "" : d.IdqgNavigation.TenQuocGia)</td>
-                                                    <td class="text-start SoCccd">@d.SoCccd</td>
-                                                    <td class="text-start NgayCap">@formatDay(@d.NgayCap)</td>
-                                                    <td class="text-start GhiChu">@(d.GhiChu == null ? "" : d.GhiChu)</td>
-                                                    <td class="text-start NgayDen">@(formatDay(d.NgayDen == null ? null : d.NgayDen))</td>
-                                                    <td class="text-center px-2">
-                                                        <button class="status status-purple border-0 btn-kham" value="@d.Id">Khám</button>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="tab-pane" id="tabs-KhamBenh" role="tabpanel">
-                    <div class="row">
-                        <div class="col-12 col-md-4 mb-1">
+                        <div class="tab-pane" id="tabs-KhamBenh" role="tabpanel">
                             <div class="row">
-                                <div class="col-3">
-                                    <label class="form-label col-form-label mb-0">Tên profile</label>
+                                <div class="col-12 col-md-4 mb-1">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <label class="form-label col-form-label mb-0">Tên profile</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input id="txtTenProfile" readonly type="text" autocomplete="off" class="form-control" name="" placeholder="Tên profile">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-9">
-                                    <input id="txtTenProfile" readonly type="text" autocomplete="off" class="form-control" name="" placeholder="Tên profile">
+                                <div class="col-12 col-md-4 mb-1">
+                                    <div class="row mb-1">
+                                        <div class="col-3">
+                                            <label class="form-label col-form-label mb-0">Tên bệnh nhân</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input id="txtTenBN" readonly type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tên bệnh nhân">
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4 mb-1">
-                            <div class="row mb-1">
-                                <div class="col-3">
-                                    <label class="form-label col-form-label mb-0">Tên bệnh nhân</label>
+                                <div class="col-12 col-md-3 mb-1">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <label class="form-label col-form-label mb-0">Tuổi</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input id="txtTuoi" readonly type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tuổi">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-9">
-                                    <input id="txtTenBN" readonly type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tên bệnh nhân">
+                                <div class="col-auto">
+                                    <button id="btnReloadBn" class="btn btn-icon" aria-label="Button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                            <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                        </svg>
+                                    </button>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-1">
-                            <div class="row">
-                                <div class="col-3">
-                                    <label class="form-label col-form-label mb-0">Tuổi</label>
-                                </div>
-                                <div class="col-9">
-                                    <input id="txtTuoi" readonly type="text" autocomplete="off" class="form-control" name="TenBn" placeholder="Tuổi">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <button id="btnReloadBn" class="btn btn-icon" aria-label="Button">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
-                                    <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        @*<div class="col-auto mb-1">
+                                @*<div class="col-auto mb-1">
                         <button class="btn btn-primary btn-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -213,240 +257,256 @@
                         </svg>
                         </button>
                         </div>*@
-                        <div class="col-12 mb-2">
-                            <div class="card">
-                                <div class="table-responsive">
-                                    <table class="table table-vcenter card-table table-bordered  table-nowrap table-input">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center ">STT</th>
-                                                <th class="text-center ">Tên vaccine</th>
-                                                <th class="text-center ">Số lần tiêm</th>
-                                                <th class="text-center ">TG sớm nhất</th>
-                                                <th class="text-center ">TG trễ nhất</th>
-                                                <th class="text-center ">Tên thời gian</th>
-                                                <th class="text-center ">Mũi tiên quyết</th>
-                                                <th class="text-center ">Đã tiêm</th>
-                                                <th class="text-center ">Ngày tiêm</th>
-                                                <th class="text-center ">Đề nghị tiêm</th>
-                                                <th class="text-center ">Ngày đề nghị</th>
-                                                <th class="text-center ">Ngày hẹn</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody-lichTiem">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="row justify-content-end">
-                                <div class="col-auto">
-                                    <button class="btn btn-primary" id="btnLuu">
-                                        Lưu
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane" id="tabs-ThuNgan" role="tabpanel">
-                    <div class="w-100">
-                        <div class="row d-flex justify-content-between">
-                            <div class="row col-9 col-lg-6 mb-2 p-0">
-                                <div class="row">
-                                    <div class="col-3 ms-2">
-                                        <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày đề nghị" value="" id="txtNgayDeNghi">
-                                    </div>
-                                    <div class="col-auto p-0">
-                                        <button id="btnReloadDSThuNgan" class="btn btn-icon" aria-label="Button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
-                                                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-100">
-                            <div class="card">
-                                <div style="display: none;" id="progress">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive" style="max-height:73vh;" id="tableDM">
-                                    <table class="table table-vcenter card-table table-bordered  table-nowrap table-input">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center p-2 w-2 "></th>
-                                                <th class="text-center">STT</th>
-                                                <th class="text-center TenVaccine">Tên vaccine</th>
-                                                <th class="text-center SoLuong p-2 w-2">Số lượng</th>
-                                                <th class="text-center DonGia p-2 w-2">Đơn giá</th>
-                                                <th class="text-center DaThu col-1">Đã thu</th>
-                                                <th class="text-center NgayThu p-2 w-2">Ngày thu</th>
-                                                <th class="text-center p-2 w-2">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody-tableThuNhan">
-                                            @{
-                                                List<LichTiemBn> lichTiem = ViewBag.DanhSachDeNghi;
-                                                var groupBenhNhan = lichTiem.GroupBy(x => x.IdbnNavigation)
-                                                .Select(x => new
-                                                {
-                                                    idbnNavigation = x.Key,
-                                                    datas = x.ToList(),
-                                                    sl = x.Where(y => y.DaThu != true).Count()
-                                                })
-                                                .OrderByDescending(x => x.sl)
-                                                .ToList();
-                                            }
-                                            @foreach (var gr in groupBenhNhan)
-                                            {
-                                                <tr class="bg-azure-lt">
-                                                    <td class="px-2 py-1 text-center">
-                                                        <button class="btn btn-icon bg-green-lt btn-print-thungan" value="@gr.idbnNavigation.Id" data-bs-toggle="tooltip" data-bs-placement="left" title="In">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
-                                                        </button>
-                                                    </td>
-                                                    <td colspan="7" class="px-2 py-1">
-                                                        @gr.idbnNavigation.MaBn - @gr.idbnNavigation.TenBn
-                                                    </td>
-                                                </tr>
-                                                int i = 1;
-                                                foreach (var lt in gr.datas)
-                                                {
-                                                    var checkDaThu = lt.DaThu == true;
-
-                                                    <tr data-id="">
-                                                        <td class="text-center px-2">
-                                                            <input data-idbn="@gr.idbnNavigation.Id" class="form-check-input border-dark single-checkbox checkIn" type="checkbox" value="@lt.Id" style="transform: scale(1.2);" />
-                                                        </td>
-                                                        <td class="text-center STT px-2">@i
-                                                            <input type="hidden" value="@lt.Id" name="Id"/>
-                                                        </td>
-                                                        <td class="text-start TenVaccine px-2">@lt.IdvcNavigation.TenVaccine</td>
-                                                        <td class="text-end SoLuong px-2">1</td>
-                                                        <td class="text-end DonGia px-2">@lt.IdvcNavigation.GiaBan?.ToString("#,##0.##")</td>
-                                                        <td class="text-center">
-                                                            <input name="DaThu" class="form-check-input border-dark single-checkbox" @(checkDaThu ? "checked disabled" : "") type="checkbox" style="transform: scale(1.2);">
-                                                        </td>
-                                                        <td class="text-center NgayThu">
-                                                            <input style="width: 140px" name="NgayThu" class="form-control form-table input-date-long-mask" @(checkDaThu ? "disabled" : "") value="@(lt.NgayThu?.ToString("dd-MM-yyyy"))" />
-                                                        </td>
-                                                        <td class="text-center px-1">
-                                                            <button class="btn btn-icon bg-azure-lt btn-save-thungan" @(checkDaThu ? "disabled" : "") value="@lt.Id" data-bs-toggle="tooltip" data-bs-placement="left" title="Lưu">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
-                                                            </button>
-                                                        </td>
+                                <div class="col-12 mb-2">
+                                    <div class="card">
+                                        <div class="table-responsive">
+                                            <table class="table table-vcenter card-table table-bordered  table-nowrap table-input">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center ">STT</th>
+                                                        <th class="text-center ">Tên vaccine</th>
+                                                        <th class="text-center ">Số lần tiêm</th>
+                                                        <th class="text-center ">TG sớm nhất</th>
+                                                        <th class="text-center ">TG trễ nhất</th>
+                                                        <th class="text-center ">Tên thời gian</th>
+                                                        <th class="text-center ">Mũi tiên quyết</th>
+                                                        <th class="text-center ">Đã tiêm</th>
+                                                        <th class="text-center ">Ngày tiêm</th>
+                                                        <th class="text-center ">Đề nghị tiêm</th>
+                                                        <th class="text-center ">Ngày đề nghị</th>
+                                                        <th class="text-center ">Ngày hẹn</th>
                                                     </tr>
-                                                    i++;
-                                                }
-                                            }
-
-                                        </tbody>
-                                    </table>
+                                                </thead>
+                                                <tbody id="tbody-lichTiem">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row justify-content-end">
+                                        <div class="col-auto">
+                                            <button class="btn btn-primary" id="btnLuu">
+                                                Lưu
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        @*<div class="row" md-1>
-                            <div class="form-selectgroup-label d-flex align-items-center  justify-content-end">
-                                <button class="btn btn-primary mb-2 me-2" id="btnLuuThuNgan">Lưu</button>
-                                <button class="btn btn-success mb-2" id="btnIn">In</button>
-                            </div>
+                    }
+                    if (quanLy || isNVBT)
+                    {
+                        <div class="tab-pane  @(bSYT == true ? "" : "active show")" id="tabs-ThuNgan" role="tabpanel">
+                            <div class="w-100">
+                                <div class="row d-flex justify-content-between">
+                                    <div class="row col-9 col-lg-6 mb-2 p-0">
+                                        <div class="row">
+                                            <div class="col-3 ms-2">
+                                                <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày đề nghị" value="" id="txtNgayDeNghi">
+                                            </div>
+                                            <div class="col-auto p-0">
+                                                <button id="btnReloadDSThuNgan" class="btn btn-icon" aria-label="Button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-100">
+                                    <div class="card">
+                                        <div style="display: none;" id="progress">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive" style="max-height:73vh;" id="tableDM">
+                                            <table class="table table-vcenter card-table table-bordered  table-nowrap table-input">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center p-2 w-2 "></th>
+                                                        <th class="text-center">STT</th>
+                                                        <th class="text-center TenVaccine">Tên vaccine</th>
+                                                        <th class="text-center SoLuong p-2 w-2">Số lượng</th>
+                                                        <th class="text-center DonGia p-2 w-2">Đơn giá</th>
+                                                        <th class="text-center DaThu col-1">Đã thu</th>
+                                                        <th class="text-center NgayThu p-2 w-2">Ngày thu</th>
+                                                        <th class="text-center p-2 w-2">Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody-tableThuNhan">
+                                                    @{
+                                                        List<LichTiemBn> lichTiem = ViewBag.DanhSachDeNghi;
+                                                        var groupBenhNhan = lichTiem.GroupBy(x => x.IdbnNavigation)
+                                                        .Select(x => new
+                                                        {
+                                                            idbnNavigation = x.Key,
+                                                            datas = x.ToList(),
+                                                            sl = x.Where(y => y.DaThu != true).Count()
+                                                        })
+                                                        .OrderByDescending(x => x.sl)
+                                                        .ToList();
+                                                    }
+                                                    @foreach (var gr in groupBenhNhan)
+                                                    {
+                                                        <tr class="bg-azure-lt">
+                                                            <td class="px-2 py-1 text-center">
+                                                                <button class="btn btn-icon bg-green-lt btn-print-thungan" value="@gr.idbnNavigation.Id" data-bs-toggle="tooltip" data-bs-placement="left" title="In">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2" /><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" /><path d="M7 13m0 2a2 2 0 0 1 2 -2h6a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-6a2 2 0 0 1 -2 -2z" /></svg>
+                                                                </button>
+                                                            </td>
+                                                            <td colspan="7" class="px-2 py-1">
+                                                                @gr.idbnNavigation.MaBn - @gr.idbnNavigation.TenBn
+                                                            </td>
+                                                        </tr>
+                                                        int i = 1;
+                                                        foreach (var lt in gr.datas)
+                                                        {
+                                                            var checkDaThu = lt.DaThu == true;
+
+                                                            <tr data-id="">
+                                                                <td class="text-center px-2">
+                                                                    <input data-idbn="@gr.idbnNavigation.Id" class="form-check-input border-dark single-checkbox checkIn" type="checkbox" value="@lt.Id" style="transform: scale(1.2);" />
+                                                                </td>
+                                                                <td class="text-center STT px-2">
+                                                                    @i
+                                                                    <input type="hidden" value="@lt.Id" name="Id" />
+                                                                </td>
+                                                                <td class="text-start TenVaccine px-2">@lt.IdvcNavigation.TenVaccine</td>
+                                                                <td class="text-end SoLuong px-2">1</td>
+                                                                <td class="text-end DonGia px-2">@lt.IdvcNavigation.GiaBan?.ToString("#,##0.##")</td>
+                                                                <td class="text-center">
+                                                                    <input name="DaThu" class="form-check-input border-dark single-checkbox" @(
+                                                        checkDaThu ? "checked disabled" : ""
+                                                        ) type="checkbox" style="transform: scale(1.2);">
+                                                                </td>
+                                                                <td class="text-center NgayThu">
+                                                                    <input style="width: 140px" name="NgayThu" class="form-control form-table input-date-long-mask" @(
+                                                        checkDaThu ? "disabled" : ""
+                                                        ) value="@(
+                                                               lt.NgayThu?.ToString("dd-MM-yyyy")
+                                                               )" />
+                                                                </td>
+                                                                <td class="text-center px-1">
+                                                                    <button class="btn btn-icon bg-azure-lt btn-save-thungan" @(
+                                                        checkDaThu ? "disabled" : ""
+                                                        ) value="@lt.Id" data-bs-toggle="tooltip" data-bs-placement="left" title="Lưu">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row" md-1>
+                        <div class="form-selectgroup-label d-flex align-items-center  justify-content-end">
+                        <button class="btn btn-primary mb-2 me-2" id="btnLuuThuNgan">Lưu</button>
+                        <button class="btn btn-success mb-2" id="btnIn">In</button>
+                        </div>
                         </div>*@
-                    </div>
-                </div>
-
-                <div class="tab-pane" id="tabs-TiemChung" role="tabpanel">
-                    <div class="w-100">
-                        <div class="row d-flex justify-content-between">
-                            <div class="row col-9 col-lg-6 mb-2 p-0">
-                                <div class="row">
-                                    <div class="col-3 ms-2">
-                                        <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày thu ngân" value="" id="txtNgayThuNgan">
+                            </div>
+                        </div>
+                    }
+                    if (quanLy || isBacSi)
+                    {
+                        <div class="tab-pane" id="tabs-TiemChung" role="tabpanel">
+                            <div class="w-100">
+                                <div class="row d-flex justify-content-between">
+                                    <div class="row col-9 col-lg-6 mb-2 p-0">
+                                        <div class="row">
+                                            <div class="col-3 ms-2">
+                                                <input type="text" autocomplete="off" class="form-control input-date-default" placeholder="Ngày thu ngân" value="" id="txtNgayThuNgan">
+                                            </div>
+                                            <div class="col-auto p-0">
+                                                <button id="btnReloadDSTiemChung" class="btn btn-icon" aria-label="Button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
+                                                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-auto p-0">
-                                        <button id="btnReloadDSTiemChung" class="btn btn-icon" aria-label="Button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-refresh" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"></path>
-                                                <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"></path>
-                                            </svg>
-                                        </button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="w-100">
+                                    <div class="card">
+                                        <div style="display: none;" id="progress">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive" style="max-height:73vh;">
+                                            <table class="table table-vcenter card-table table-bordered  table-nowrap table-input">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center p-2 w-2 ">STT</th>
+                                                        <th class="text-center TenBenhNhan col-2">Tên bệnh nhân</th>
+                                                        <th class="text-center TenVaccine">Tên vaccine</th>
+                                                        <th class="text-center SoLuong p-2 w-2">Số lượng</th>
+                                                        <th class="text-center SoCode col-1">Số code</th>
+                                                        <th class="text-center p-2 w-2 ">Kiểm tra thuốc</th>
+                                                        <th class="text-center DaTiem col-1">Đã tiêm</th>
+                                                        <th class="text-center NgayTiem p-2 w-2">Ngày tiêm</th>
+                                                        <th class="text-center">Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody-tiemchung">
+                                                    @{
+                                                        int stt = 1;
+                                                    }
+                                                    @foreach (LichTiemBn lt in ViewBag.DanhSachTiemChung)
+                                                    {
+                                                        var checkDaTiem = lt.DaTiem == true;
+                                                        <tr>
+                                                            <td class="text-center STT px-2">
+                                                                @stt
+                                                                <input class="code-vaccine" value="@lt.IdvcNavigation.SoCode" type="hidden" />
+                                                            </td>
+                                                            <td class="text-start TenBn px-2">@lt.IdbnNavigation.TenBn</td>
+                                                            <td class="text-start TenVaccine px-2">@lt.IdvcNavigation.TenVaccine</td>
+                                                            <td class="text-end SoLuong px-2">@lt.SoLuong</td>
+                                                            <td class="text-center SoCode">
+                                                                <input style="width: 140px" @(checkDaTiem ? "disabled" : "") class="form-control form-table socode" value="" />
+                                                            </td>
+                                                            <td class="text-center px-2">
+                                                                <button @(checkDaTiem ? "disabled" : "") class="status status-purple border-0 btn-kiemtra">Kiểm tra</button>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <input @(checkDaTiem ? "disabled checked" : "") class="form-check-input border-dark single-checkbox daTiem" name="DaTiem" type="checkbox" style="transform: scale(1.2);">
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <input @(checkDaTiem ? "disabled" : "") name="NgayTiem" style="width: 140px" class="form-control form-table input-date-long-mask" value="@(lt.NgayTiem?.ToString("dd-MM-yyyy"))" />
+                                                            </td>
+                                                            <td class="text-center px-2">
+                                                                <button value="@lt.Id" disabled class="btn btn-icon bg-azure-lt btn-save-tiemchung" data-bs-toggle="tooltip" data-bs-placement="left" title="Lưu">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        stt++;
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="w-100">
-                            <div class="card">
-                                <div style="display: none;" id="progress">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-indeterminate bg-blue"></div>
-                                    </div>
-                                </div>
-                                <div class="table-responsive" style="max-height:73vh;">
-                                    <table class="table table-vcenter card-table table-bordered  table-nowrap table-input">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center p-2 w-2 ">STT</th>
-                                                <th class="text-center TenBenhNhan col-2">Tên bệnh nhân</th>
-                                                <th class="text-center TenVaccine">Tên vaccine</th>
-                                                <th class="text-center SoLuong p-2 w-2">Số lượng</th>
-                                                <th class="text-center SoCode col-1">Số code</th>
-                                                <th class="text-center p-2 w-2 ">Kiểm tra thuốc</th>
-                                                <th class="text-center DaTiem col-1">Đã tiêm</th>
-                                                <th class="text-center NgayTiem p-2 w-2">Ngày tiêm</th>
-                                                <th class="text-center">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbody-tiemchung">
-                                            @{
-                                                int stt = 1;
-                                            }
-                                            @foreach (LichTiemBn lt in ViewBag.DanhSachTiemChung)
-                                            {
-                                                var checkDaTiem = lt.DaTiem == true;
-                                                <tr>
-                                                    <td class="text-center STT px-2">@stt
-                                                        <input class="code-vaccine" value="@lt.IdvcNavigation.SoCode" type="hidden"/>
-                                                    </td>
-                                                    <td class="text-start TenBn px-2">@lt.IdbnNavigation.TenBn</td>
-                                                    <td class="text-start TenVaccine px-2">@lt.IdvcNavigation.TenVaccine</td>
-                                                    <td class="text-end SoLuong px-2">@lt.SoLuong</td>
-                                                    <td class="text-center SoCode">
-                                                        <input style="width: 140px" @(checkDaTiem ? "disabled" : "") class="form-control form-table socode" value="" />
-                                                    </td>
-                                                    <td class="text-center px-2">
-                                                        <button @(checkDaTiem ? "disabled" : "") class="status status-purple border-0 btn-kiemtra">Kiểm tra</button>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input @(checkDaTiem ? "disabled checked" : "") class="form-check-input border-dark single-checkbox daTiem" name="DaTiem" type="checkbox" style="transform: scale(1.2);">
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <input @(checkDaTiem ? "disabled" : "") name="NgayTiem" style="width: 140px" class="form-control form-table input-date-long-mask" value="@(lt.NgayTiem?.ToString("dd-MM-yyyy"))" />
-                                                    </td>
-                                                    <td class="text-center px-2">
-                                                        <button value="@lt.Id" disabled class="btn btn-icon bg-azure-lt btn-save-tiemchung" data-bs-toggle="tooltip" data-bs-placement="left" title="Lưu">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                stt++;
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
 
             </div>
         </div>

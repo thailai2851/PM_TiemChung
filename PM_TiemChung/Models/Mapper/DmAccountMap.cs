@@ -12,6 +12,8 @@
 
         public bool? QuanLy { get; set; }
 
+        public bool? Bsyte { get; set; }
+
         public bool? Active { get; set; }
 
     }
