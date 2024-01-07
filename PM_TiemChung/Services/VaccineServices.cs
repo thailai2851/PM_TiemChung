@@ -115,6 +115,16 @@ namespace PM_TiemChung.Services
             using var tran = _context.Database.BeginTransaction();
             try
             {
+                var maCu = _context.DmVaccines.FirstOrDefault(x => x.SoCode.ToLower().Equals(model.SoCode.ToLower())
+                && (model.Id == 0 || x.Id != model.Id));
+                if (maCu != null)
+                {
+                    return new ResponseModel()
+                    {
+                        statusCode = 500,
+                        message = "Số code đã tồn tại!",
+                    };
+                }
                 if (model.Id == 0)
                 {
                     model.Active = true;

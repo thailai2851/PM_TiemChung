@@ -17,11 +17,12 @@ $(document).ready(function () {
     } else {
       var userName = $('#txtUserName').val();
       var formData = $(this).serialize(); // Lấy dữ liệu từ form
+      var idtk = $('#Id').val();
       if (userName != "") {
         $.ajax({
           type: "post",
           url: "/DanhMuc/DM_Account/checkUserName",
-          data: "userName=" + userName,
+            data: "idtk=" + idtk + "&userName=" + userName,
           success: function (response) {
             if (response != null) {
               form.classList.add('was-validated');
@@ -80,34 +81,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
-  $(document).on('input', '#txtUserName', function (event) {
-    var userName = $(this).val();
-    event.preventDefault();
-
-    if (userName != "") {
-      var form = document.getElementById('formUpdate');
-      $.ajax({
-        type: "post",
-        url: "/DanhMuc/DM_Account/checkUserName",
-        data: "userName=" + userName,
-        success: function (response) {
-          if (response != null) {
-            event.preventDefault();
-            event.stopPropagation();
-           // $('#txtUserName').val("");
-            form.classList.add('was-validated');
-            showToast("Tên tài khoản đã tồn tại!");
-          } 
-        },
-        error: function (error) {
-          console.log(error);
-        }
-      });
-    }
-
-  })
 
 })
 function changeActive(id) {

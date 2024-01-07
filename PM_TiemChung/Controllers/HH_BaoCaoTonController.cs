@@ -109,7 +109,7 @@ namespace PM_TiemChung.Controllers
             {
                 GlobalSettings = {
                         ColorMode = ColorMode.Color,
-                        Orientation = Orientation.Landscape,
+                        Orientation = Orientation.Landscape, //ngang
                         PaperSize = PaperKind.A4,
                         Margins = new MarginSettings()
                         {
@@ -159,7 +159,7 @@ namespace PM_TiemChung.Controllers
             {
                 GlobalSettings = {
                         ColorMode = ColorMode.Color,
-                        Orientation = Orientation.Portrait,
+                        Orientation = Orientation.Portrait, //dọc
                         PaperSize = PaperKind.A4,
                         Margins = new MarginSettings()
                         {

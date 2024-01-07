@@ -21,8 +21,8 @@
                                                 <td class="text-center">${data.idbnNavigation.idgtNavigation.tenGioiTinh}</td>
                                                 <td class="text-start">${data.idbnNavigation.diaChi}</td>
                                                 <td class="text-end">${data.idbnNavigation.dienThoai}</td>
-                                                <td class="text-start">${data.idbnNavigation.email}</td>
-                                                <td class="text-start">${data.idbnNavigation.idnnNavigation.tenNgheNghiep}</td>
+                                                <td class="text-start">${data.idbnNavigation.email == null ? "" : data.idbnNavigation.email}</td>
+                                                <td class="text-start">${data.idbnNavigation?.idnnNavigation == null ? "" : data.idbnNavigation?.idnnNavigation.tenNgheNghiep}</td>
                                                 <td class="text-start">${data.idvcNavigation.tenVaccine}</td>
                                             </tr>`);
                 })

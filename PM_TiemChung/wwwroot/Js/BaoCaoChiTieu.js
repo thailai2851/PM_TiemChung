@@ -37,8 +37,8 @@ function addRowTableTD(data, i) {
     var stt = i + 1;
     var newRow = $(`<tr>
                 <td>${stt}</td>
-                <td>${data.label}</td>
-                <td><input type="text" readonly class="form-control formatted-number" name="doanhThu" value="${data.soLuong}" /></td>
+                <td class="text-start">${data.label}</td>
+                <td><input type="text" readonly class=" text-center form-control formatted-number" name="doanhThu" value="${data.soLuong}" /></td>
     </tr>`)
     $('#tbodyTD').append(newRow);
     TinhTongTD();
@@ -62,7 +62,7 @@ function renderDoThiThucDon(labels, values) {
         datasets: [{
             label: 'Số Lượng',
             data: values,
-            backgroundColor: 'rgba(255, 169, 41, 1)',
+            backgroundColor: 'rgba(255, 165, 0, 1)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         }]

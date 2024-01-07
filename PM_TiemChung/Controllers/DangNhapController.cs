@@ -51,9 +51,11 @@ namespace PM_TiemChung.Controllers
             var claims = new List<Claim>();
             if (taiKhoanAdmin != null)
             {
+                bool? isQuanLy = taiKhoanAdmin.QuanLy == null ? false : taiKhoanAdmin.QuanLy;
+                bool? isBsyte = taiKhoanAdmin.Bsyte == null ? false : taiKhoanAdmin.Bsyte;
                 claims.Add(new Claim(ClaimTypes.Name, taiKhoanAdmin.IdnhanVien.ToString(), taiKhoanAdmin.IdnhanVienNavigation.TenNhanVien));
                 claims.Add(new Claim(ClaimTypes.Role, "NhanVien"));
-                claims.Add(new Claim("VaiTro", taiKhoanAdmin.QuanLy.ToString(), taiKhoanAdmin.Bsyte.ToString()));
+                claims.Add(new Claim("VaiTro", isQuanLy.ToString(), isBsyte.ToString()));
                 await signIn(claims);
                 return Ok(new
                 {

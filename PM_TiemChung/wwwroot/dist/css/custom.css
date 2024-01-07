@@ -3,10 +3,10 @@
 }
 
 .row-disabled .form-table {
-    background-color: #d8d8d8 !important;
+    background-color: #efefef !important;
 }
 .row-disabled td {
-    background-color: #d8d8d8 !important;
+    background-color: #efefef !important;
 }
 
 .row-warning .form-table {

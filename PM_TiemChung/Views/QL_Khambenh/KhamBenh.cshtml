@@ -297,7 +297,7 @@
                     }
                     if (quanLy || isNVBT)
                     {
-                        <div class="tab-pane  @(bSYT == true ? "" : "active show")" id="tabs-ThuNgan" role="tabpanel">
+                        <div class="tab-pane  @(quanLy == false && isNVBT == true ? "active show" : "")" id="tabs-ThuNgan" role="tabpanel">
                             <div class="w-100">
                                 <div class="row d-flex justify-content-between">
                                     <div class="row col-9 col-lg-6 mb-2 p-0">
@@ -507,7 +507,6 @@
                         </div>
                     }
                 }
-
             </div>
         </div>
     </div>

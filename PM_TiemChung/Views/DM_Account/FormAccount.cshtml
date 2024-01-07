@@ -23,9 +23,9 @@
         </div>
         <div class="col-sm-6 col-md-6 pr-0 mt-2">
             <div class="mb-2">
-                <label for="txtIdNhanVien">Nhân viên</label>
-                <select class="form-select" asp-for="@Model.IdnhanVien">
-                    <option selected disabled> --Nhân viên-- </option>
+                <label for="txtIdNhanVien" class="col-form-label required">Nhân viên</label>
+                <select required class="form-select" asp-for="@Model.IdnhanVien">
+                    <option selected disabled value=""> --Nhân viên-- </option>
                     @foreach (DmNhanVien item in ViewBag.nhanViens)
                     {
                         <option value="@item.Id"> @item.TenNhanVien</option>

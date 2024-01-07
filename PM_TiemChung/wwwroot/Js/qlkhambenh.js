@@ -408,7 +408,7 @@ function renderTableDsThuNgan(gr) {
                                                             <input type="hidden" value="${lt.id}" name="Id"/>
                                                         </td>
                                                         <td class="text-start TenVaccine px-2">${lt.idvcNavigation.tenVaccine}</td>
-                                                        <td class="text-end SoLuong px-2">1</td>
+                                                        <td class="text-center SoLuong px-2">1</td>
                                                         <td class="text-end DonGia px-2">${formatOddNumber(toEmpty(lt.idvcNavigation.giaBan))}</td>
                                                         <td class="text-center">
                                                             <input name="DaThu" class="form-check-input border-dark single-checkbox" ${lt.daThu == true ? "checked disabled" : ""} type="checkbox" style="transform: scale(1.2);">
@@ -437,7 +437,7 @@ function renderTableTiemChung(datas) {
                                                     </td>
                                                     <td class="text-start TenBn px-2">${lt.idbnNavigation.tenBn}</td>
                                                     <td class="text-start TenVaccine px-2">${lt.idvcNavigation.tenVaccine}</td>
-                                                    <td class="text-end SoLuong px-2">${lt.soLuong}</td>
+                                                    <td class="text-center SoLuong px-2">${lt.soLuong}</td>
                                                     <td class="text-center SoCode">
                                                         <input style="width: 140px" ${checkDaTiem ? "disabled" : ""} class="form-control form-table socode" value="" />
                                                     </td>

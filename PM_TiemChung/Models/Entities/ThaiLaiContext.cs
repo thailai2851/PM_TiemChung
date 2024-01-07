@@ -364,7 +364,7 @@ public partial class ThaiLaiContext : DbContext
 
             entity.HasOne(d => d.IdpnctNavigation).WithMany(p => p.LichTiemBns)
                 .HasForeignKey(d => d.Idpnct)
-                .HasConstraintName("FK__LichTiemB__IDPNC__00200768");
+                .HasConstraintName("FK__LichTiemB__IDPNC__1C873BEC");
 
             entity.HasOne(d => d.IdthoiGianNavigation).WithMany(p => p.LichTiemBns)
                 .HasForeignKey(d => d.IdthoiGian)

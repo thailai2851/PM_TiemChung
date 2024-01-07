@@ -32,8 +32,8 @@
         </div>
         <div class="col-sm-6 col-md-6 pr-0 mt-2">
             <div class="mb-2">
-                <label for="txtSoCode" class="col-form-label ">Số code</label>
-                <input type="text" asp-for="@Model.SoCode" id="txtSoCode" class="form-control" placeholder="Nhập số code">
+                <label for="txtSoCode" class="col-form-label required ">Số code</label>
+                <input required type="text" asp-for="@Model.SoCode" id="txtSoCode" class="form-control" placeholder="Nhập số code">
                 <div class="invalid-feedback">
                     Nhập số code
                 </div>
@@ -42,7 +42,7 @@
         <div class="col-sm-6 col-md-6 pr-0 mt-2">
             <div class="mb-2">
                 <label for="txtGiaBan" class="col-form-label">Giá bán</label>
-                <input type="text" asp-for="@Model.GiaBan" id="txtGiaBan" class="form-control formatted-number-float" placeholder="Nhập giá bán" maxlength="17">
+                <input type="text" asp-for="@Model.GiaBan" id="txtGiaBan" class=" text-start form-control formatted-number-float" placeholder="Nhập giá bán" maxlength="17">
             </div>
         </div>
     </div>

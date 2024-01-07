@@ -64,8 +64,8 @@
                     <td class="">@data.IdvaccineNavigation.TenVaccine</td>
                     <td class="">@data.IdvaccineNavigation.DonViTinh</td>
                     <td class="text-end">@toDecimal(data.SoLuong)</td>
-                    <td class="text-end">@toDecimal(data.SoLuongXuat)</td>
-                    <td class="text-end">@toDecimal(data.SoLuong - data.SoLuongXuat ?? 0)</td>
+                    <td class="text-end">@toDecimal(data.SoLuongXuat ?? 0)</td>
+                    <td class="text-end">@toDecimal(data.SoLuong - (data.SoLuongXuat ?? 0))</td>
                     <td class="">@data.IdpnNavigation.IdnccNavigation.TenNcc</td>
                 </tr>
                 tt++;
